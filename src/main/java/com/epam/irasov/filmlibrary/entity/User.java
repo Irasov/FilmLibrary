@@ -1,50 +1,47 @@
 package com.epam.irasov.filmlibrary.entity;
 
-public class User extends Member {
-    private Type type;
-    private String login;
-    private String password;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-    public static class Type extends NamedEntity {
-        public Type() {
-        }
-
-        public Type(Long id, String name) {
-            super(id, name);
-        }
-    }
+public class User extends SystemUser {
+    List<Review> reviews;
+    List<Rating> ratings;
 
     public User() {
+        super();
+        ratings = new ArrayList<>();
+        reviews = new ArrayList<>();
     }
 
-    public User(Type type, String login, String password) {
-        this.type = type;
-        this.login = login;
-        this.password = password;
+    public User(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
+        super(id, name, patronymic, surname, birthDate, photo, type, login, password, email);
+        ratings = new ArrayList<>();
+        reviews = new ArrayList<>();
     }
 
-    public Type getType() {
-        return type;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
-    public String getLogin() {
-        return login;
+    public void addReviews(Review review){
+        reviews.add(review);
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
-    public String getPassword() {
-        return password;
+    public void setRatings(List<Rating> ratings) {
+        ratings = ratings;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void addRatings(Rating rating){
+        ratings.add(rating);
     }
 
     @Override
@@ -53,16 +50,15 @@ public class User extends Member {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return !(type != null ? !type.equals(user.type) : user.type != null) && !(login != null ? !login.equals(user.login) : user.login != null) && !(password != null ? !password.equals(user.password) : user.password != null);
+        return !(reviews != null ? !reviews.equals(user.reviews) : user.reviews != null) && !(ratings != null ? !ratings.equals(user.ratings) : user.ratings != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
+        result = 31 * result + (ratings != null ? ratings.hashCode() : 0);
         return result;
     }
 }
