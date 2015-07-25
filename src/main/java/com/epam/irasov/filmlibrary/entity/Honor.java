@@ -1,6 +1,6 @@
 package com.epam.irasov.filmlibrary.entity;
 
-public class Honor extends NamedEntity{
+public class Honor extends NamedEntity {
     String photo;
 
     public Honor() {
