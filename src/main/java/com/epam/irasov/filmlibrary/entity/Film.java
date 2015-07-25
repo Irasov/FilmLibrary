@@ -1,11 +1,11 @@
 package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Film extends NamedEntity {
     private String tagLine;
-    private Member director;
     private List<Member> members;
     private List<Genre> genres;
     private LocalDate premiere;
@@ -13,24 +13,26 @@ public class Film extends NamedEntity {
     private int duration;
     private String cover;
     private String description;
-    private List<Comment> comments;
+    private List<Review> reviews;
+    private int rating;
 
     public Film() {
-
+        super();
+        members = new ArrayList<>();
+        genres = new ArrayList<>();
     }
 
-    public Film(Long id, String name, String tagLine, Member director, List<Member> members, List<Genre> genres, LocalDate premiere, int ageRestriction, int duration, String cover, String description, List<Comment> comments) {
-        super(id, name);
+
+    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, List<Review> reviews, int rating, String description) {
+        this();
         this.tagLine = tagLine;
-        this.director = director;
-        this.members = members;
-        this.genres = genres;
         this.premiere = premiere;
         this.ageRestriction = ageRestriction;
         this.duration = duration;
         this.cover = cover;
+        this.reviews = reviews;
+        this.rating = rating;
         this.description = description;
-        this.comments = comments;
     }
 
     public String getTagLine() {
@@ -41,14 +43,6 @@ public class Film extends NamedEntity {
         this.tagLine = tagLine;
     }
 
-    public Member getDirector() {
-        return director;
-    }
-
-    public void setDirector(Member director) {
-        this.director = director;
-    }
-
     public List<Member> getMembers() {
         return members;
     }
@@ -57,12 +51,20 @@ public class Film extends NamedEntity {
         this.members = members;
     }
 
+    public void addMember(Member memberTo) {
+        this.members.add(memberTo);
+    }
+
     public List<Genre> getGenres() {
         return genres;
     }
 
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
+    }
+
+    public void addGenre(Genre genreTo) {
+        this.genres.add(genreTo);
     }
 
     public LocalDate getPremiere() {
@@ -105,11 +107,44 @@ public class Film extends NamedEntity {
         this.description = description;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Film)) return false;
+        if (!super.equals(o)) return false;
+        Film film = (Film) o;
+        return ageRestriction == film.ageRestriction && duration == film.duration && rating == film.rating && !(tagLine != null ? !tagLine.equals(film.tagLine) : film.tagLine != null) && !(members != null ? !members.equals(film.members) : film.members != null) && !(genres != null ? !genres.equals(film.genres) : film.genres != null) && !(premiere != null ? !premiere.equals(film.premiere) : film.premiere != null) && !(cover != null ? !cover.equals(film.cover) : film.cover != null) && !(description != null ? !description.equals(film.description) : film.description != null) && !(reviews != null ? !reviews.equals(film.reviews) : film.reviews != null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (tagLine != null ? tagLine.hashCode() : 0);
+        result = 31 * result + (members != null ? members.hashCode() : 0);
+        result = 31 * result + (genres != null ? genres.hashCode() : 0);
+        result = 31 * result + (premiere != null ? premiere.hashCode() : 0);
+        result = 31 * result + ageRestriction;
+        result = 31 * result + duration;
+        result = 31 * result + (cover != null ? cover.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
+        result = 31 * result + rating;
+        return result;
     }
 }
