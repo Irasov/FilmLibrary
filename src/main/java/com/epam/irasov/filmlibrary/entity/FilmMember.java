@@ -23,7 +23,7 @@ public class FilmMember extends Member {
         this.honors = honors;
     }
 
-    public void addHonor(Honor honor){
+    public void addHonor(Honor honor) {
         honors.add(honor);
     }
 
