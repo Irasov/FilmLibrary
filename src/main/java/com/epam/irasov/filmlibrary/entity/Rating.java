@@ -33,7 +33,7 @@ public class Rating extends NamedEntity {
         this.members = members;
     }
 
-    public void addMember(Member member){
+    public void addMember(Member member) {
         members.add(member);
     }
 
