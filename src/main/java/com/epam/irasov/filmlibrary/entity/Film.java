@@ -53,7 +53,7 @@ public class Film extends NamedEntity {
         this.members = members;
     }
 
-    public void addMember(Member member){
+    public void addMember(Member member) {
         members.add(member);
     }
 
@@ -65,7 +65,7 @@ public class Film extends NamedEntity {
         this.honors = honors;
     }
 
-    public void addHonors(Honor honor){
+    public void addHonors(Honor honor) {
         honors.add(honor);
     }
 
@@ -77,7 +77,7 @@ public class Film extends NamedEntity {
         this.genres = genres;
     }
 
-    public void addGenres(Genre genre){
+    public void addGenres(Genre genre) {
         genres.add(genre);
     }
 
@@ -129,7 +129,7 @@ public class Film extends NamedEntity {
         this.reviews = reviews;
     }
 
-    public void addReviews(Review review){
+    public void addReviews(Review review) {
         reviews.add(review);
     }
 
