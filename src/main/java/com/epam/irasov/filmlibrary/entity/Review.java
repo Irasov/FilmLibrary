@@ -3,13 +3,14 @@ package com.epam.irasov.filmlibrary.entity;
 import java.time.LocalDate;
 
 public class Review extends NamedEntity {
-    public enum Status {POSITIVE,NEGATIVE,NEUTRAL};
+    public enum Status {POSITIVE, NEGATIVE, NEUTRAL}
+
     private LocalDate date;
     private String text;
     private Status status;
     private Rating rating;
 
-    public Review(){
+    public Review() {
     }
 
     public Review(Long id, String name, LocalDate date, String text, Status status, Rating rating) {
