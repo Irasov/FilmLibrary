@@ -28,8 +28,12 @@ public class User extends SystemUser {
         this.reviews = reviews;
     }
 
-    public void addReviews(Review review){
+    public void addReviews(Review review) {
         reviews.add(review);
+    }
+
+    public void removeReviews(Review review) {
+        reviews.remove(review);
     }
 
     public List<Rating> getRatings() {
@@ -40,8 +44,12 @@ public class User extends SystemUser {
         ratings = ratings;
     }
 
-    public void addRatings(Rating rating){
+    public void addRating(Rating rating) {
         ratings.add(rating);
+    }
+
+    public void removeRating(Rating rating) {
+        ratings.remove(rating);
     }
 
     @Override
