@@ -8,9 +8,11 @@ public class FilmMember extends Member {
     private List<Honor> honors;
 
     public FilmMember() {
+        super();
+        honors = new ArrayList<>();
     }
 
-    public FilmMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, List<Honor> honors) {
+    public FilmMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type) {
         super(id, name, patronymic, surname, birthDate, photo, type);
         honors = new ArrayList<>();
     }
