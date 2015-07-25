@@ -14,7 +14,7 @@ public class Film extends NamedEntity {
     private String cover;
     private String description;
     private List<Review> reviews;
-    private int rating;
+    private Rating rating;
 
     public Film() {
         super();
@@ -23,7 +23,7 @@ public class Film extends NamedEntity {
     }
 
 
-    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, List<Review> reviews, int rating, String description) {
+    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, List<Review> reviews, Rating rating, String description) {
         this();
         this.tagLine = tagLine;
         this.premiere = premiere;
@@ -51,8 +51,8 @@ public class Film extends NamedEntity {
         this.members = members;
     }
 
-    public void addMember(Member memberTo) {
-        this.members.add(memberTo);
+    public void addMember(Member member){
+        members.add(member);
     }
 
     public List<Genre> getGenres() {
@@ -63,8 +63,8 @@ public class Film extends NamedEntity {
         this.genres = genres;
     }
 
-    public void addGenre(Genre genreTo) {
-        this.genres.add(genreTo);
+    public void addGenres(Genre genre){
+        genres.add(genre);
     }
 
     public LocalDate getPremiere() {
@@ -115,11 +115,11 @@ public class Film extends NamedEntity {
         this.reviews = reviews;
     }
 
-    public int getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
@@ -129,7 +129,8 @@ public class Film extends NamedEntity {
         if (!(o instanceof Film)) return false;
         if (!super.equals(o)) return false;
         Film film = (Film) o;
-        return ageRestriction == film.ageRestriction && duration == film.duration && rating == film.rating && !(tagLine != null ? !tagLine.equals(film.tagLine) : film.tagLine != null) && !(members != null ? !members.equals(film.members) : film.members != null) && !(genres != null ? !genres.equals(film.genres) : film.genres != null) && !(premiere != null ? !premiere.equals(film.premiere) : film.premiere != null) && !(cover != null ? !cover.equals(film.cover) : film.cover != null) && !(description != null ? !description.equals(film.description) : film.description != null) && !(reviews != null ? !reviews.equals(film.reviews) : film.reviews != null);
+        return ageRestriction == film.ageRestriction && duration == film.duration && !(tagLine != null ? !tagLine.equals(film.tagLine) : film.tagLine != null) && !(members != null ? !members.equals(film.members) : film.members != null) && !(genres != null ? !genres.equals(film.genres) : film.genres != null) && !(premiere != null ? !premiere.equals(film.premiere) : film.premiere != null) && !(cover != null ? !cover.equals(film.cover) : film.cover != null) && !(description != null ? !description.equals(film.description) : film.description != null) && !(reviews != null ? !reviews.equals(film.reviews) : film.reviews != null) && !(rating != null ? !rating.equals(film.rating) : film.rating != null);
+
     }
 
     @Override
@@ -144,7 +145,7 @@ public class Film extends NamedEntity {
         result = 31 * result + (cover != null ? cover.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
-        result = 31 * result + rating;
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
         return result;
     }
 }
