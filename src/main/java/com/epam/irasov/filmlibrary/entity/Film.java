@@ -20,17 +20,17 @@ public class Film extends NamedEntity {
         super();
         members = new ArrayList<>();
         genres = new ArrayList<>();
+        reviews = new ArrayList<>();
     }
 
 
-    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, List<Review> reviews, Rating rating, String description) {
+    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, Rating rating, String description) {
         this();
         this.tagLine = tagLine;
         this.premiere = premiere;
         this.ageRestriction = ageRestriction;
         this.duration = duration;
         this.cover = cover;
-        this.reviews = reviews;
         this.rating = rating;
         this.description = description;
     }
@@ -113,6 +113,10 @@ public class Film extends NamedEntity {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public void addReviews(Review review){
+        reviews.add(review);
     }
 
     public Rating getRating() {
