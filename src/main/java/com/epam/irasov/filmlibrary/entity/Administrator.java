@@ -8,11 +8,15 @@ public class Administrator extends SystemUser {
     private List<Film> films;
     private List<Member> members;
     private List<Genre> genres;
+    private List<Honor> honors;
+    private List<Rating> ratings;
 
     public Administrator() {
         films = new ArrayList<>();
         members = new ArrayList<>();
         genres = new ArrayList<>();
+        honors = new ArrayList<>();
+        ratings = new ArrayList<>();
     }
 
     public Administrator(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
@@ -20,6 +24,8 @@ public class Administrator extends SystemUser {
         films = new ArrayList<>();
         members = new ArrayList<>();
         genres = new ArrayList<>();
+        honors = new ArrayList<>();
+        ratings = new ArrayList<>();
     }
 
     public List<Film> getFilms() {
@@ -34,9 +40,9 @@ public class Administrator extends SystemUser {
         films.add(film);
     }
 
-    public void removeFilm(Film film) {
+    /*public void removeFilm(Film film) {
         films.remove(film);
-    }
+    }*/
 
     public List<Member> getMembers() {
         return members;
@@ -50,9 +56,9 @@ public class Administrator extends SystemUser {
         members.add(member);
     }
 
-    public void removeMember(Member member) {
+    /*public void removeMember(Member member) {
         members.remove(member);
-    }
+    }*/
 
     public List<Genre> getGenres() {
         return genres;
@@ -66,8 +72,32 @@ public class Administrator extends SystemUser {
         genres.add(genre);
     }
 
-    public void removeGenre(Genre genre) {
+   /* public void removeGenre(Genre genre) {
         genres.remove(genre);
+    }*/
+
+    public List<Honor> getHonors() {
+        return honors;
+    }
+
+    public void setHonors(List<Honor> honors) {
+        this.honors = honors;
+    }
+
+    public void Honor(Honor honor) {
+        honors.add(honor);
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void addRating(Rating rating) {
+        ratings.add(rating);
     }
 
     @Override
