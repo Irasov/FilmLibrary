@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Film extends NamedEntity {
     private String tagLine;
-    private List<Member> members;
+    private List<FilmMember> members;
     private List<Genre> genres;
     private LocalDate premiere;
     private int ageRestriction;
@@ -45,15 +45,15 @@ public class Film extends NamedEntity {
         this.tagLine = tagLine;
     }
 
-    public List<Member> getMembers() {
+    public List<FilmMember> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(List<FilmMember> members) {
         this.members = members;
     }
 
-    public void addMember(Member member) {
+    public void addMember(FilmMember member) {
         members.add(member);
     }
 
