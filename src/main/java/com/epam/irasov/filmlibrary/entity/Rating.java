@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Rating extends NamedEntity {
     private int rating;
-    private List<Member> members;
+    private List<User> members;
 
     public Rating() {
         super();
@@ -25,15 +25,15 @@ public class Rating extends NamedEntity {
         this.rating = rating;
     }
 
-    public List<Member> getMembers() {
+    public List<User> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(List<User> members) {
         this.members = members;
     }
 
-    public void addMember(Member member) {
+    public void addMember(User member) {
         members.add(member);
     }
 
