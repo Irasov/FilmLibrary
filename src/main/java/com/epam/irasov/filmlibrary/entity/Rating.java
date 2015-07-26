@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Rating extends NamedEntity {
-    private int rating;
     private List<User> members;
 
     public Rating() {
@@ -12,17 +11,8 @@ public class Rating extends NamedEntity {
         members = new ArrayList<>();
     }
 
-    public Rating(Long id, String name, int rating) {
-        this();
-        this.rating = rating;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
+    public Rating(Long id, String name) {
+        super(id, name);
     }
 
     public List<User> getMembers() {
@@ -42,15 +32,14 @@ public class Rating extends NamedEntity {
         if (this == o) return true;
         if (!(o instanceof Rating)) return false;
         if (!super.equals(o)) return false;
-        Rating rating1 = (Rating) o;
-        return rating == rating1.rating && !(members != null ? !members.equals(rating1.members) : rating1.members != null);
+        Rating rating = (Rating) o;
+        return !(members != null ? !members.equals(rating.members) : rating.members != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + rating;
         result = 31 * result + (members != null ? members.hashCode() : 0);
         return result;
     }
