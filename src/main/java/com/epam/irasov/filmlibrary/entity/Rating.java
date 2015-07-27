@@ -1,30 +1,22 @@
 package com.epam.irasov.filmlibrary.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Rating extends NamedEntity {
-    private List<User> members;
+    private int votes;
 
     public Rating() {
-        super();
-        members = new ArrayList<>();
     }
 
-    public Rating(Long id, String name) {
+    public Rating(Long id, String name, int votes) {
         super(id, name);
+        this.votes = votes;
     }
 
-    public List<User> getMembers() {
-        return members;
+    public int getCount() {
+        return votes;
     }
 
-    public void setMembers(List<User> members) {
-        this.members = members;
-    }
-
-    public void addMember(User member) {
-        members.add(member);
+    public void setCount(int votes) {
+        this.votes = votes;
     }
 
     @Override
@@ -33,14 +25,13 @@ public class Rating extends NamedEntity {
         if (!(o instanceof Rating)) return false;
         if (!super.equals(o)) return false;
         Rating rating = (Rating) o;
-        return !(members != null ? !members.equals(rating.members) : rating.members != null);
-
+        return votes == rating.votes;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (members != null ? members.hashCode() : 0);
+        result = 31 * result + votes;
         return result;
     }
 }
