@@ -6,17 +6,17 @@ import java.util.List;
 
 public class User extends SystemUser {
     List<Review> reviews;
-    List<Rating> ratings;
+    List<Film> films;
 
     public User() {
         super();
-        ratings = new ArrayList<>();
+        films = new ArrayList<>();
         reviews = new ArrayList<>();
     }
 
     public User(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
         super(id, name, patronymic, surname, birthDate, photo, type, login, password, email);
-        ratings = new ArrayList<>();
+        films = new ArrayList<>();
         reviews = new ArrayList<>();
     }
 
@@ -32,24 +32,16 @@ public class User extends SystemUser {
         reviews.add(review);
     }
 
-    public void removeReviews(Review review) {
-        reviews.remove(review);
+    public List<Film> getFilms() {
+        return films;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
 
-    public void setRatings(List<Rating> ratings) {
-        ratings = ratings;
-    }
-
-    public void addRating(Rating rating) {
-        ratings.add(rating);
-    }
-
-    public void removeRating(Rating rating) {
-        ratings.remove(rating);
+    public void addFilm(Film film) {
+        films.add(film);
     }
 
     @Override
@@ -58,15 +50,14 @@ public class User extends SystemUser {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return !(reviews != null ? !reviews.equals(user.reviews) : user.reviews != null) && !(ratings != null ? !ratings.equals(user.ratings) : user.ratings != null);
-
+        return !(reviews != null ? !reviews.equals(user.reviews) : user.reviews != null) && !(films != null ? !films.equals(user.films) : user.films != null);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
-        result = 31 * result + (ratings != null ? ratings.hashCode() : 0);
+        result = 31 * result + (films != null ? films.hashCode() : 0);
         return result;
     }
 }
