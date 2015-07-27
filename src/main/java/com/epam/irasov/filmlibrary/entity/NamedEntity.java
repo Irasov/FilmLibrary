@@ -1,6 +1,10 @@
 package com.epam.irasov.filmlibrary.entity;
 
+import java.util.Comparator;
+
 public abstract class NamedEntity extends BaseEntity {
+
+    public static final Comparator<NamedEntity> NAME_ORDER = new NameComparator();
 
     private String name;
 
@@ -19,6 +23,12 @@ public abstract class NamedEntity extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static class NameComparator implements Comparator<NamedEntity> {
+        public int compare(NamedEntity o1, NamedEntity o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
     }
 
     @Override
