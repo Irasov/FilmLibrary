@@ -1,22 +1,22 @@
 package com.epam.irasov.filmlibrary.entity;
 
 public class Honor extends NamedEntity {
-    String photo;
+    String image;
 
     public Honor() {
     }
 
-    public Honor(Long id, String name, String photo) {
+    public Honor(Long id, String name, String image) {
         super(id, name);
-        this.photo = photo;
+        this.image = image;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getImage() {
+        return image;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
@@ -25,14 +25,14 @@ public class Honor extends NamedEntity {
         if (!(o instanceof Honor)) return false;
         if (!super.equals(o)) return false;
         Honor honor = (Honor) o;
-        return !(photo != null ? !photo.equals(honor.photo) : honor.photo != null);
+        return !(image != null ? !image.equals(honor.image) : honor.image != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
         return result;
     }
 }
