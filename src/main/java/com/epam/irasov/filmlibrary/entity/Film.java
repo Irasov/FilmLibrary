@@ -17,6 +17,25 @@ public class Film extends NamedEntity {
     private Rating rating;
     private List<Honor> honors;
 
+    public static class Rating extends NamedEntity {
+        private int count;
+        public Rating() {
+        }
+
+        public Rating(Long id, String name, int count) {
+            super(id, name);
+            this.count = count;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+    }
+
     public Film() {
         super();
         members = new ArrayList<>();
