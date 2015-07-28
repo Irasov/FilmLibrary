@@ -9,16 +9,18 @@ public class Review extends NamedEntity {
     private String text;
     private Status status;
     private Rating rating;
+    private boolean published;
 
     public Review() {
     }
 
-    public Review(Long id, String name, LocalDate date, String text, Status status, Rating rating) {
+    public Review(Long id, String name, LocalDate date, String text, Status status, Rating rating, boolean published) {
         super(id, name);
         this.date = date;
         this.text = text;
         this.status = status;
         this.rating = rating;
+        this.published = published;
     }
 
     public LocalDate getDate() {
@@ -53,14 +55,21 @@ public class Review extends NamedEntity {
         this.rating = rating;
     }
 
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Review)) return false;
         if (!super.equals(o)) return false;
         Review review = (Review) o;
-        return !(date != null ? !date.equals(review.date) : review.date != null) && !(text != null ? !text.equals(review.text) : review.text != null) && status == review.status && !(rating != null ? !rating.equals(review.rating) : review.rating != null);
-
+        return published == review.published && !(date != null ? !date.equals(review.date) : review.date != null) && !(text != null ? !text.equals(review.text) : review.text != null) && status == review.status && !(rating != null ? !rating.equals(review.rating) : review.rating != null);
     }
 
     @Override
@@ -70,6 +79,7 @@ public class Review extends NamedEntity {
         result = 31 * result + (text != null ? text.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + (published ? 1 : 0);
         return result;
     }
 }
