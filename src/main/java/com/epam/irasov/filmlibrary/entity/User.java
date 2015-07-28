@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User extends SystemMember {
-    List<Review> reviews;
-    List<Film> films;
+    private List<Review> reviews;
+    private List<Film> films;
 
     public User() {
         super();
