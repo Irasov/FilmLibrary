@@ -2,16 +2,16 @@ package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
 
-public abstract class SystemUser extends Member{
+public abstract class SystemMember extends Member{
     private String login;
     private String password;
     private String email;
 
-    public SystemUser() {
+    public SystemMember() {
 
     }
 
-    public SystemUser(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
+    public SystemMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
         super(id, name, patronymic, surname, birthDate, photo, type);
         this.login = login;
         this.password = password;
@@ -45,9 +45,9 @@ public abstract class SystemUser extends Member{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SystemUser)) return false;
+        if (!(o instanceof SystemMember)) return false;
         if (!super.equals(o)) return false;
-        SystemUser that = (SystemUser) o;
+        SystemMember that = (SystemMember) o;
         return !(login != null ? !login.equals(that.login) : that.login != null) && !(password != null ? !password.equals(that.password) : that.password != null) && !(email != null ? !email.equals(that.email) : that.email != null);
     }
 

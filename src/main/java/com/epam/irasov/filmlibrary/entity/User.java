@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User extends SystemUser {
+public class User extends SystemMember {
     List<Review> reviews;
     List<Film> films;
 
