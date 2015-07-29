@@ -17,8 +17,8 @@ public class Administrator extends SystemMember {
         honors = new ArrayList<>();
     }
 
-    public Administrator(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
-        super(id, name, patronymic, surname, birthDate, photo, type, login, password, email);
+    public Administrator(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, String login, String password, String email, Type type) {
+        super(id, name, patronymic, surname, birthDate, photo, login, password, email, type);
         films = new ArrayList<>();
         members = new ArrayList<>();
         genres = new ArrayList<>();

@@ -14,8 +14,8 @@ public class User extends SystemMember {
         reviews = new ArrayList<>();
     }
 
-    public User(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type, String login, String password, String email) {
-        super(id, name, patronymic, surname, birthDate, photo, type, login, password, email);
+    public User(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, String login, String password, String email, Type type) {
+        super(id, name, patronymic, surname, birthDate, photo, login, password, email, type);
         films = new ArrayList<>();
         reviews = new ArrayList<>();
     }
