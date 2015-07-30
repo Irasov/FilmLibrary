@@ -42,6 +42,11 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
+    public NewsDao newNewsDao() {
+        return new JdbcNewsDao(connection);
+    }
+
+    @Override
     public FilmMemberDao newFilmMemberDao() {
         return new JdbcFilmMemberDao(connection);
     }
