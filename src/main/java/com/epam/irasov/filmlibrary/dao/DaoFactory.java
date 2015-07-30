@@ -31,6 +31,8 @@ public abstract class DaoFactory {
 
     public abstract NewsBlockDao newNewsBlockDao();
 
+    public abstract FilmBlockDao newFilmBlockDao();
+
     public abstract void beginTx();
 
     public abstract void endTx();

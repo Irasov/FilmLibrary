@@ -56,6 +56,11 @@ public class JdbcDaoFactory extends DaoFactory {
         return new JdbcNewsBlockDao(connection);
     }
 
+    @Override
+    public FilmBlockDao newFilmBlockDao() {
+        return new JdbcFilmBlockDao(connection);
+    }
+
 
     @Override
     public void beginTx() {
