@@ -29,6 +29,8 @@ public abstract class DaoFactory {
 
     public abstract FilmMemberDao newFilmMemberDao();
 
+    public abstract NewsBlockDao newNewsBlockDao();
+
     public abstract void beginTx();
 
     public abstract void endTx();
