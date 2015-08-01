@@ -1,6 +1,6 @@
 /* Сброс */
 
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote {
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote {
     margin: 0;
     padding: 0;
 }
@@ -11,33 +11,33 @@ html {
     height: 100%;
 }
 
-body{
-    font: 12px "Helvetica Neue",Verdana, Tahoma, Arial, Nelvetica, Geneva, sans-serif;
+body {
+    font: 12px "Helvetica Neue", Verdana, Tahoma, Arial, Nelvetica, Geneva, sans-serif;
     width: 100%;
-    height :100%;
+    height: 100%;
     background: #fff;
     color: #4d4d4d;
 }
 
-a{
+a {
     color: #022e75;
     outline: none;
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
-img{
+img {
     border: none;
 }
 
-input{
+input {
     vertical-align: middle;
 }
 
-article,aside,footer,header,hgroup,nav,section{
+article, aside, footer, header, hgroup, nav, section {
     display: block;
 }
 
@@ -85,4 +85,18 @@ article,aside,footer,header,hgroup,nav,section{
 
 .navigation li span:hover {
     background: url('img/menu_bg2.png') no-repeat right top;
+}
+
+.reg {
+    width: 500px;
+    margin: 0 auto;
+    background: #e6e6e6;
+}
+
+.reg_text {
+    padding: 10px 0 10px 25px;
+}
+
+.reg_input {
+    padding: 0 0 10px 25px;
 }
