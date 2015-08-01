@@ -5,20 +5,18 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
-    <title>
-        <fmt:setLocale value="${locale}"/>
+    <title><fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="film.library" bundle="${lang}"/>
+        <fmt:message key="site.registration" bundle="${lang}"/>
     </title>
 </head>
 <body>
 <div class="wrapper">
     <fl:header/>
-    <fl:navigation/>
     <div class="container">
-        <fl:informationBlock/>
-        <fl:footer/>
+        <fl:registration/>
     </div>
+    <fl:footer/>
 </div>
 </body>
 </html>
