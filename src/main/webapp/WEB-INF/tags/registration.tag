@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <div class="reg">
-    <form action="${pageContext.request.contextPath}/controller" method="get">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
         <div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
