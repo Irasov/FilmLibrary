@@ -1,4 +1,4 @@
 package com.epam.irasov.filmlibrary.dao;
 
-public interface UserDao {
+public interface SystemMemberDao {
 }

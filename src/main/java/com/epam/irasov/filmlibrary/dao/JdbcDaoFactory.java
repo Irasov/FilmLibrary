@@ -17,13 +17,8 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public UserDao newUserDao() {
-        return new JdbcUserDao(connection);
-    }
-
-    @Override
-    public AdminDao newAdminDao() {
-        return new JdbcAdminDao(connection);
+    public SystemMemberDao newSystemMember() {
+        return new JdbcSystemMemberDao(connection);
     }
 
     @Override

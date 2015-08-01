@@ -2,11 +2,11 @@ package com.epam.irasov.filmlibrary.dao;
 
 import java.sql.Connection;
 
-public class JdbcUserDao implements UserDao {
+public class JdbcSystemMemberDao implements SystemMemberDao {
 
     private final Connection connection;
 
-    public JdbcUserDao(Connection connection) {
+    public JdbcSystemMemberDao(Connection connection) {
         this.connection = connection;
     }
 }

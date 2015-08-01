@@ -15,9 +15,7 @@ public abstract class DaoFactory {
 
     public abstract FilmDao newFilmDao();
 
-    public abstract UserDao newUserDao();
-
-    public abstract AdminDao newAdminDao();
+    public abstract SystemMemberDao newSystemMember();
 
     public abstract GenreDao newGenreDao();
 
