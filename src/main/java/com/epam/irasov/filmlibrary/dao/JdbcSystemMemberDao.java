@@ -150,6 +150,4 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         preparedStatement.setLong(index, id);
         preparedStatement.executeUpdate();
     }
-
-
 }
