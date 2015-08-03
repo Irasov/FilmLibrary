@@ -11,6 +11,7 @@ public interface SystemMemberDao {
     SystemMember findBySurName(String surName);
     void update (SystemMember systemMember);
     SystemMember save (SystemMember movie);
+    Member.Type saveType (SystemMember.Type type);
     Member.Type insertMemberType(Member.Type type);
     boolean remove(SystemMember systemMember);
 }

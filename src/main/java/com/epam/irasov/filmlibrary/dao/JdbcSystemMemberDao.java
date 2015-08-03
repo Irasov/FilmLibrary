@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL) VALUES(?,?,?,?,?,?,?,?)";
-
+    private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(NAME) VALUES(?)";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -37,8 +37,21 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     public SystemMember save(SystemMember systemMember) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SYSTEM_MEMBER);
-            setInsertSystemMember(preparedStatement,systemMember.getName(),systemMember.getPatronymic(),systemMember.getSurname(),systemMember.getBirthDate(),systemMember.getType().getId(),systemMember.getLogin(),systemMember.getPassword(),systemMember.getEmail());
+            setInsertSystemMember(preparedStatement, systemMember.getName(), systemMember.getPatronymic(), systemMember.getSurname(), systemMember.getBirthDate(), systemMember.getType().getId(), systemMember.getLogin(), systemMember.getPassword(), systemMember.getEmail());
             return systemMember;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Member.Type saveType(SystemMember.Type type) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SYSTEM_MEMBER_TYPE);
+            int index = 1;
+            preparedStatement.setString(index, type.getName());
+            preparedStatement.executeUpdate();
+            return type;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
