@@ -3,15 +3,24 @@ package com.epam.irasov.filmlibrary.dao;
 import com.epam.irasov.filmlibrary.entity.Member;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
+import static java.time.format.DateTimeFormatter.ofPattern;
+
 public class JdbcSystemMemberDao implements SystemMemberDao {
+    private final static String RESULT_ID = "id";
+    private final static String RESULT_DATE = "date";
+    private final static String RESULT_NAME = "name";
+    private final static String RESULT_SURNAME = "surname";
+    private final static String RESULT_PATRONYMIC = "patronymic";
+    private final static String RESULT_LOGIN = "login";
+    private final static String RESULT_PASSWORD = "password";
+    private final static String RESULT_EMAIL = "email";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL) VALUES(?,?,?,?,?,?,?,?)";
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(NAME) VALUES(?)";
+    private final static String FIND_BY_ID = "SELECT  ID, NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL FROM SYSTEM_MEMBER WHERE ID = ?";
+    private final static String FIND_BY_ID_TYPE = "SELECT ID, NAME FROM SYSTEM_MEMBER_TYPE WHERE ID=ANY(SELECT ID_TYPE FROM SYSTEM_MEMBER WHERE ID=?)";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -20,6 +29,39 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
 
     @Override
     public SystemMember findById(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID_TYPE);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            Member.Type type = new Member.Type();
+            type.setId(resultSet.getLong(RESULT_ID));
+            type.setName(resultSet.getString(RESULT_NAME));
+            preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            preparedStatement.setLong(index, id);
+            resultSet = preparedStatement.executeQuery();
+            found = resultSet.next();
+            if (!found) return null;
+            SystemMember systemMember;
+            while (found) {
+                systemMember = new SystemMember();
+                systemMember.setId(resultSet.getLong(RESULT_ID));
+                systemMember.setName(resultSet.getString(RESULT_NAME));
+                systemMember.setPatronymic(resultSet.getString(RESULT_PATRONYMIC));
+                systemMember.setSurname(resultSet.getString(RESULT_SURNAME));
+                systemMember.setBirthDate(LocalDate.parse(resultSet.getDate(RESULT_DATE).toString(), ofPattern("yyyy-MM-dd")));
+                systemMember.setType(type);
+                systemMember.setLogin(resultSet.getString(RESULT_LOGIN));
+                systemMember.setPassword(resultSet.getString(RESULT_PASSWORD));
+                systemMember.setEmail(resultSet.getString(RESULT_EMAIL));
+                found = resultSet.next();
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
         return null;
     }
 
