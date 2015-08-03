@@ -46,7 +46,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             found = resultSet.next();
             if (!found) return null;
             SystemMember systemMember;
-            while (found) {
+           /* while (found) {*/
                 systemMember = new SystemMember();
                 systemMember.setId(resultSet.getLong(RESULT_ID));
                 systemMember.setName(resultSet.getString(RESULT_NAME));
@@ -57,8 +57,8 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
                 systemMember.setLogin(resultSet.getString(RESULT_LOGIN));
                 systemMember.setPassword(resultSet.getString(RESULT_PASSWORD));
                 systemMember.setEmail(resultSet.getString(RESULT_EMAIL));
-                found = resultSet.next();
-            }
+             /*   found = resultSet.next();
+            }*/
 
         } catch (SQLException e) {
             throw new DaoException(e);
