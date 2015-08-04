@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <div class="reg">
-    <form action="${pageContext.request.contextPath}/controller" method="post">
+    <form action="${pageContext.request.contextPath}/controller?action=register" method="post">
         <div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
@@ -74,13 +74,11 @@
             </button>
         </div>
     </form>
-    <form action="${pageContext.request.contextPath}/controller" method="get">
+    <a href="${pageContext.request.contextPath}/controller?action=register">
         <div class="reg_text">
-            <button type="submit">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="site.not.registration" bundle="${lang}"/>
-            </button>
+            <fmt:setLocale value="${locale}"/>
+            <fmt:setBundle basename="i18n" var="lang"/>
+            <fmt:message key="site.not.registration" bundle="${lang}"/>
         </div>
-    </form>
+    </a>
 </div>
