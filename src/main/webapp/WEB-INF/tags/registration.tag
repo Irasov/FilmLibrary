@@ -24,7 +24,7 @@
             <fmt:message key="reg.password" bundle="${lang}"/>
         </div>
         <div class="reg_input">
-            <input type="text" name="pas" class="reginput" required title="password"/>
+            <input type="password" name="pas" class="reginput" required title="password"/>
         </div>
         <div class="reg_text">
             <fmt:setLocale value="${locale}"/>
