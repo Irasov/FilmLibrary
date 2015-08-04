@@ -1,10 +1,13 @@
 package com.epam.irasov.filmlibrary.dao;
 
+import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.Member;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
@@ -17,6 +20,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String RESULT_LOGIN = "login";
     private final static String RESULT_PASSWORD = "password";
     private final static String RESULT_EMAIL = "email";
+    private final static String FIND_ALL_SYSTEM_MEMBEBERS = "SELECT * FROM SYSTEM_MEMBERS";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL) VALUES(?,?,?,?,?,?,?,?)";
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(NAME) VALUES(?)";
     private final static String FIND_BY_ID = "SELECT  ID, NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL FROM SYSTEM_MEMBER WHERE ID = ?";
@@ -64,6 +68,32 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             throw new DaoException(e);
         }
         return null;
+    }
+
+    @Override
+    public List<SystemMember> selectSystemMembers() {
+        List<SystemMember> systemMembers = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SYSTEM_MEMBEBERS);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            SystemMember systemMember;
+            while (found) {
+                systemMember = new SystemMember();
+                systemMember.setId(resultSet.getLong(RESULT_ID));
+                systemMember.setName(resultSet.getString(RESULT_NAME));
+                systemMember.setPatronymic(resultSet.getString(RESULT_PATRONYMIC));
+                systemMember.setSurname(resultSet.getString(RESULT_SURNAME));
+                systemMember.setBirthDate(LocalDate.parse(resultSet.getDate(RESULT_DATE).toString(), ofPattern("yyyy-MM-dd")));
+                //reviews
+                systemMembers.add(systemMember);
+                found = resultSet.next();
+            }
+            return systemMembers;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.List;
 public interface SystemMemberDao {
     SystemMember findById(Long id);
     SystemMember findBySurName(String surName);
+    List<SystemMember> selectSystemMembers();
     void update (SystemMember systemMember);
     SystemMember save (SystemMember movie);
     Member.Type saveType (SystemMember.Type type);
