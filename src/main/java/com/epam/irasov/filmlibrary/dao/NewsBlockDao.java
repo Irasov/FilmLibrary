@@ -11,4 +11,5 @@ public interface NewsBlockDao {
     boolean removeNews(News news);
     boolean remove(NewsBlock newsBlock);
     NewsBlock upDate(NewsBlock newsBlock);
+    NewsBlock selectNews(Long idNewsBlock);
 }
