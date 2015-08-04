@@ -21,7 +21,7 @@ public class JdbcFilmDao implements FilmDao {
     private final static String RESULT_SECOND_NAME = "second_name";
     private final static String RESULT_PATRONYMIC = "patronymic";
     private final static String RESULT_ROLE = "role";
-    private final static String SELECT_FILMS = "SELECT * FROM FILM";
+    private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
     private final static String FIND_BY_ID = "SELECT ID, NAME, COUNTRY, DATE FROM MOVIE WHERE ID = ?";
     private final static String FIND_BY_ID_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER WHERE ID_MOVIE=?)";
     private final static String INSERT_MOVIE = "INSERT INTO MOVIE(ID, NAME, COUNTRY, DATE) VALUES(?,?,?,?)";
@@ -61,7 +61,7 @@ public class JdbcFilmDao implements FilmDao {
     public List<Film> selectFilms() {
         List<Film> films = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FILMS);
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_FILMS);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (!found) return null;
