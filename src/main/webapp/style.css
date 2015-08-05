@@ -100,3 +100,8 @@ article, aside, footer, header, hgroup, nav, section {
 .reg_input {
     padding: 0 0 10px 25px;
 }
+
+.error {
+    padding: 10px 0 10px 25px;
+    color: #ff0000;
+}

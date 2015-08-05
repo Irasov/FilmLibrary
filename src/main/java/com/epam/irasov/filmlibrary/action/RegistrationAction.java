@@ -5,6 +5,7 @@ import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.SystemMemberDao;
 import com.epam.irasov.filmlibrary.entity.Member;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
+import com.epam.irasov.filmlibrary.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,8 @@ public class RegistrationAction implements Action {
     private final static Long ID_USER = 2l;
     private final static String NAME_ADMIN = "admin";
     private final static String NAME_USER = "user";
+    private final static int NO_ADMINISTRATOR = 0;
+    private final static int NO_USER = 1;
 
     public RegistrationAction() {
     }
@@ -30,15 +33,28 @@ public class RegistrationAction implements Action {
         String surName = req.getParameter("surname");
         String birthDate = req.getParameter("birthdate");
         String email = req.getParameter("email");
+        String loginError = Validator.isLoginValid(login);
+        String passwordError = Validator.isPasswordValid(password);
+        String emailError = Validator.isEmailValid(email);
+        if (loginError != null) {
+            req.setAttribute("loginError", loginError);
+            return new View("index", false);
+        } else if (passwordError != null) {
+            req.setAttribute("passwordError", passwordError);
+            return new View("index", false);
+        } else if (emailError != null){
+            req.setAttribute("emailError", emailError);
+            return new View("index", false);
+        }
         DaoFactory daoFactory = DaoFactory.getInstance();
         Member.Type type = null;
         try {
             int cont = daoFactory.newSystemMemberDao().findType();
-            if (cont == 0) {
+            if (cont == NO_ADMINISTRATOR) {
                 type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_ADMIN, NAME_ADMIN));
-            } else if (cont == 1) {
+            } else if (cont == NO_USER) {
                 type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_USER, NAME_USER));
-            } else if ((cont > 1)) {
+            } else if ((cont > NO_USER)) {
                 type = (new Member.Type(ID_USER, NAME_USER));
             }
             SystemMember systemMember = new SystemMember();
