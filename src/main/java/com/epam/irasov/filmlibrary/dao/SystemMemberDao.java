@@ -13,6 +13,7 @@ public interface SystemMemberDao {
     void update (SystemMember systemMember);
     SystemMember save (SystemMember movie);
     Member.Type saveType (SystemMember.Type type);
+    int findType ();
     Member.Type insertMemberType(Member.Type type);
     boolean remove(SystemMember systemMember);
 }

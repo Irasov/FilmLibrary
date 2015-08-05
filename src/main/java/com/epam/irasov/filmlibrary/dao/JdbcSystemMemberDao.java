@@ -20,12 +20,13 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String RESULT_LOGIN = "login";
     private final static String RESULT_PASSWORD = "password";
     private final static String RESULT_EMAIL = "email";
-    private final static String FIND_ALL_SYSTEM_MEMBEBERS = "SELECT * FROM SYSTEM_MEMBERS";
+    private final static String FIND_ALL_SYSTEM_MEMBERS = "SELECT * FROM SYSTEM_MEMBERS";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL) VALUES(?,?,?,?,?,?,?,?)";
-    private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(NAME) VALUES(?)";
+    private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(ID,NAME) VALUES(?,?)";
     private final static String FIND_BY_ID = "SELECT  ID, NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL FROM SYSTEM_MEMBER WHERE ID = ?";
     private final static String FIND_BY_ID_TYPE = "SELECT ID, NAME FROM SYSTEM_MEMBER_TYPE WHERE ID=ANY(SELECT ID_TYPE FROM SYSTEM_MEMBER WHERE ID=?)";
     private final static String UPDATE_SYSTEM_MEMBER = "UPDATE SYSTEM_MEMBER SET NAME = ?, SURNAME = ?, PATRONYMIC=?, BIRTH_DATE =  ?  WHERE ID=?";
+    private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -50,7 +51,6 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             found = resultSet.next();
             if (!found) return null;
             SystemMember systemMember;
-           /* while (found) {*/
                 systemMember = new SystemMember();
                 systemMember.setId(resultSet.getLong(RESULT_ID));
                 systemMember.setName(resultSet.getString(RESULT_NAME));
@@ -61,9 +61,6 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
                 systemMember.setLogin(resultSet.getString(RESULT_LOGIN));
                 systemMember.setPassword(resultSet.getString(RESULT_PASSWORD));
                 systemMember.setEmail(resultSet.getString(RESULT_EMAIL));
-             /*   found = resultSet.next();
-            }*/
-
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -74,7 +71,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     public List<SystemMember> selectSystemMembers() {
         List<SystemMember> systemMembers = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SYSTEM_MEMBEBERS);
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SYSTEM_MEMBERS);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (!found) return null;
@@ -127,10 +124,29 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SYSTEM_MEMBER_TYPE);
             int index = 1;
+            preparedStatement.setLong(index, type.getId());
+            index++;
             preparedStatement.setString(index, type.getName());
             preparedStatement.executeUpdate();
             return type;
         } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int findType() {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_SYSTEM_MEMBER_TYPE);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found){
+                count++;
+                found = resultSet.next();
+            }
+            return count;
+        }catch (SQLException e){
             throw new DaoException(e);
         }
     }
