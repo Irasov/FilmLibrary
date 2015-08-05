@@ -17,7 +17,7 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public SystemMemberDao newSystemMember() {
+    public SystemMemberDao newSystemMemberDao() {
         return new JdbcSystemMemberDao(connection);
     }
 
