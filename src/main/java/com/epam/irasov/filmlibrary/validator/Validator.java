@@ -20,4 +20,12 @@ public class Validator {
         }
         return null;
     }
+
+    public static String isEmailValid(String email){
+        if(!email.matches("\\w+@[a-zA-Z]+?\\.[a-zA-Z]{2,6}")){
+            return "error.email";
+        }
+        return null;
+    }
+
 }
