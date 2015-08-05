@@ -10,4 +10,14 @@ public class Validator {
         }
         return null;
     }
+
+    public static String isPasswordValid(String login){
+        if((login.length()<7)||(login.length()>15)){
+            return "error.password.too_long";
+        }
+        if(!login.matches("[A-z0-9]+")){
+            return "error.password.incorrect_characters";
+        }
+        return null;
+    }
 }
