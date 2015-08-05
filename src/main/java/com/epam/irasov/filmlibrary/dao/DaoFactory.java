@@ -15,7 +15,6 @@ public abstract class DaoFactory {
 
     public abstract FilmDao newFilmDao();
 
-    public abstract SystemMemberDao newSystemMember();
     public abstract SystemMemberDao newSystemMemberDao();
 
     public abstract GenreDao newGenreDao();
