@@ -13,10 +13,11 @@ import java.time.LocalDate;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class RegistrationAction implements Action {
-    private final static Long ID_ADMIN=1l;
-    private final static Long ID_USER=2l;
-    private final static String NAME_ADMIN="admin";
-    private final static String NAME_USER="user";
+    private final static Long ID_ADMIN = 1l;
+    private final static Long ID_USER = 2l;
+    private final static String NAME_ADMIN = "admin";
+    private final static String NAME_USER = "user";
+
     public RegistrationAction() {
     }
 
@@ -32,13 +33,13 @@ public class RegistrationAction implements Action {
         DaoFactory daoFactory = DaoFactory.getInstance();
         Member.Type type = null;
         try {
-           int cont = daoFactory.newSystemMemberDao().findType();
-            if(cont==0){
-                type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_ADMIN,NAME_ADMIN));
-            }else if(cont==1){
-                 type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_USER,NAME_USER));
-            }else if((cont>1)){
-                type = (new Member.Type(2L,"user"));
+            int cont = daoFactory.newSystemMemberDao().findType();
+            if (cont == 0) {
+                type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_ADMIN, NAME_ADMIN));
+            } else if (cont == 1) {
+                type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_USER, NAME_USER));
+            } else if ((cont > 1)) {
+                type = (new Member.Type(ID_USER, NAME_USER));
             }
             SystemMember systemMember = new SystemMember();
             systemMember.setLogin(login);
@@ -50,12 +51,12 @@ public class RegistrationAction implements Action {
             systemMember.setBirthDate(LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")));
             systemMember.setEmail(email);
             daoFactory.beginTx();
-            SystemMemberDao systemMemberDao= daoFactory.newSystemMemberDao();
+            SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             systemMemberDao.save(systemMember);
             daoFactory.endTx();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new DaoException(e);
-        }finally {
+        } finally {
             daoFactory.close();
         }
         return new View("home", true);
