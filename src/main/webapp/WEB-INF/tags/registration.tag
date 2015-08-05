@@ -29,6 +29,14 @@
         <div class="reg_text">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>
+            <fmt:message key="reg.surname" bundle="${lang}"/>
+        </div>
+        <div class="reg_input">
+            <input type="text" name="surname" class="reginput" required title="surname"/>
+        </div>
+        <div class="reg_text">
+            <fmt:setLocale value="${locale}"/>
+            <fmt:setBundle basename="i18n" var="lang"/>
             <fmt:message key="reg.name" bundle="${lang}"/>
         </div>
         <div class="reg_input">
@@ -45,14 +53,6 @@
         <div class="reg_text">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="reg.surname" bundle="${lang}"/>
-        </div>
-        <div class="reg_input">
-            <input type="text" name="surname" class="reginput" required title="surname"/>
-        </div>
-        <div class="reg_text">
-            <fmt:setLocale value="${locale}"/>
-            <fmt:setBundle basename="i18n" var="lang"/>
             <fmt:message key="reg.email" bundle="${lang}"/>
         </div>
         <div class="reg_input">
@@ -64,7 +64,7 @@
             <fmt:message key="reg.birthdate" bundle="${lang}"/>
         </div>
         <div class="reg_input">
-            <input type="text" name="birthdate" class="reginput" required title="birthdate"/>
+            <input type="text" name="birthdate" class="reginput"  value="2015-08-20" pattern="[0-9]{4}-[0-1]{1}[0-9]{1}-[0-9]{2}" required title="yyyy-mm-dd"/>
         </div>
         <div class="reg_text">
             <button type="submit">
