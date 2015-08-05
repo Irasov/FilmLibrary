@@ -27,7 +27,7 @@ public class FrontControllerServlet extends HttpServlet {
         if(view.getRedirect()){
             resp.sendRedirect(view.getPath() + ".jsp");
         }else{
-            req.getRequestDispatcher("/"+"index" + ".jsp").forward(req, resp);
+            req.getRequestDispatcher("/"+view.getPath() + ".jsp").forward(req, resp);
         }
     }
 
