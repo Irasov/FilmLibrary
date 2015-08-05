@@ -4,6 +4,9 @@ public class View {
     String path;
     boolean redirect;
 
+    public View() {
+    }
+
     public View(String path, boolean redirect) {
         this.path = path;
         this.redirect = redirect;
