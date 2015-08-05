@@ -7,13 +7,6 @@
 <%--@elvariable id="emailError" type="java.lang.String"--%>
 <div class="reg">
     <form action="${pageContext.request.contextPath}/controller?action=register" method="post">
-        <div>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="reg.text" bundle="${lang}"/>
-            </div>
-        </div>
         <div class="reg_text">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>
@@ -100,11 +93,4 @@
             </button>
         </div>
     </form>
-    <a href="${pageContext.request.contextPath}/controller?action=register">
-        <div class="reg_text">
-            <fmt:setLocale value="${locale}"/>
-            <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="site.not.registration" bundle="${lang}"/>
-        </div>
-    </a>
 </div>

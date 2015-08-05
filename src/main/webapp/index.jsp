@@ -14,7 +14,13 @@
 <div class="wrapper">
     <fl:header/>
     <div class="container">
+        <div class="reg_text">
+            <fmt:setLocale value="${locale}"/>
+            <fmt:setBundle basename="i18n" var="lang"/>
+            <fmt:message key="reg.text" bundle="${lang}"/>
+        </div>
         <fl:registration/>
+        <fl:login/>
     </div>
     <fl:footer/>
 </div>

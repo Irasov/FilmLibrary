@@ -86,10 +86,16 @@ article, aside, footer, header, hgroup, nav, section {
 .navigation li span:hover {
     background: url('img/menu_bg2.png') no-repeat right top;
 }
-
-.reg {
-    width: 500px;
+/*Container*/
+.container{
+    width:800px;
+    height: 650px;
     margin: 0 auto;
+    background: #e6e6e6;
+}
+/*Регистрация*/
+.reg {
+    float: left;
     background: #e6e6e6;
 }
 
@@ -102,6 +108,24 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .error {
+    width:300px;
     padding: 10px 0 10px 25px;
     color: #ff0000;
+}
+/*логин*/
+.login{
+    float: right;
+    padding: 0 50px 0 0;
+    background: #e6e6e6;
+}
+.no_login_text {
+   margin: 360px 0 10px 25px;
+    background: #f4f4f4;
+}
+/*подвал*/
+.footer{
+    margin: 10px 0 0 0;
+    height: 110px;
+    background-color: #626262;
+
 }
