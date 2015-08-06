@@ -88,15 +88,14 @@ article, aside, footer, header, hgroup, nav, section {
 }
 /*Container*/
 .container{
-    width:800px;
-    height: 650px;
+    width:1100px;
     margin: 0 auto;
-    background: #e6e6e6;
+    background: #ffffff;
 }
 /*Регистрация*/
 .reg {
-    float: left;
-    background: #e6e6e6;
+    margin: 0 auto;
+    background: #ffffff;
 }
 
 .reg_text {
@@ -114,9 +113,8 @@ article, aside, footer, header, hgroup, nav, section {
 }
 /*логин*/
 .login{
-    float: right;
     padding: 0 50px 0 0;
-    background: #e6e6e6;
+    background: #ffffff;
 }
 .no_login_text {
    margin: 360px 0 10px 25px;
@@ -124,7 +122,7 @@ article, aside, footer, header, hgroup, nav, section {
 }
 /*подвал*/
 .footer{
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
     height: 110px;
     background-color: #626262;
 

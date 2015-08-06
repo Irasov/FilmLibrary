@@ -45,11 +45,4 @@
             </button>
         </div>
     </form>
-    <a href="${pageContext.request.contextPath}/controller?action=register">
-        <div class="no_login_text">
-            <fmt:setLocale value="${locale}"/>
-            <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="site.not.registration" bundle="${lang}"/>
-        </div>
-    </a>
 </div>

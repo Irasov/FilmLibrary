@@ -38,13 +38,13 @@ public class RegistrationAction implements Action {
         String emailError = Validator.isEmailValid(email);
         if (loginError != null) {
             req.setAttribute("loginError", loginError);
-            return new View("index", false);
+            return new View("registration", false);
         } else if (passwordError != null) {
             req.setAttribute("passwordError", passwordError);
-            return new View("index", false);
+            return new View("registration", false);
         } else if (emailError != null){
             req.setAttribute("emailError", emailError);
-            return new View("index", false);
+            return new View("registration", false);
         }
         DaoFactory daoFactory = DaoFactory.getInstance();
         Member.Type type = null;
@@ -75,6 +75,6 @@ public class RegistrationAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("home", true);
+        return new View("index", true);
     }
 }

@@ -5,10 +5,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
-    <title>
-        <fmt:setLocale value="${locale}"/>
+    <title><fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="film.library" bundle="${lang}"/>
+        <fmt:message key="site.registration" bundle="${lang}"/>
     </title>
 </head>
 <body>
@@ -16,9 +15,14 @@
     <fl:header/>
     <fl:navigation/>
     <div class="container">
-        <fl:informationBlock/>
-        <fl:footer/>
+        <div class="reg_text">
+            <fmt:setLocale value="${locale}"/>
+            <fmt:setBundle basename="i18n" var="lang"/>
+            <fmt:message key="reg.text" bundle="${lang}"/>
+        </div>
+        <fl:registration/>
     </div>
+    <fl:footer/>
 </div>
 </body>
 </html>

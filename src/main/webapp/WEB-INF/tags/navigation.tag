@@ -3,7 +3,7 @@
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <div class="nav">
     <ul class="navigation">
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/index.jsp">
             <span>
               <fmt:setLocale value="${locale}"/>
               <fmt:setBundle basename="i18n" var="lang"/>
@@ -33,13 +33,13 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.other" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/registration.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.registration" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/login.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
