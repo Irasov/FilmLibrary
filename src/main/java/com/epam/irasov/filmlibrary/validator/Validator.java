@@ -5,7 +5,7 @@ public class Validator {
         if((login.length()<4)||(login.length()>15)){
             return "error.login.too_long";
         }
-        if(!login.matches("[a-z0-9]+")){
+        if(!login.matches("[A-z0-9]+")){
             return "error.login.incorrect_characters";
         }
         return null;
