@@ -59,11 +59,6 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     }
 
     @Override
-    public boolean remove(NewsBlock newsBlock) {
-        return false;
-    }
-
-    @Override
     public NewsBlock upDate(NewsBlock newsBlock) {
         return null;
     }
