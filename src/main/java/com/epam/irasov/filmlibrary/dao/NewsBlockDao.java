@@ -9,4 +9,5 @@ public interface NewsBlockDao {
     boolean removeNews(News news);
     NewsBlock upDate(NewsBlock newsBlock);
     NewsBlock findByIDNewsBlock(Long idNewsBlock);
+    boolean emptyTable();
 }
