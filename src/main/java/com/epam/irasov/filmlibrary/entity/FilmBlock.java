@@ -10,7 +10,7 @@ public class FilmBlock extends NamedEntity {
         this.films = new ArrayList<>();
     }
 
-    public FilmBlock(Long id, String name, List<Film> films) {
+    public FilmBlock(Long id, String name) {
         super(id, name);
         this.films = new ArrayList<>();
     }
