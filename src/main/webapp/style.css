@@ -116,14 +116,10 @@ article, aside, footer, header, hgroup, nav, section {
     padding: 0 50px 0 0;
     background: #ffffff;
 }
-.no_login_text {
-   margin: 360px 0 10px 25px;
-    background: #f4f4f4;
-}
 /*подвал*/
 .footer{
     margin: 5px 0 0 0;
     height: 110px;
-    background-color: #626262;
+    background-color: #f4f4f4;
 
 }
