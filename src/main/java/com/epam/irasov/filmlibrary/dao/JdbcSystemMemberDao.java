@@ -173,7 +173,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         index++;
         preparedStatement.setLong(index, idType);
         index++;
-        preparedStatement.setString(index, login);
+        preparedStatement.setString(index, login.toLowerCase());
         index++;
         preparedStatement.setString(index, password);
         index++;
