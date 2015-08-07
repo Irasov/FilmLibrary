@@ -3,7 +3,7 @@
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <div class="nav">
     <ul class="navigation">
-        <li><a href="${pageContext.request.contextPath}/home.jsp">
+        <li><a href="${pageContext.request.contextPath}/index.jsp">
             <span>
               <fmt:setLocale value="${locale}"/>
               <fmt:setBundle basename="i18n" var="lang"/>
