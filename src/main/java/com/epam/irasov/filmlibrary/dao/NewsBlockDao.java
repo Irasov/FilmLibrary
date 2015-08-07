@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface NewsBlockDao {
     NewsBlock save(NewsBlock newsBlock);
-    void addNews (News news);
+    void addNews (NewsBlock newsBlock, News news);
     boolean removeNews(News news);
     boolean remove(NewsBlock newsBlock);
     NewsBlock upDate(NewsBlock newsBlock);
-    NewsBlock selectNews(Long idNewsBlock);
+    NewsBlock findByIDNewsBlock(Long idNewsBlock);
 }

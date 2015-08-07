@@ -12,8 +12,9 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     private final static String RESULT_ID = "id";
     private final static String RESULT_DATE = "date";
     private final static String RESULT_NAME = "name";
-    private static final String INSERT_NEWS_BLOCK = "INSERT INTO INFORMATION_BLOCK (NAME) VALUES (?)";
-    private static final String SELECT_NEWS_BLOCK = "SELECT NAME, DATE, TEXT, IMAGE FROM NEWS WHERE ID=ANY (SELECT ID_NEWS WHERE ID_INFORMATION_BLOCK=?)";
+    private static final String INSERT_NEWS_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
+    private static final String SELECT_NEWS_BLOCK = "SELECT ID, NAME, DATE, TEXT, IMAGE FROM NEWS WHERE iD=ANY(SELECT ID_NEWS FROM INFORMATION_BLOCK_NEWS WHERE ID_INFORMATION_BLOCK=?)";
+    private static final String ADD_NEWS="INSERT INTO INFORMATION_BLOCK_NEWS(ID_INFORMATION_BLOCK, ID_NEWS) VALUES (?,?)";
     private static final String RESULT_TEXT = "text";
     private static final String RESULT_IMAGE = "image";
 
@@ -28,6 +29,8 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEWS_BLOCK);
             int index = 1;
+            preparedStatement.setLong(index, newsBlock.getId());
+            index++;
             preparedStatement.setString(index, newsBlock.getName());
             preparedStatement.executeUpdate();
             return newsBlock;
@@ -37,8 +40,17 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     }
 
     @Override
-    public void addNews(News news) {
-
+    public void addNews(NewsBlock newsBlock, News news) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEWS);
+            int index = 1;
+            preparedStatement.setLong(index, newsBlock.getId());
+            index++;
+            preparedStatement.setLong(index, news.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
@@ -57,7 +69,7 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     }
 
     @Override
-    public NewsBlock selectNews(Long idNewsBlock) {
+    public NewsBlock findByIDNewsBlock(Long idNewsBlock) {
         NewsBlock newsBlock = new NewsBlock();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_NEWS_BLOCK);

@@ -4,6 +4,8 @@ import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.SystemMemberDao;
 import com.epam.irasov.filmlibrary.entity.Member;
+import com.epam.irasov.filmlibrary.entity.News;
+import com.epam.irasov.filmlibrary.entity.NewsBlock;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
 import com.epam.irasov.filmlibrary.validator.Validator;
 
@@ -52,6 +54,14 @@ public class RegistrationAction implements Action {
             int cont = daoFactory.newSystemMemberDao().findType();
             if (cont == NO_ADMINISTRATOR) {
                 type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_ADMIN, NAME_ADMIN));
+                NewsBlock newsBlock = new NewsBlock();
+                News news = new News(1l,"nazvanie novosti",LocalDate.parse("2015-08-20", ofPattern("yyyy-MM-dd")),"Zdes budet text","Zdes budet image");
+                newsBlock.setId(1l);
+                newsBlock.setName("Nazvanie blocka");
+                newsBlock.addNews(news);
+                daoFactory.newNewsDao().save(news);
+                daoFactory.newNewsBlockDao().save(newsBlock);
+                daoFactory.newNewsBlockDao().addNews(newsBlock,news);
             } else if (cont == NO_USER) {
                 type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_USER, NAME_USER));
             } else if ((cont > NO_USER)) {
