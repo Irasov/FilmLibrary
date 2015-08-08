@@ -78,12 +78,13 @@ public class RegistrationAction implements Action {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             systemMemberDao.save(systemMember);
+            req.getSession().setAttribute("systemMember",systemMember);
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("index", true);
+        return new View("user", true);
     }
 }
