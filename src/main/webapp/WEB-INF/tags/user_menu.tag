@@ -33,5 +33,35 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.film" bundle="${lang}"/>
             </span></a></li>
+        <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="user.honors" bundle="${lang}"/>
+            </span></a></li>
+        <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="user.actors" bundle="${lang}"/>
+            </span></a></li>
+        <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="user.users" bundle="${lang}"/>
+            </span></a></li>
+        <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="site.films" bundle="${lang}"/>
+            </span></a></li>
+        <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="user.user.reviews" bundle="${lang}"/>
+            </span></a></li>
     </ul>
 </div>
