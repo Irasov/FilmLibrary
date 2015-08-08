@@ -46,7 +46,20 @@ article, aside, footer, header, hgroup, nav, section {
     margin: 0 auto;
     background: #fff;
 }
+.header{
+    height: 100px;
+    background: #aed40a url('img/header_bg.png') repeat-x left top;
+}
 
+.logo{
+    width: 85px;
+    height: 85px;
+    float: left;
+    padding: 5px 0 5px 10px;
+}
+.header h2{
+    padding: 20px 0 0 150px;
+}
 /* Навигация*/
 
 .nav {
@@ -113,7 +126,7 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .navigation_user li a:hover {
-    background-color: greenyellow;
+    background-color: #aed40a;
     color: #000000;
 }
 
@@ -174,6 +187,6 @@ article, aside, footer, header, hgroup, nav, section {
 .footer {
     margin: 5px 0 0 0;
     height: 110px;
-    background-color: #f4f4f4;
+    background: #aed40a url('img/footer_bg.png') repeat-x left top;
 
 }
