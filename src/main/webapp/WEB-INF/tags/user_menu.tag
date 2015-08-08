@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
+<%--@elvariable id="systemMember" type="com.epam.irasov.filmlibrary.entity.SystemMember"--%>
 <div class="nav_user">
     <div class="reg_text">
         <fmt:setLocale value="${locale}"/>
@@ -33,35 +34,45 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.film" bundle="${lang}"/>
             </span></a></li>
+        <c:if test="${systemMember.type.id==1}">
         <li><a href="/">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.honors" bundle="${lang}"/>
             </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
         <li><a href="/">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.actors" bundle="${lang}"/>
             </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
         <li><a href="/">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.users" bundle="${lang}"/>
             </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
         <li><a href="/">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.films" bundle="${lang}"/>
             </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
         <li><a href="/">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.user.reviews" bundle="${lang}"/>
             </span></a></li>
+        </c:if>
     </ul>
 </div>
