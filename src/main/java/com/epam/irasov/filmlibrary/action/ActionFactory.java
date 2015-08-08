@@ -12,6 +12,8 @@ public class ActionFactory {
         actions = new HashMap<>();
         actions.put("POST/register", new RegistrationAction());
         actions.put("GET/start", new StartAction());
+        actions.put("POST/login", new LoginAction());
+        actions.put("GET/logout", new LogoutAction());
     }
 
     public Action getAction(HttpServletRequest request) {

@@ -16,4 +16,5 @@ public interface SystemMemberDao {
     int findType ();
     Member.Type insertMemberType(Member.Type type);
     boolean remove(SystemMember systemMember);
+    SystemMember findByCredentials(String login,String password);
 }

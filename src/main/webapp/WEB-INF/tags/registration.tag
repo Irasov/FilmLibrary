@@ -1,4 +1,4 @@
-<%@tag description="navigation tamlate" pageEncoding="UTF-8" %>
+<%@tag description="registration tamlate" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>

@@ -23,6 +23,7 @@ public class RegistrationAction implements Action {
     private final static long FILM_BLOCK_ID_VALUE = 2l;
     private final static String NEWS_BLOCK_NAME_INITIAL_VALUE = "News from the world of cinema";
     private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "New film on the site";
+    private final static String NO_AVATAR = "img/no_avatar.png";
 
     public RegistrationAction() {
     }
@@ -42,10 +43,12 @@ public class RegistrationAction implements Action {
         if (loginError != null) {
             req.setAttribute("loginError", loginError);
             return new View("registration", false);
-        } else if (passwordError != null) {
+        }
+        if (passwordError != null) {
             req.setAttribute("passwordError", passwordError);
             return new View("registration", false);
-        } else if (emailError != null){
+        }
+        if (emailError != null){
             req.setAttribute("emailError", emailError);
             return new View("registration", false);
         }
@@ -63,7 +66,7 @@ public class RegistrationAction implements Action {
                 type = (new Member.Type(ID_USER, NAME_USER));
             }
             SystemMember systemMember = new SystemMember();
-            systemMember.setLogin(login);
+            systemMember.setLogin(login.toLowerCase());
             systemMember.setPassword(password);
             systemMember.setName(name);
             systemMember.setPatronymic(patronymic);
@@ -71,6 +74,7 @@ public class RegistrationAction implements Action {
             systemMember.setType(type);
             systemMember.setBirthDate(LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")));
             systemMember.setEmail(email);
+            systemMember.setPhoto(NO_AVATAR);
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             systemMemberDao.save(systemMember);
