@@ -38,7 +38,6 @@ public class StartAction implements Action {
             FilmBlockDao filmBlockDao = daoFactory.newFilmBlockDao();
             if (!filmBlockDao.emptyTable()) {
                 filmBlock = filmBlockDao.findByIDFilmBlock(Long.parseLong(ID_FILM_BLOCK));
-                System.out.println(filmBlock.getName());
                 session.setAttribute("filmBlock", filmBlock);
             }
         } catch (Exception e) {

@@ -22,7 +22,7 @@ public class RegistrationAction implements Action {
     private final static long NEWS_BLOCK_ID_VALUE = 1l;
     private final static long FILM_BLOCK_ID_VALUE = 2l;
     private final static String NEWS_BLOCK_NAME_INITIAL_VALUE = "News from the world of cinema";
-    private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "New Movies on the site";
+    private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "New film on the site";
 
     public RegistrationAction() {
     }
