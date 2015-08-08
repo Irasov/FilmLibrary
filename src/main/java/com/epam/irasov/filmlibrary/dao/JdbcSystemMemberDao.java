@@ -174,6 +174,17 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             systemMember.setLogin(resultSet.getString(RESULT_LOGIN));
             systemMember.setPassword(resultSet.getString(RESULT_PASSWORD));
             systemMember.setEmail(resultSet.getString(RESULT_EMAIL));
+            Long id = resultSet.getLong(RESULT_ID);
+            preparedStatement = connection.prepareStatement(FIND_BY_ID_TYPE);
+            index = 1;
+            preparedStatement.setLong(index, id);
+            resultSet = preparedStatement.executeQuery();
+            found = resultSet.next();
+            if (!found) return null;
+            Member.Type type = new Member.Type();
+            type.setId(resultSet.getLong(RESULT_ID));
+            type.setName(resultSet.getString(RESULT_NAME));
+            systemMember.setType(type);
             return systemMember;
         }catch (SQLException e){
             throw new DaoException(e);
