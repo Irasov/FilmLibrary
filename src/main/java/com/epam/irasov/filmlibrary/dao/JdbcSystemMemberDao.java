@@ -29,6 +29,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private static final String FIND_BY_CREDENTIALS="SELECT * FROM SYSTEM_MEMBER WHERE (LOGIN=? AND PASSWORD=?)";
     private static final String RESULT_PHOTO = "photo";
+    private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -186,6 +187,24 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             type.setName(resultSet.getString(RESULT_NAME));
             systemMember.setType(type);
             return systemMember;
+        }catch (SQLException e){
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean checkForUniqueness(String login) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_LOGIN);
+            preparedStatement.setString(1,login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found){
+                count++;
+                found = resultSet.next();
+            }
+            return count == 0;
         }catch (SQLException e){
             throw new DaoException(e);
         }

@@ -8,6 +8,7 @@ import com.epam.irasov.filmlibrary.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -21,6 +22,7 @@ public class RegistrationAction implements Action {
     private final static int NO_USER = 1;
     private final static long NEWS_BLOCK_ID_VALUE = 1l;
     private final static long FILM_BLOCK_ID_VALUE = 2l;
+    private final static String ERROR_UNIQUE_LOGIN = "not.unique.login";
     private final static String NEWS_BLOCK_NAME_INITIAL_VALUE = "News from the world of cinema";
     private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "New film on the site";
     private final static String NO_AVATAR = "img/no_avatar.png";
@@ -30,7 +32,7 @@ public class RegistrationAction implements Action {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        String login = req.getParameter("login");
+        String login = req.getParameter("login").toLowerCase();
         String password = req.getParameter("pas");
         String name = req.getParameter("name");
         String patronymic = req.getParameter("patronymic");
@@ -48,7 +50,7 @@ public class RegistrationAction implements Action {
             req.setAttribute("passwordError", passwordError);
             return new View("registration", false);
         }
-        if (emailError != null){
+        if (emailError != null) {
             req.setAttribute("emailError", emailError);
             return new View("registration", false);
         }
@@ -65,8 +67,13 @@ public class RegistrationAction implements Action {
             } else if ((cont > NO_USER)) {
                 type = (new Member.Type(ID_USER, NAME_USER));
             }
+            if (!daoFactory.newSystemMemberDao().checkForUniqueness(login)) {
+                loginError = ERROR_UNIQUE_LOGIN;
+                req.setAttribute("loginError", loginError);
+                return new View("registration", false);
+            }
             SystemMember systemMember = new SystemMember();
-            systemMember.setLogin(login.toLowerCase());
+            systemMember.setLogin(login);
             systemMember.setPassword(password);
             systemMember.setName(name);
             systemMember.setPatronymic(patronymic);
@@ -78,7 +85,7 @@ public class RegistrationAction implements Action {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             systemMemberDao.save(systemMember);
-            req.getSession().setAttribute("systemMember",systemMember);
+            req.getSession().setAttribute("systemMember", systemMember);
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

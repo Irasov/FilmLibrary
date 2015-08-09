@@ -3,12 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <%--@elvariable id="loginError" type="java.lang.String"--%>
+<%--@elvariable id="authError" type="java.lang.String"--%>
 <%--@elvariable id="passwordError" type="java.lang.String"--%>
 <div class="login">
     <form action="${pageContext.request.contextPath}/controller?action=login" method="post">
-        <div class="error">
-           Введеные вами логи или пароль не верны!
-        </div>
+        <c:if test="${not empty authError}">
+            <div class="error">
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="${authError}" bundle="${lang}"/>
+            </div>
+        </c:if>
         <div class="reg_text">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>

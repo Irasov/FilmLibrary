@@ -9,12 +9,14 @@ import java.util.List;
 public interface SystemMemberDao {
     SystemMember findById(Long id);
     SystemMember findBySurName(String surName);
-    List<SystemMember> selectSystemMembers();
-    void update (SystemMember systemMember);
     SystemMember save (SystemMember systemMember);
-    Member.Type saveType (SystemMember.Type type);
-    int findType ();
-    Member.Type insertMemberType(Member.Type type);
-    boolean remove(SystemMember systemMember);
     SystemMember findByCredentials(String login,String password);
+    List<SystemMember> selectSystemMembers();
+    Member.Type saveType (SystemMember.Type type);
+    Member.Type insertMemberType(Member.Type type);
+    int findType ();
+    boolean checkForUniqueness(String login);
+    boolean remove(SystemMember systemMember);
+    void update (SystemMember systemMember);
+
 }
