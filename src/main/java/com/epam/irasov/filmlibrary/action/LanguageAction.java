@@ -10,7 +10,6 @@ public class LanguageAction implements Action {
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String locale = req.getParameter("lang");
-        System.out.println(locale);
         req.getSession().setAttribute("locale",locale);
         return new View("index",true);
     }
