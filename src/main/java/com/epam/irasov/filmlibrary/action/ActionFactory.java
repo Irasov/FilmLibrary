@@ -14,6 +14,7 @@ public class ActionFactory {
         actions.put("GET/start", new StartAction());
         actions.put("POST/login", new LoginAction());
         actions.put("GET/logout", new LogoutAction());
+        actions.put("GET/lang", new LanguageAction());
     }
 
     public Action getAction(HttpServletRequest request) {
