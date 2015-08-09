@@ -8,7 +8,9 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
     <title>
-        personal.area
+        <fmt:setLocale value="${locale}"/>
+        <fmt:setBundle basename="i18n" var="lang"/>
+        <fmt:message key="site.user" bundle="${lang}"/>
     </title>
 </head>
 <body>
