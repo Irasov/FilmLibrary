@@ -10,25 +10,31 @@
         <fmt:message key="user.menu" bundle="${lang}"/>
     </div>
     <ul class="navigation_user">
-        <li><a href="${pageContext.request.contextPath}/index.jsp">
+        <li><a href="${pageContext.request.contextPath}/user.jsp">
             <span>
               <fmt:setLocale value="${locale}"/>
               <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="Edit.personal.data" bundle="${lang}"/>
+              <fmt:message key="my.information" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/edit-personal-data.jsp">
+            <span>
+              <fmt:setLocale value="${locale}"/>
+              <fmt:setBundle basename="i18n" var="lang"/>
+              <fmt:message key="edit.personal.data" bundle="${lang}"/>
+            </span></a></li>
+        <li><a href="${pageContext.request.contextPath}/change-password.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="change.password" bundle="${lang}"/>
                 </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/my-reviews.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.reviews" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/my-film.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
