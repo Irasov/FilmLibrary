@@ -5,9 +5,25 @@
 
 <div class="header">
     <a href="${pageContext.request.contextPath}/index.jsp"><img src="img/logo.png" class="logo"></a>
-        <h2>
-            <fmt:setLocale value="${locale}"/>
-            <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="site.welcome" bundle="${lang}"/>
-        </h2>
+
+    <h2>
+        <fmt:setLocale value="${locale}"/>
+        <fmt:setBundle basename="i18n" var="lang"/>
+        <fmt:message key="site.welcome" bundle="${lang}"/>
+    </h2>
+
+    <div class="lang">
+        <a href="${pageContext.request.contextPath}/controller?action=lang&lang=ru">
+            <div class="rus">
+            </div>
+        </a>
+        <a href="${pageContext.request.contextPath}/controller?action=lang&lang=kk">
+            <div class="kaz">
+            </div>
+        </a>
+        <a href="${pageContext.request.contextPath}/controller?action=lang&lang=en">
+            <div class="eng">
+            </div>
+        </a>
+    </div>
 </div>
