@@ -28,4 +28,25 @@ public class Validator {
         return null;
     }
 
+    public static String isTagLineValid(String tagLine){
+        if((tagLine.length()<1)||(tagLine.length()>250)){
+            return "error.tag.line";
+        }
+        return null;
+    }
+
+    public static String isRestrictionAgeValid(String restrictionAge){
+        if(!restrictionAge.matches("[0-9]+")){
+            return "error.restriction.age";
+        }
+        return null;
+    }
+
+    public static String isDescriptionValid(String description){
+        if((description.length()<1)||(description.length()>450)){
+            return "error.description";
+        }
+        return null;
+    }
+
 }
