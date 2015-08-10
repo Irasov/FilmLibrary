@@ -19,8 +19,6 @@ public abstract class DaoFactory {
 
     public abstract GenreDao newGenreDao();
 
-    public abstract HonorDao newHonorDao();
-
     public abstract ReviewDao newReviewDao();
 
     public abstract NewsDao newNewsDao();
@@ -30,6 +28,8 @@ public abstract class DaoFactory {
     public abstract NewsBlockDao newNewsBlockDao();
 
     public abstract FilmBlockDao newFilmBlockDao();
+
+    public abstract RatingDao newRatingDao();
 
     public abstract void beginTx();
 

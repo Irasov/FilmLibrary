@@ -27,11 +27,6 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public HonorDao newHonorDao() {
-        return new JdbcHonorDao(connection);
-    }
-
-    @Override
     public ReviewDao newReviewDao() {
         return new JdbcReviewDao(connection);
     }
@@ -56,6 +51,10 @@ public class JdbcDaoFactory extends DaoFactory {
         return new JdbcFilmBlockDao(connection);
     }
 
+    @Override
+    public RatingDao newRatingDao() {
+        return new JdbcRatingDao(connection);
+    }
 
     @Override
     public void beginTx() {

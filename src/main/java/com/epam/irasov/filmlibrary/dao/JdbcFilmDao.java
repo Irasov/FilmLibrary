@@ -22,7 +22,7 @@ public class JdbcFilmDao implements FilmDao {
     private final static String RESULT_PATRONYMIC = "patronymic";
     private final static String RESULT_ROLE = "role";
     private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
-    private final static String SAVE_FILM = "INSERT INTO FILM(ID, NAME, TAGLINE, AGE_RESTRICTION, )";
+    private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT ID, NAME, COUNTRY, DATE FROM MOVIE WHERE ID = ?";
     private final static String FIND_BY_ID_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER WHERE ID_MOVIE=?)";
     private final static String INSERT_MOVIE = "INSERT INTO MOVIE(ID, NAME, COUNTRY, DATE) VALUES(?,?,?,?)";
@@ -45,9 +45,37 @@ public class JdbcFilmDao implements FilmDao {
 
     @Override
     public Film save(Film film) {
-
-        return null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_FILM);
+            System.out.println("sssssssssss"+film.getName());
+            System.out.println("aaaaaaaaaaa"+film.getDescription());
+            setInsertFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getCover(), film.getDescription(), film.getRating().getId(), film.getPremiere()) ;
+            return film;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
+
+    private void setInsertFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String cover, String description, Long id, LocalDate premiere) throws SQLException{
+        int index = 1;
+        preparedStatement.setString(index, name);
+        index++;
+        preparedStatement.setString(index, tagLine);
+        index++;
+        preparedStatement.setInt(index, ageRestriction);
+        index++;
+        preparedStatement.setInt(index, duration);
+        index++;
+        preparedStatement.setString(index, cover);
+        index++;
+        preparedStatement.setString(index, description);
+        index++;
+        preparedStatement.setLong(index, id);
+        index++;
+        preparedStatement.setDate(index, Date.valueOf(premiere));
+        preparedStatement.executeUpdate();
+    }
+
 
     @Override
     public boolean remove(Film film) {
@@ -72,14 +100,14 @@ public class JdbcFilmDao implements FilmDao {
                 film = new Film();
                 film.setId(resultSet.getLong(RESULT_ID));
                 film.setName(resultSet.getString(RESULT_NAME));
-            //   film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
-               // film.setAgeRestriction(resultSet.getInt(RESULT_AGE_RESTRICTION));
+                //   film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
+                // film.setAgeRestriction(resultSet.getInt(RESULT_AGE_RESTRICTION));
                 film.setPremiere(LocalDate.parse(resultSet.getDate(RESULT_PREMIER).toString(), ofPattern("yyyy-MM-dd")));
                 films.add(film);
                 found = resultSet.next();
             }
             return films;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
