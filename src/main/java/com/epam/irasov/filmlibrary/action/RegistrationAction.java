@@ -72,20 +72,10 @@ public class RegistrationAction implements Action {
                 req.setAttribute("loginError", loginError);
                 return new View("registration", false);
             }
-            SystemMember systemMember = new SystemMember();
-            systemMember.setLogin(login);
-            systemMember.setPassword(password);
-            systemMember.setName(name);
-            systemMember.setPatronymic(patronymic);
-            systemMember.setSurname(surName);
-            systemMember.setType(type);
-            systemMember.setBirthDate(LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")));
-            systemMember.setEmail(email);
-            systemMember.setPhoto(NO_AVATAR);
+            SystemMember systemMember = new SystemMember(ID_USER,name,patronymic,surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")),NO_AVATAR,login,password,email,type);
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
-            systemMemberDao.save(systemMember);
-            req.getSession().setAttribute("systemMember", systemMember);
+            req.getSession().setAttribute("systemMember", systemMemberDao.save(systemMember));
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
