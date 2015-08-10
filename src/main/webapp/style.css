@@ -133,7 +133,7 @@ article, aside, footer, header, hgroup, nav, section {
 
 /* Навигация юзера */
 .user_menu {
-    height: 300px;
+    height: 150%;
 }
 
 .nav_user {
@@ -187,6 +187,12 @@ article, aside, footer, header, hgroup, nav, section {
     color: #ff0000;
 }
 
+.complete {
+    width: 300px;
+    padding: 10px 0 10px 25px;
+    color: #aed40a;
+}
+
 /*логин*/
 .login {
     padding: 0 50px 0 0;
@@ -213,6 +219,20 @@ article, aside, footer, header, hgroup, nav, section {
     height: 200px;
 }
 
+.add_film{
+    float: left;
+}
+.edit_film{
+    float: left;
+}
+.select{
+    margin: 0 25px 0 0;
+    float: left;
+}
+.text_area{
+    rows:5;
+    cols:50;
+}
 /*подвал*/
 .footer {
     margin: 5px 0 0 0;
