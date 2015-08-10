@@ -15,11 +15,16 @@ public class ActionFactory {
         actions.put("POST/login", new LoginAction());
         actions.put("GET/logout", new LogoutAction());
         actions.put("GET/lang", new LanguageAction());
+        actions.put("POST/editPersonalData", new LanguageAction());
+        actions.put("POST/addFilm", new AddFilmAction());
+        actions.put("POST/addImage", new AddImageAction());
+        actions.put("POST/selected", new SelectedActionFilmAction());
     }
 
     public Action getAction(HttpServletRequest request) {
         String method = request.getMethod();
         String action = request.getParameter("action");
+        System.out.println(action+method);
         return actions.get(method+"/"+action);
     }
 }
