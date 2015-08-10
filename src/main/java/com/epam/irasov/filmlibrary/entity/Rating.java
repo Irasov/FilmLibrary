@@ -11,11 +11,11 @@ public class Rating extends NamedEntity {
         this.votes = votes;
     }
 
-    public int getCount() {
+    public int getVotes() {
         return votes;
     }
 
-    public void setCount(int votes) {
+    public void setVotes(int votes) {
         this.votes = votes;
     }
 
