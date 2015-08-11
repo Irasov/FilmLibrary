@@ -47,8 +47,6 @@ public class JdbcFilmDao implements FilmDao {
     public Film save(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_FILM);
-            System.out.println("sssssssssss"+film.getName());
-            System.out.println("aaaaaaaaaaa"+film.getDescription());
             setInsertFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getCover(), film.getDescription(), film.getRating().getId(), film.getPremiere()) ;
             return film;
         } catch (SQLException e) {

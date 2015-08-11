@@ -9,12 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcFilmBlockDao implements FilmBlockDao {
-    private final static String RESULT_ID = "id";
     private final static String RESULT_PREMIERE = "premiere";
-    private final static String RESULT_NAME = "name";
     private final static String RESULT_COVER = "cover";
     private static final String INSERT_FILM_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
     private static final String ADD_FILMS = "INSERT INTO INFORMATION_BLOCK_FILMS(ID_INFORMATION_BLOCK, ID_FILM) VALUES (?,?)";

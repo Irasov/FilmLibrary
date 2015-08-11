@@ -6,12 +6,11 @@ import com.epam.irasov.filmlibrary.entity.NewsBlock;
 import java.sql.*;
 import java.time.LocalDate;
 
+import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcNewsBlockDao implements NewsBlockDao {
-    private final static String RESULT_ID = "id";
     private final static String RESULT_DATE = "date";
-    private final static String RESULT_NAME = "name";
     private static final String INSERT_NEWS_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
     private static final String SELECT_NEWS_BLOCk = "SELECT NAME FROM INFORMATION_BLOCK WHERE ID=?";
     private static final String SELECT_NEWS = "SELECT ID, NAME, DATE, TEXT, IMAGE FROM NEWS WHERE iD=ANY(SELECT ID_NEWS FROM INFORMATION_BLOCK_NEWS WHERE ID_INFORMATION_BLOCK=?)";

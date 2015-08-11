@@ -1,6 +1,5 @@
 package com.epam.irasov.filmlibrary.dao;
 
-import com.epam.irasov.filmlibrary.entity.Member;
 import com.epam.irasov.filmlibrary.entity.Rating;
 
 import java.sql.Connection;
@@ -8,10 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
+
 public class JdbcRatingDao implements RatingDao {
-    private final static String RESULT_ID = "id";
     private final static String RESULT_VOTES = "votes";
-    private final static String RESULT_NAME = "name";
     private final static String SAVE_RATING = "INSERT INTO RATING(NAME, VOTES) VALUES(?,?)";
     private static final java.lang.String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
 

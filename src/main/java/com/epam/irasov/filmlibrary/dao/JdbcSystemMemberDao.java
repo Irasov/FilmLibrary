@@ -8,18 +8,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcSystemMemberDao implements SystemMemberDao {
-    private final static String RESULT_ID = "id";
     private final static String RESULT_BIRTH_DATE = "birth_date";
-    private final static String RESULT_NAME = "name";
     private final static String RESULT_SURNAME = "surname";
     private final static String RESULT_PATRONYMIC = "patronymic";
     private final static String RESULT_LOGIN = "login";
     private final static String RESULT_PASSWORD = "password";
     private final static String RESULT_EMAIL = "email";
-    private static final String RESULT_IMAGE = "image";
+    private static final String RESULT_PHOTO = "photo";
     private final static String FIND_ALL_SYSTEM_MEMBERS = "SELECT * FROM SYSTEM_MEMBERS";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL, PHOTO) VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(ID,NAME) VALUES(?,?)";
@@ -28,7 +27,6 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String UPDATE_SYSTEM_MEMBER = "UPDATE SYSTEM_MEMBER SET NAME = ?, SURNAME = ?, PATRONYMIC=?, BIRTH_DATE =  ?  WHERE ID=?";
     private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private static final String FIND_BY_CREDENTIALS="SELECT * FROM SYSTEM_MEMBER WHERE (LOGIN=? AND PASSWORD=?)";
-    private static final String RESULT_PHOTO = "photo";
     private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
     private final Connection connection;
 
