@@ -15,14 +15,12 @@ public class Film extends NamedEntity {
     private String description;
     private List<Review> reviews;
     private Rating rating;
-  //  private List<Honor> honors;
 
     public Film() {
         super();
         members = new ArrayList<>();
         genres = new ArrayList<>();
         reviews = new ArrayList<>();
-       // honors = new ArrayList<>();
     }
 
 
@@ -59,18 +57,6 @@ public class Film extends NamedEntity {
     public void addMember(FilmMember member) {
         members.add(member);
     }
-
-    /*public List<Honor> getHonors() {
-        return honors;
-    }
-
-    public void setHonors(List<Honor> honors) {
-        this.honors = honors;
-    }
-
-    public void addHonors(Honor honor) {
-        honors.add(honor);
-    }*/
 
     public List<Genre> getGenres() {
         return genres;
@@ -167,7 +153,6 @@ public class Film extends NamedEntity {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
-       /* result = 31 * result + (honors != null ? honors.hashCode() : 0);*/
         return result;
     }
 }
