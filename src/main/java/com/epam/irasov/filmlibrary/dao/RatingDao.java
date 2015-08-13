@@ -6,4 +6,5 @@ public interface RatingDao {
     Rating save (Rating rating);
     void upDate();
     Rating findbyName(String name);
+    Rating findbyId(Long id);
 }

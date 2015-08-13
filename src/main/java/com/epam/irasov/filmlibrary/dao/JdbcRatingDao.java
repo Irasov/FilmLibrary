@@ -13,6 +13,7 @@ public class JdbcRatingDao implements RatingDao {
     private final static String RESULT_VOTES = "votes";
     private final static String SAVE_RATING = "INSERT INTO RATING(NAME, VOTES) VALUES(?,?)";
     private static final java.lang.String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
+    private static final java.lang.String FIND_BY_ID = "SELECT * FROM RATING WHERE ID=?";
 
     private final Connection connection;
 
@@ -46,6 +47,25 @@ public class JdbcRatingDao implements RatingDao {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
             int index = 1;
             preparedStatement.setString(index, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            Rating rating = new Rating();
+            rating.setId(resultSet.getLong(RESULT_ID));
+            rating.setName(resultSet.getString(RESULT_NAME));
+            rating.setVotes(resultSet.getInt(RESULT_VOTES));
+            return rating;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Rating findbyId(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            int index = 1;
+            preparedStatement.setLong(index, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (!found) return null;

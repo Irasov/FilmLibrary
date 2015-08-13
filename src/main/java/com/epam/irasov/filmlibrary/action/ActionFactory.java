@@ -19,6 +19,8 @@ public class ActionFactory {
         actions.put("POST/addFilm", new AddFilmAction());
         actions.put("POST/addImage", new AddImageAction());
         actions.put("POST/selected", new SelectedActionFilmAction());
+        actions.put("POST/selectFilm", new SelectFilm());
+        actions.put("POST/editFilm", new EditFilmAction());
     }
 
     public Action getAction(HttpServletRequest request) {
