@@ -133,7 +133,7 @@ article, aside, footer, header, hgroup, nav, section {
 
 /* Навигация юзера */
 .user_menu {
-    height: 150%;
+    height: 1100px;
 }
 
 .nav_user {
@@ -219,20 +219,32 @@ article, aside, footer, header, hgroup, nav, section {
     height: 200px;
 }
 
-.add_film{
+.add_film {
     float: left;
 }
-.edit_film{
+
+.edit_film {
     float: left;
 }
-.select{
-    margin: 0 25px 0 0;
+
+.selected {
+    margin: 0 45px 0 0;
     float: left;
 }
-.text_area{
-    rows:5;
-    cols:50;
+
+.select {
+    float: left;
 }
+
+.text_area {
+    rows: 5;
+    cols: 50;
+}
+
+.operation {
+    float: left;
+}
+
 /*подвал*/
 .footer {
     margin: 5px 0 0 0;
