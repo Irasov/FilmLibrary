@@ -21,7 +21,7 @@ public class SelectFilm implements Action {
             FilmDao filmDao = daoFactory.newFilmDao();
             Film film = filmDao.findById(selectFilm);
             System.out.println(film.getRating().getId());
-            req.setAttribute("film", film);
+            req.getSession().setAttribute("film", film);
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
