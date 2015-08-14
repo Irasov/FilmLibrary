@@ -1,6 +1,6 @@
 package com.epam.irasov.filmlibrary.dao;
 
-import com.epam.irasov.filmlibrary.entity.Member;
+import com.epam.irasov.filmlibrary.entity.FilmMember;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
 
 import java.sql.*;
@@ -43,7 +43,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (!found) return null;
-            Member.Type type = new Member.Type();
+            FilmMember.Type type = new FilmMember.Type();
             type.setId(resultSet.getLong(RESULT_ID));
             type.setName(resultSet.getString(RESULT_NAME));
             preparedStatement = connection.prepareStatement(FIND_BY_ID);
@@ -121,7 +121,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     }
 
     @Override
-    public Member.Type saveType(SystemMember.Type type) {
+    public FilmMember.Type saveType(SystemMember.Type type) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SYSTEM_MEMBER_TYPE);
             int index = 1;
@@ -180,7 +180,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             resultSet = preparedStatement.executeQuery();
             found = resultSet.next();
             if (!found) return null;
-            Member.Type type = new Member.Type();
+            FilmMember.Type type = new FilmMember.Type();
             type.setId(resultSet.getLong(RESULT_ID));
             type.setName(resultSet.getString(RESULT_NAME));
             systemMember.setType(type);
@@ -209,7 +209,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     }
 
     @Override
-    public Member.Type insertMemberType(Member.Type type) {
+    public FilmMember.Type insertMemberType(FilmMember.Type type) {
         return null;
     }
 

@@ -1,9 +1,8 @@
 package com.epam.irasov.filmlibrary.dao;
 
-import com.epam.irasov.filmlibrary.entity.Member;
+import com.epam.irasov.filmlibrary.entity.FilmMember;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface SystemMemberDao {
@@ -12,8 +11,8 @@ public interface SystemMemberDao {
     SystemMember save (SystemMember systemMember);
     SystemMember findByCredentials(String login,String password);
     List<SystemMember> selectSystemMembers();
-    Member.Type saveType (SystemMember.Type type);
-    Member.Type insertMemberType(Member.Type type);
+    FilmMember.Type saveType (SystemMember.Type type);
+    FilmMember.Type insertMemberType(FilmMember.Type type);
     int findType ();
     boolean checkForUniqueness(String login);
     boolean remove(SystemMember systemMember);

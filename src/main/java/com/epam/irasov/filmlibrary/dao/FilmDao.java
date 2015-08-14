@@ -17,8 +17,8 @@ public interface FilmDao {
     void update(Movie movie);
     Movie save(Movie movie);
     Movie merge(Movie movie);
-    List<Movie.Member> selectMember(int countMovie);
-    Movie.Member insertMember(Movie.Member member);
+    List<Movie.FilmMember> selectMember(int countMovie);
+    Movie.FilmMember insertMember(Movie.FilmMember member);
     boolean remove(Movie movie);
     void removeByDate(LocalDate date);*/
 }
