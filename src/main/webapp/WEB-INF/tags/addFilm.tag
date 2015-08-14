@@ -79,6 +79,15 @@
             <div class="reg_input">
                 <textarea name="tagLine" required class="tagline" title="tagLine"></textarea>
             </div>
+
+            <div class="reg_text">
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="film.genre" bundle="${lang}"/>
+            </div>
+            <div class="reg_input">
+                <textarea name="genre" required class="genre" title="genre"></textarea>
+            </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>

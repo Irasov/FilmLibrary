@@ -72,5 +72,29 @@
                 <fmt:message key="user.user.reviews" bundle="${lang}"/>
             </span></a></li>
         </c:if>
+        <c:if test="${systemMember.type.id==1}">
+            <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="site.news" bundle="${lang}"/>
+            </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
+            <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="site.block.news" bundle="${lang}"/>
+            </span></a></li>
+        </c:if>
+        <c:if test="${systemMember.type.id==1}">
+            <li><a href="/">
+            <span>
+                <fmt:setLocale value="${locale}"/>
+                <fmt:setBundle basename="i18n" var="lang"/>
+                <fmt:message key="site.block.film" bundle="${lang}"/>
+            </span></a></li>
+        </c:if>
     </ul>
 </div>

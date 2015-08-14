@@ -29,6 +29,7 @@ public class EditFilmAction implements Action {
         String premiere = req.getParameter("premiere");
         Long rating = Long.parseLong(req.getParameter("rating"));
         String cover = req.getParameter("cover");
+        String genre = req.getParameter("genre");
         System.out.println(cover);
         String tagLineError = Validator.isTagLineValid(tagLine);
         String descriptionError = Validator.isDescriptionValid(description);
@@ -49,10 +50,10 @@ public class EditFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            filmDao.upDate(new Film(id, name, tagLine, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findbyId(rating), description));
+            filmDao.upDate(new Film(id, name, tagLine, genre, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findbyId(rating), description));
             req.getSession().setAttribute("message", "edit.message");
-            req.getSession().setAttribute("selectedAction","");
-            req.getSession().setAttribute("film","");
+            req.getSession().setAttribute("selectedAction", "");
+            req.getSession().setAttribute("film", "");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

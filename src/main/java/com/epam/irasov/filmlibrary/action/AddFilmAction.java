@@ -32,6 +32,7 @@ public class AddFilmAction implements Action {
         String description = req.getParameter("description");
         String premiere = req.getParameter("premiere");
         String cover = req.getParameter("fileName");
+        String genre = req.getParameter("genre");
 
         String tagLineError = Validator.isTagLineValid(tagLine);
         String descriptionError = Validator.isDescriptionValid(description);
@@ -58,7 +59,7 @@ public class AddFilmAction implements Action {
             System.out.println(name);
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            filmDao.save(new Film(ID_FILM, name, tagLine, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findbyName(name), description));
+            filmDao.save(new Film(ID_FILM, name, tagLine, genre ,LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findbyName(name), description));
             req.getSession().setAttribute("message",MESSAGE);
             req.getSession().setAttribute("selectedAction","");
             req.getSession().setAttribute("film","");
