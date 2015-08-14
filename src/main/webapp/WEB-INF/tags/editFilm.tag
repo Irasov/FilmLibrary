@@ -1,8 +1,8 @@
 <%@tag description="add film tamlate" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--@elvariable id="fileName" type="java.lang.String"--%>
 <%--@elvariable id="locale" type="java.lang.String"--%>
+<%--@elvariable id="fileName" type="java.lang.String"--%>
 <%--@elvariable id="loginError" type="java.lang.String"--%>
 <%--@elvariable id="passwordError" type="java.lang.String"--%>
 <%--@elvariable id="emailError" type="java.lang.String"--%>
@@ -56,6 +56,7 @@
             </div>
             <input type="text" name="strar" value="${film.cover}" hidden class="reginput"
                    title="cover"/>
+
             <div class="reg_input">
                 <button type="submit">
                     <fmt:setLocale value="${locale}"/>
@@ -65,29 +66,18 @@
             </div>
         </form>
         <c:if test="${not empty fileName}">
-            <c:redirect url="/controller?action=editFilm&name=${film.name}&id=${film.id}&tagLine=${film.tagLine}&age=${film.ageRestriction}&duration=${film.duration}&description=${film.description}&description=${film.description}&premiere=${film.premiere}&rating=${film.rating.id}&cover=img/site/${fileName}"/>
+            <c:redirect
+                    url="/controller?action=editFilm&name=${film.name}&id=${film.id}&tagLine=${film.tagLine}&age=${film.ageRestriction}&duration=${film.duration}&description=${film.description}&description=${film.description}&premiere=${film.premiere}&rating=${film.rating.id}&cover=img/site/${fileName}"/>
         </c:if>
         <form action="${pageContext.request.contextPath}/controller?action=editFilm" method="post">
             <input type="text" name="id" value="${film.id}" hidden class="reginput" title="id"/>
             <input type="text" name="rating" value="${film.rating.id}" hidden class="reginput"
                    title="rating"/>
-            <c:if test="${empty fileName}">
-                <input type="text" name="cover" value="${film.cover}" hidden class="reginput"
-                       title="cover"/>
-            </c:if>
-            <c:if test="${not empty fileName}">
-                <input type="text" name="cover" value="img/site/${fileName}" hidden class="reginput"
-                       title="image"/>
-            </c:if>
+            <input type="text" name="cover" value="${film.cover}" hidden class="reginput"
+                   title="cover"/>
 
             <div class="reg_text">
-                <img class="img"
-                <c:if test="${not empty fileName}">
-                     src="img/site/${fileName}"/>
-                </c:if>
-                <c:if test="${empty fileName}">
-                    src="${film.cover}"/>
-                </c:if>
+                <img class="img" src="${film.cover}"/>
             </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
