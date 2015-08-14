@@ -67,7 +67,7 @@
         </form>
         <c:if test="${not empty fileName}">
             <c:redirect
-                    url="/controller?action=editFilm&name=${film.name}&id=${film.id}&tagLine=${film.tagLine}&age=${film.ageRestriction}&duration=${film.duration}&description=${film.description}&description=${film.description}&premiere=${film.premiere}&rating=${film.rating.id}&cover=img/site/${fileName}"/>
+                    url="/controller?action=editFilm&name=${film.name}&id=${film.id}&tagLine=${film.tagLine}&genre=${film.genre}&age=${film.ageRestriction}&duration=${film.duration}&description=${film.description}&description=${film.description}&premiere=${film.premiere}&rating=${film.rating.id}&cover=img/site/${fileName}"/>
         </c:if>
         <form action="${pageContext.request.contextPath}/controller?action=editFilm" method="post">
             <input type="text" name="id" value="${film.id}" hidden class="reginput" title="id"/>
