@@ -24,7 +24,7 @@ public class AddImageAction implements Action {
         try {
             for (Part part : req.getParts()) {
                 fileName = getFileName(part);
-                    part.write(uploadFilePath + File.separator + fileName);
+                if(!fileName.equals("")) part.write(uploadFilePath + File.separator + fileName);
             }
         } catch (IOException | ServletException e) {
             req.setAttribute("fileError", "file.null");

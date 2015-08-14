@@ -14,7 +14,6 @@ public class SelectedActionFilmAction implements Action {
     private final static int ADD_FILM = 1;
     private final static int EDIT_FILMS = 2;
     private final static int FILM_ADD_MEMBER = 3;
-    private final static int FILM_ADD_GENRE = 4;
     private final static int REMOVE_FILM = 5;
     private static final String SORT_CRITERION = "name";
     private static final String MESSAGE = "film.null";
@@ -52,10 +51,6 @@ public class SelectedActionFilmAction implements Action {
         }
         if (Integer.parseInt(selected) == FILM_ADD_MEMBER) {
             req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
-            return new View("operation-with-movies", false);
-        }
-        if (Integer.parseInt(selected) == FILM_ADD_GENRE) {
-            req.getSession().setAttribute("selectedAction", FILM_ADD_GENRE);
             return new View("operation-with-movies", false);
         }
         if (Integer.parseInt(selected) == REMOVE_FILM) {

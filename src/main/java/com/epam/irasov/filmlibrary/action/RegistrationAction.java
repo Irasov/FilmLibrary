@@ -8,7 +8,6 @@ import com.epam.irasov.filmlibrary.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -55,17 +54,17 @@ public class RegistrationAction implements Action {
             return new View("registration", false);
         }
         DaoFactory daoFactory = DaoFactory.getInstance();
-        Member.Type type = null;
+        FilmMember.Type type = null;
         try {
             int cont = daoFactory.newSystemMemberDao().findType();
             if (cont == NO_ADMINISTRATOR) {
-                type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_ADMIN, NAME_ADMIN));
+                type = daoFactory.newSystemMemberDao().saveType(new FilmMember.Type(ID_ADMIN, NAME_ADMIN));
                 daoFactory.newNewsBlockDao().save(new NewsBlock(NEWS_BLOCK_ID_VALUE, NEWS_BLOCK_NAME_INITIAL_VALUE));
                 daoFactory.newFilmBlockDao().save(new FilmBlock(FILM_BLOCK_ID_VALUE, FILM_BLOCK_NAME_INITIAL_VALUE));
             } else if (cont == NO_USER) {
-                type = daoFactory.newSystemMemberDao().saveType(new Member.Type(ID_USER, NAME_USER));
+                type = daoFactory.newSystemMemberDao().saveType(new FilmMember.Type(ID_USER, NAME_USER));
             } else if ((cont > NO_USER)) {
-                type = (new Member.Type(ID_USER, NAME_USER));
+                type = (new FilmMember.Type(ID_USER, NAME_USER));
             }
             if (!daoFactory.newSystemMemberDao().checkForUniqueness(login)) {
                 loginError = ERROR_UNIQUE_LOGIN;
