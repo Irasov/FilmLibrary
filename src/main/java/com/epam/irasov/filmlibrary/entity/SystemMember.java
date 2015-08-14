@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemMember extends Member {
+public class SystemMember extends FilmMember {
     private String login;
     private String password;
     private String email;
-    private Type type;
     private List<Review> reviews;
     private List<Film> films;
 
@@ -19,11 +18,10 @@ public class SystemMember extends Member {
     }
 
     public SystemMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, String login, String password, String email, Type type) {
-        super(id, name, patronymic, surname, birthDate, photo);
+        super(id, name, patronymic, surname, birthDate, photo,type);
         this.login = login;
         this.password = password;
         this.email = email;
-        this.type = type;
         reviews = new ArrayList<>();
         films = new ArrayList<>();
     }
@@ -50,14 +48,6 @@ public class SystemMember extends Member {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public List<Review> getReviews() {
@@ -90,7 +80,7 @@ public class SystemMember extends Member {
         if (!(o instanceof SystemMember)) return false;
         if (!super.equals(o)) return false;
         SystemMember that = (SystemMember) o;
-        return !(login != null ? !login.equals(that.login) : that.login != null) && !(password != null ? !password.equals(that.password) : that.password != null) && !(email != null ? !email.equals(that.email) : that.email != null) && !(type != null ? !type.equals(that.type) : that.type != null) && !(reviews != null ? !reviews.equals(that.reviews) : that.reviews != null) && !(films != null ? !films.equals(that.films) : that.films != null);
+        return !(login != null ? !login.equals(that.login) : that.login != null) && !(password != null ? !password.equals(that.password) : that.password != null) && !(email != null ? !email.equals(that.email) : that.email != null) && !(reviews != null ? !reviews.equals(that.reviews) : that.reviews != null) && !(films != null ? !films.equals(that.films) : that.films != null);
     }
 
     @Override
@@ -99,7 +89,6 @@ public class SystemMember extends Member {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
         result = 31 * result + (films != null ? films.hashCode() : 0);
         return result;
