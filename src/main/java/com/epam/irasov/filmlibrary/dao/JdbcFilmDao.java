@@ -18,20 +18,15 @@ public class JdbcFilmDao implements FilmDao {
     private static final String RESULT_TAG_LINE = "tagline";
     private static final String RESULT_AGE_RESTRICTION = "age_restriction";
     private static final String RESULT_ID_RATING = "id_rating";
-    private final static String RESULT_LAST_NAME = "last_name";
-    private final static String RESULT_SECOND_NAME = "second_name";
-    private final static String RESULT_PATRONYMIC = "patronymic";
-    private final static String RESULT_ROLE = "role";
+    private static final String RESULT_GENRE = "genre";
     private static final String RESULT_COVER = "cover";
     private static final String RESULT_DURATION = "duration";
-    private static final String RESULT_RATING = "rating";
     private static final String RESULT_DESCRIPTION = "description";
-    private final static String FIND_BY_ID_FILMS = "SELECT * FROM FILM WHERE ID=?";
     private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
-    private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?)";
+    private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, GENRE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT* FROM FILM WHERE ID = ?";
     private final static String FIND_RATING = "SELECT * FROM RATING WHERE ID=?";
-    private final static String UPDATE_FILM = "UPDATE FILM SET NAME = ?, TAGLINE = ?, AGE_RESTRICTION=?, DURATION =  ?, DESCRIPTION = ?, PREMIERE=?, COVER=? WHERE ID=?";
+    private final static String UPDATE_FILM = "UPDATE FILM SET NAME = ?, TAGLINE = ?, GENRE = ?,AGE_RESTRICTION=?, DURATION =  ?, DESCRIPTION = ?, PREMIERE=?, COVER=? WHERE ID=?";
     private static final String EMPTY_TABLE = "SELECT ID FROM FILM";
     private static final String DELETE_FILM = "DELETE FROM FILM WHERE id=?";
     private static final String SELECT_ID_RATING = "SELECT ID_RATING FROM FILM WHERE ID=?";
@@ -61,6 +56,7 @@ public class JdbcFilmDao implements FilmDao {
             film.setId(resultSet.getLong(RESULT_ID));
             film.setName(resultSet.getString(RESULT_NAME));
             film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
+            film.setGenre(resultSet.getString(RESULT_GENRE));
             film.setAgeRestriction(resultSet.getInt(RESULT_AGE_RESTRICTION));
             film.setDuration(resultSet.getInt(RESULT_DURATION));
             film.setCover(resultSet.getString(RESULT_COVER));
@@ -77,18 +73,20 @@ public class JdbcFilmDao implements FilmDao {
     public Film save(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_FILM);
-            setInsertFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getCover(), film.getDescription(), film.getRating().getId(), film.getPremiere());
+            setInsertFilm(preparedStatement, film.getName(), film.getTagLine(),film.getGenre(), film.getAgeRestriction(), film.getDuration(), film.getCover(), film.getDescription(), film.getRating().getId(), film.getPremiere());
             return film;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
-    private void setInsertFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String cover, String description, Long id, LocalDate premiere) throws SQLException {
+    private void setInsertFilm(PreparedStatement preparedStatement, String name, String tagLine, String genre, int ageRestriction, int duration, String cover, String description, Long id, LocalDate premiere) throws SQLException {
         int index = 1;
         preparedStatement.setString(index, name);
         index++;
         preparedStatement.setString(index, tagLine);
+        index++;
+        preparedStatement.setString(index, genre);
         index++;
         preparedStatement.setInt(index, ageRestriction);
         index++;
@@ -128,17 +126,19 @@ public class JdbcFilmDao implements FilmDao {
     public void upDate(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FILM);
-            setUpdateFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getDescription(), film.getPremiere(), film.getCover(), film.getId());
+            setUpdateFilm(preparedStatement, film.getName(), film.getTagLine(), film.getGenre(), film.getAgeRestriction(), film.getDuration(), film.getDescription(), film.getPremiere(), film.getCover(), film.getId());
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
-    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, String cover, Long id) throws SQLException {
+    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String genre, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, String cover, Long id) throws SQLException {
         int index = 1;
         preparedStatement.setString(index, name);
         index++;
         preparedStatement.setString(index, tagLine);
+        index++;
+        preparedStatement.setString(index, genre);
         index++;
         preparedStatement.setInt(index, ageRestriction);
         index++;
@@ -168,6 +168,7 @@ public class JdbcFilmDao implements FilmDao {
                 film.setId(resultSet.getLong(RESULT_ID));
                 film.setName(resultSet.getString(RESULT_NAME));
                 film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
+                film.setGenre(resultSet.getString(RESULT_GENRE));
                 film.setAgeRestriction(resultSet.getInt(RESULT_AGE_RESTRICTION));
                 film.setDuration(resultSet.getInt(RESULT_DURATION));
                 film.setCover(resultSet.getString(RESULT_COVER));

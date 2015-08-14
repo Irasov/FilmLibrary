@@ -17,8 +17,6 @@ public abstract class DaoFactory {
 
     public abstract SystemMemberDao newSystemMemberDao();
 
-    public abstract GenreDao newGenreDao();
-
     public abstract ReviewDao newReviewDao();
 
     public abstract NewsDao newNewsDao();

@@ -22,11 +22,6 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public GenreDao newGenreDao() {
-        return new JdbcGenreDao(connection);
-    }
-
-    @Override
     public ReviewDao newReviewDao() {
         return new JdbcReviewDao(connection);
     }
