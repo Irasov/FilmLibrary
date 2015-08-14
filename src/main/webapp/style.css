@@ -247,7 +247,9 @@ article, aside, footer, header, hgroup, nav, section {
 .removeFilm{
     float: left;
 }
-
+.add_member{
+    float: left;
+}
 /*подвал*/
 .footer {
     margin: 5px 0 0 0;

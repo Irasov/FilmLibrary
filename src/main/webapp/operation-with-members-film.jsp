@@ -15,7 +15,7 @@
     <title>
         <fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="site.films" bundle="${lang}"/>
+        <fmt:message key="site.member" bundle="${lang}"/>
     </title>
 </head>
 <body>
@@ -26,26 +26,19 @@
         <div class="operation">
             <div class="selected">
                 <div class="select">
-                    <form action="${pageContext.request.contextPath}/controller?action=selected" method="post">
-                        <p><input type="radio" name="selected" value="1" checked title="add film"/>
+                    <form action="${pageContext.request.contextPath}/controller?action=selectedMemberOperation" method="post">
+                        <p><input type="radio" name="selected" value="1" checked title="add member"/>
                             <fmt:setLocale value="${locale}"/>
                             <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="add.film" bundle="${lang}"/></p>
-
+                            <fmt:message key="add.member" bundle="${lang}"/></p>
                         <p><input type="radio" name="selected" value="2" title="remove"/>
                             <fmt:setLocale value="${locale}"/>
                             <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="edit.film" bundle="${lang}"/></p>
-
+                            <fmt:message key="edit.member" bundle="${lang}"/></p>
                         <p><input type="radio" name="selected" value="3" title="count"/>
                             <fmt:setLocale value="${locale}"/>
                             <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="film.add.member" bundle="${lang}"/></p>
-
-                        <p><input type="radio" name="selected" value="5" title="count"/>
-                            <fmt:setLocale value="${locale}"/>
-                            <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="film.remove" bundle="${lang}"/></p>
+                            <fmt:message key="remove.member" bundle="${lang}"/></p>
                         <button type="submit">
                             <fmt:setLocale value="${locale}"/>
                             <fmt:setBundle basename="i18n" var="lang"/>
@@ -61,10 +54,10 @@
                     </form>
                 </div>
             </div>
-            <c:if test="${selectedAction==1}">
-                <fl:addFilm/>
+           <c:if test="${selectedAction==1}">
+                <fl:addMember/>
             </c:if>
-            <c:if test="${selectedAction==2}">
+           <%--  <c:if test="${selectedAction==2}">
                 <c:if test="${not empty films}">
                     <fl:editFilm/>
                 </c:if>
@@ -87,7 +80,7 @@
                         <fmt:message key="${messageError}" bundle="${lang}"/>
                     </div>
                 </c:if>
-            </c:if>
+            </c:if>--%>
         </div>
         <div class="user_menu"><fl:user_menu/></div>
     </div>
