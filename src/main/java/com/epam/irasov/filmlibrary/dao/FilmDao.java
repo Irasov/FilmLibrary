@@ -9,7 +9,7 @@ import java.util.List;
 public interface FilmDao {
     Film findById(Long id);
     Film save(Film film);
-    boolean remove(Film film);
+    Long remove(Long id);
     void upDate(Film film);
     List<Film> selectFilms();
     boolean emptyTable();

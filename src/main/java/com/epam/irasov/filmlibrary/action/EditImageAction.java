@@ -20,10 +20,8 @@ public class EditImageAction implements Action {
         File fileSaveDir = new File(uploadFilePath);
         String star = req.getParameter("strar");
         if (!(star == null)) {
-            System.out.println("PUT "+applicationPath +star);
             File file = new File(applicationPath +star);
             boolean res = file.delete();
-            System.out.println(res);
         }
         if (!fileSaveDir.exists()) {
             boolean mkDirs = fileSaveDir.mkdirs();

@@ -33,6 +33,8 @@ public class JdbcFilmDao implements FilmDao {
     private final static String FIND_RATING = "SELECT * FROM RATING WHERE ID=?";
     private final static String UPDATE_FILM = "UPDATE FILM SET NAME = ?, TAGLINE = ?, AGE_RESTRICTION=?, DURATION =  ?, DESCRIPTION = ?, PREMIERE=?, COVER=? WHERE ID=?";
     private static final String EMPTY_TABLE = "SELECT ID FROM FILM";
+    private static final String DELETE_FILM = "DELETE FROM FILM WHERE id=?";
+    private static final String SELECT_ID_RATING = "SELECT ID_RATING FROM FILM WHERE ID=?";
     private final static String FIND_BY_ID_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER WHERE ID_MOVIE=?)";
     private final static String INSERT_MOVIE = "INSERT INTO MOVIE(ID, NAME, COUNTRY, DATE) VALUES(?,?,?,?)";
     private final static String INSERT_MEMBER = "INSERT INTO MEMBER(SECOND_NAME, LAST_NAME, PATRONYMIC, DATE, ROLE) VALUES(?,?,?,?,?)";
@@ -56,7 +58,6 @@ public class JdbcFilmDao implements FilmDao {
             boolean found = resultSet.next();
             if (!found) return null;
             Film film = new Film();
-            ;
             film.setId(resultSet.getLong(RESULT_ID));
             film.setName(resultSet.getString(RESULT_NAME));
             film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
@@ -105,8 +106,22 @@ public class JdbcFilmDao implements FilmDao {
 
 
     @Override
-    public boolean remove(Film film) {
-        return false;
+    public Long remove(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ID_RATING);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            preparedStatement = connection.prepareStatement(DELETE_FILM);
+            index = 1;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
+            return resultSet.getLong(RESULT_ID_RATING);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
@@ -119,7 +134,7 @@ public class JdbcFilmDao implements FilmDao {
         }
     }
 
-    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, String cover,Long id) throws SQLException {
+    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, String cover, Long id) throws SQLException {
         int index = 1;
         preparedStatement.setString(index, name);
         index++;

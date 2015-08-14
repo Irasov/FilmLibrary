@@ -23,6 +23,7 @@ public class ActionFactory {
         actions.put("POST/editFilm", new EditFilmAction());
         actions.put("GET/editFilm", new EditFilmAction());
         actions.put("POST/editImage", new EditImageAction());
+        actions.put("POST/removeFilm", new RemoveFilmAction());
     }
 
     public Action getAction(HttpServletRequest request) {

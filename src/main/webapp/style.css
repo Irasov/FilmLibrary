@@ -244,6 +244,9 @@ article, aside, footer, header, hgroup, nav, section {
 .operation {
     float: left;
 }
+.removeFilm{
+    float: left;
+}
 
 /*подвал*/
 .footer {

@@ -17,7 +17,7 @@ public class SelectedActionFilmAction implements Action {
     private final static int FILM_ADD_GENRE = 4;
     private final static int REMOVE_FILM = 5;
     private static final String SORT_CRITERION = "name";
-    private static final String MESSAGE="film.null";
+    private static final String MESSAGE = "film.null";
 
     public SelectedActionFilmAction() {
     }
@@ -35,7 +35,7 @@ public class SelectedActionFilmAction implements Action {
                 FilmDao filmDao = daoFactory.newFilmDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", EDIT_FILMS);
-                    req.getSession().setAttribute("messageError",MESSAGE);
+                    req.getSession().setAttribute("messageError", MESSAGE);
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
@@ -60,6 +60,23 @@ public class SelectedActionFilmAction implements Action {
         }
         if (Integer.parseInt(selected) == REMOVE_FILM) {
             req.getSession().setAttribute("selectedAction", REMOVE_FILM);
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            try {
+                FilmDao filmDao = daoFactory.newFilmDao();
+                if (filmDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", REMOVE_FILM);
+                    req.getSession().setAttribute("messageError", MESSAGE);
+                    return new View("operation-with-movies", false);
+                }
+                List<Film> films = filmDao.selectFilms();
+                Sorting.sortFilm(films, SORT_CRITERION);
+                req.getSession().setAttribute("films", films);
+                daoFactory.endTx();
+            } catch (Exception e) {
+                throw new DaoException(e);
+            } finally {
+                daoFactory.close();
+            }
             return new View("operation-with-movies", false);
         }
         return new View("operation-with-movies", false);

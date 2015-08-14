@@ -81,6 +81,18 @@
                     </div>
                 </c:if>
             </c:if>
+            <c:if test="${selectedAction==5}">
+                <c:if test="${not empty films}">
+                    <fl:removeFilm/>
+                </c:if>
+                <c:if test="${empty films}">
+                    <div class="error">
+                        <fmt:setLocale value="${locale}"/>
+                        <fmt:setBundle basename="i18n" var="lang"/>
+                        <fmt:message key="${messageError}" bundle="${lang}"/>
+                    </div>
+                </c:if>
+            </c:if>
         </div>
         <div class="user_menu"><fl:user_menu/></div>
     </div>

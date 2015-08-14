@@ -14,6 +14,8 @@ public class JdbcRatingDao implements RatingDao {
     private final static String SAVE_RATING = "INSERT INTO RATING(NAME, VOTES) VALUES(?,?)";
     private static final java.lang.String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
     private static final java.lang.String FIND_BY_ID = "SELECT * FROM RATING WHERE ID=?";
+    private static final String DELETE_RATING = "DELETE FROM RATING WHERE ID=?";
+
 
     private final Connection connection;
 
@@ -39,6 +41,18 @@ public class JdbcRatingDao implements RatingDao {
     @Override
     public void upDate() {
 
+    }
+
+    @Override
+    public void remove(Long id) {
+        try {
+        int index = 1;
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_RATING);
+        preparedStatement.setLong(index, id);
+        preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
