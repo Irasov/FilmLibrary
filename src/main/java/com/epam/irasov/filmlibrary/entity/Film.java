@@ -7,7 +7,7 @@ import java.util.List;
 public class Film extends NamedEntity {
     private String tagLine;
     private List<FilmMember> members;
-    private List<Genre> genres;
+    private String genre;
     private LocalDate premiere;
     private int ageRestriction;
     private int duration;
@@ -19,13 +19,12 @@ public class Film extends NamedEntity {
     public Film() {
         super();
         members = new ArrayList<>();
-        genres = new ArrayList<>();
         reviews = new ArrayList<>();
     }
 
 
-    public Film(Long id, String name, String tagLine, LocalDate premiere, int ageRestriction, int duration, String cover, Rating rating, String description) {
-        super(id,name);
+    public Film(Long id, String name, String tagLine, String genre, LocalDate premiere, int ageRestriction, int duration, String cover, Rating rating, String description) {
+        super(id, name);
         this.tagLine = tagLine;
         this.premiere = premiere;
         this.ageRestriction = ageRestriction;
@@ -33,8 +32,8 @@ public class Film extends NamedEntity {
         this.cover = cover;
         this.rating = rating;
         this.description = description;
+        this.genre = genre;
         members = new ArrayList<>();
-        genres = new ArrayList<>();
         reviews = new ArrayList<>();
     }
 
@@ -58,16 +57,12 @@ public class Film extends NamedEntity {
         members.add(member);
     }
 
-    public List<Genre> getGenres() {
-        return genres;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
-    }
-
-    public void addGenres(Genre genre) {
-        genres.add(genre);
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public LocalDate getPremiere() {
@@ -133,10 +128,10 @@ public class Film extends NamedEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Film)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Film film = (Film) o;
-        return ageRestriction == film.ageRestriction && duration == film.duration && !(tagLine != null ? !tagLine.equals(film.tagLine) : film.tagLine != null) && !(members != null ? !members.equals(film.members) : film.members != null) && !(genres != null ? !genres.equals(film.genres) : film.genres != null) && !(premiere != null ? !premiere.equals(film.premiere) : film.premiere != null) && !(cover != null ? !cover.equals(film.cover) : film.cover != null) && !(description != null ? !description.equals(film.description) : film.description != null) && !(reviews != null ? !reviews.equals(film.reviews) : film.reviews != null) && !(rating != null ? !rating.equals(film.rating) : film.rating != null)/* && !(honors != null ? !honors.equals(film.honors) : film.honors != null)*/;
+        return ageRestriction == film.ageRestriction && duration == film.duration && !(tagLine != null ? !tagLine.equals(film.tagLine) : film.tagLine != null) && !(members != null ? !members.equals(film.members) : film.members != null) && !(genre != null ? !genre.equals(film.genre) : film.genre != null) && !(premiere != null ? !premiere.equals(film.premiere) : film.premiere != null) && !(cover != null ? !cover.equals(film.cover) : film.cover != null) && !(description != null ? !description.equals(film.description) : film.description != null) && !(reviews != null ? !reviews.equals(film.reviews) : film.reviews != null) && !(rating != null ? !rating.equals(film.rating) : film.rating != null);
 
     }
 
@@ -145,7 +140,7 @@ public class Film extends NamedEntity {
         int result = super.hashCode();
         result = 31 * result + (tagLine != null ? tagLine.hashCode() : 0);
         result = 31 * result + (members != null ? members.hashCode() : 0);
-        result = 31 * result + (genres != null ? genres.hashCode() : 0);
+        result = 31 * result + (genre != null ? genre.hashCode() : 0);
         result = 31 * result + (premiere != null ? premiere.hashCode() : 0);
         result = 31 * result + ageRestriction;
         result = 31 * result + duration;
