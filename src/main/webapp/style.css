@@ -50,7 +50,7 @@ article, aside, footer, header, hgroup, nav, section {
 /*Шапка*/
 .header {
     height: 100px;
-    background: #aed40a url('img/header_bg.png') repeat-x left top;
+    background: #aed40a url('img/site/header_bg.png') repeat-x left top;
 }
 
 .logo {
@@ -71,21 +71,21 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .rus {
-    background: #ffffff url('img/rus.png') no-repeat left top;
+    background: #ffffff url('img/site/rus.png') no-repeat left top;
     float: left;
     width: 45px;
     height: 30px;
 }
 
 .kaz {
-    background: #ffffff url('img/kaz.png') no-repeat left top;
+    background: #ffffff url('img/site/kaz.png') no-repeat left top;
     float: left;
     width: 45px;
     height: 30px;
 }
 
 .eng {
-    background: #ffffff url('img/eng.png') no-repeat left top;
+    background: #ffffff url('img/site/eng.png') no-repeat left top;
     float: left;
     width: 45px;
     height: 30px;
@@ -95,7 +95,7 @@ article, aside, footer, header, hgroup, nav, section {
 
 .nav {
     height: 37px;
-    background: url('img/nav_bg.png') repeat-x left top;
+    background: url('img/site/nav_bg.png') repeat-x left top;
 }
 
 .navigation {
@@ -117,7 +117,7 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .navigation li a:hover {
-    background: url('img/menu_bg1.png') no-repeat left top;
+    background: url('img/site/menu_bg1.png') no-repeat left top;
     color: #fffafe;
 }
 
@@ -128,12 +128,12 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .navigation li span:hover {
-    background: url('img/menu_bg2.png') no-repeat right top;
+    background: url('img/site/menu_bg2.png') no-repeat right top;
 }
 
 /* Навигация юзера */
 .user_menu {
-    height: 1100px;
+    height: 1300px;
 }
 
 .nav_user {
@@ -249,6 +249,6 @@ article, aside, footer, header, hgroup, nav, section {
 .footer {
     margin: 5px 0 0 0;
     height: 110px;
-    background: #aed40a url('img/footer_bg.png') repeat-x left top;
+    background: #aed40a url('img/site/footer_bg.png') repeat-x left top;
 
 }

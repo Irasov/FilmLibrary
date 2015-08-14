@@ -17,7 +17,7 @@ public class AddFilmAction implements Action {
     private final static Long ID_FILM = 1l;
     private final static Long ID_RATING = 1l;
     private final static int VOTES_RATING = 0;
-    private final static String PATH_IMAGE = "img/";
+    private final static String PATH_IMAGE = "img/site/";
     private final static String MESSAGE = "film.add.complete";
 
     public AddFilmAction() {
@@ -60,6 +60,8 @@ public class AddFilmAction implements Action {
             FilmDao filmDao = daoFactory.newFilmDao();
             filmDao.save(new Film(ID_FILM, name, tagLine, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findbyName(name), description));
             req.getSession().setAttribute("message",MESSAGE);
+            req.getSession().setAttribute("selectedAction","");
+            req.getSession().setAttribute("film","");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

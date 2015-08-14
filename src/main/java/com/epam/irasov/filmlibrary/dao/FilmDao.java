@@ -12,6 +12,7 @@ public interface FilmDao {
     boolean remove(Film film);
     void upDate(Film film);
     List<Film> selectFilms();
+    boolean emptyTable();
     /*Movie findById(Long id);
     void update(Movie movie);
     Movie save(Movie movie);

@@ -17,6 +17,7 @@ public class SelectedActionFilmAction implements Action {
     private final static int FILM_ADD_GENRE = 4;
     private final static int REMOVE_FILM = 5;
     private static final String SORT_CRITERION = "name";
+    private static final String MESSAGE="film.null";
 
     public SelectedActionFilmAction() {
     }
@@ -32,6 +33,11 @@ public class SelectedActionFilmAction implements Action {
             DaoFactory daoFactory = DaoFactory.getInstance();
             try {
                 FilmDao filmDao = daoFactory.newFilmDao();
+                if (filmDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", EDIT_FILMS);
+                    req.getSession().setAttribute("messageError",MESSAGE);
+                    return new View("operation-with-movies", false);
+                }
                 List<Film> films = filmDao.selectFilms();
                 Sorting.sortFilm(films, SORT_CRITERION);
                 req.getSession().setAttribute("films", films);

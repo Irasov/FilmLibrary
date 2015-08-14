@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class EditFilmAction implements Action {
+    private static final int FILM_ADD_MEMBER = 1;
+
     public EditFilmAction() {
     }
 
@@ -27,32 +29,30 @@ public class EditFilmAction implements Action {
         String premiere = req.getParameter("premiere");
         Long rating = Long.parseLong(req.getParameter("rating"));
         String cover = req.getParameter("cover");
+        System.out.println(cover);
         String tagLineError = Validator.isTagLineValid(tagLine);
         String descriptionError = Validator.isDescriptionValid(description);
         String restrictionError = Validator.isRestrictionAgeValid(ageRestriction);
         if (tagLineError != null) {
-            req.setAttribute("fileName", cover);
             req.setAttribute("tagLineError", tagLineError);
             return new View("operation-with-movies", false);
         }
         if (descriptionError != null) {
             req.setAttribute("descriptionError", descriptionError);
-            req.setAttribute("fileName", cover);
             return new View("operation-with-movies", false);
         }
         if (restrictionError != null) {
-            req.setAttribute("fileName", cover);
             req.setAttribute("restrictionError", restrictionError);
             return new View("operation-with-movies", false);
         }
-
-
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            filmDao.upDate(new Film(id,name,tagLine, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")),Integer.parseInt(ageRestriction),Integer.parseInt(duration),cover,daoFactory.newRatingDao().findbyId(rating),description));
-            req.getSession().setAttribute("messageEdit","film.editii");
+            filmDao.upDate(new Film(id, name, tagLine, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findbyId(rating), description));
+            req.getSession().setAttribute("message", "edit.message");
+            req.getSession().setAttribute("selectedAction","");
+            req.getSession().setAttribute("film","");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

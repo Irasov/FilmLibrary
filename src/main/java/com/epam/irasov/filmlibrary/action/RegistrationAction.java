@@ -25,7 +25,7 @@ public class RegistrationAction implements Action {
     private final static String ERROR_UNIQUE_LOGIN = "not.unique.login";
     private final static String NEWS_BLOCK_NAME_INITIAL_VALUE = "News from the world of cinema";
     private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "New film on the site";
-    private final static String NO_AVATAR = "img/no_avatar.png";
+    private final static String NO_AVATAR = "img/site/no_avatar.png";
 
     public RegistrationAction() {
     }

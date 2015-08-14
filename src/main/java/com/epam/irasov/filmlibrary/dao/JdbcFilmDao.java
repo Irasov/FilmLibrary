@@ -31,7 +31,8 @@ public class JdbcFilmDao implements FilmDao {
     private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT* FROM FILM WHERE ID = ?";
     private final static String FIND_RATING = "SELECT * FROM RATING WHERE ID=?";
-    private final static String UPDATE_FILM = "UPDATE FILM SET NAME = ?, TAGLINE = ?, AGE_RESTRICTION=?, DURATION =  ?, DESCRIPTION = ?, PREMIERE=?  WHERE ID=?";
+    private final static String UPDATE_FILM = "UPDATE FILM SET NAME = ?, TAGLINE = ?, AGE_RESTRICTION=?, DURATION =  ?, DESCRIPTION = ?, PREMIERE=?, COVER=? WHERE ID=?";
+    private static final String EMPTY_TABLE = "SELECT ID FROM FILM";
     private final static String FIND_BY_ID_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER WHERE ID_MOVIE=?)";
     private final static String INSERT_MOVIE = "INSERT INTO MOVIE(ID, NAME, COUNTRY, DATE) VALUES(?,?,?,?)";
     private final static String INSERT_MEMBER = "INSERT INTO MEMBER(SECOND_NAME, LAST_NAME, PATRONYMIC, DATE, ROLE) VALUES(?,?,?,?,?)";
@@ -54,7 +55,8 @@ public class JdbcFilmDao implements FilmDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             if (!found) return null;
-            Film film = new Film();;
+            Film film = new Film();
+            ;
             film.setId(resultSet.getLong(RESULT_ID));
             film.setName(resultSet.getString(RESULT_NAME));
             film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
@@ -111,13 +113,13 @@ public class JdbcFilmDao implements FilmDao {
     public void upDate(Film film) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FILM);
-            setUpdateFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getDescription(), film.getPremiere(), film.getId());
+            setUpdateFilm(preparedStatement, film.getName(), film.getTagLine(), film.getAgeRestriction(), film.getDuration(), film.getDescription(), film.getPremiere(), film.getCover(), film.getId());
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
-    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, Long id) throws SQLException {
+    private void setUpdateFilm(PreparedStatement preparedStatement, String name, String tagLine, int ageRestriction, int duration, String description, LocalDate premiere, String cover,Long id) throws SQLException {
         int index = 1;
         preparedStatement.setString(index, name);
         index++;
@@ -130,6 +132,8 @@ public class JdbcFilmDao implements FilmDao {
         preparedStatement.setString(index, description);
         index++;
         preparedStatement.setDate(index, Date.valueOf(premiere));
+        index++;
+        preparedStatement.setString(index, cover);
         index++;
         preparedStatement.setLong(index, id);
         preparedStatement.executeUpdate();
@@ -159,6 +163,23 @@ public class JdbcFilmDao implements FilmDao {
                 found = resultSet.next();
             }
             return films;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean emptyTable() {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(EMPTY_TABLE);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count == 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
