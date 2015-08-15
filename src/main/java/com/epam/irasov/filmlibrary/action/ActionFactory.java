@@ -25,7 +25,12 @@ public class ActionFactory {
         actions.put("POST/editImage", new EditImageAction());
         actions.put("POST/removeFilm", new RemoveFilmAction());
         actions.put("POST/selectedMemberOperation", new SelectedActionMemberAction());
-        actions.put("POST/addPhoto", new AddMemberPhoto());
+        actions.put("POST/addPhoto", new AddMemberPhotoAction());
+        actions.put("POST/addMember", new AddMemberAction());
+        actions.put("POST/selectMember", new SelectMemberAction());
+        actions.put("POST/editPhotoMember", new EditPhotoMemberAction());
+        actions.put("POST/editFilmMember", new EditFilmMemberAction());
+        actions.put("GET/editFilmMember", new EditFilmMemberAction());
     }
 
     public Action getAction(HttpServletRequest request) {

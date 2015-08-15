@@ -55,9 +55,9 @@
             <fmt:message key="reg.type" bundle="${lang}"/>
         </div>
         <div class="reg_text">
-            <select name="idType" size="5" required title="select type">
+            <select name="type" size="5" required title="select type">
                 <c:forEach items="${types}" var="type">
-                    <option value="${type.id}">${type.name}</option>
+                    <option value="${type.id}+${type.name}">${type.name}</option>
                 </c:forEach>
             </select>
         </div>

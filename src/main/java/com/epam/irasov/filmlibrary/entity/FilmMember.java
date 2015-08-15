@@ -2,7 +2,7 @@ package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
 
-public abstract class FilmMember extends NamedEntity {
+public class FilmMember extends NamedEntity {
     private String patronymic;
     private String surname;
     private LocalDate birthDate;

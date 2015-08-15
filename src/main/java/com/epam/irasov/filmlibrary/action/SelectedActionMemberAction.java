@@ -3,7 +3,9 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmMemberDao;
+import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
+import com.epam.irasov.filmlibrary.logic.Sorting;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,9 @@ import java.util.List;
 
 public class SelectedActionMemberAction implements Action {
     private static final int ADD_MEMBER = 1;
+    private final static int EDIT_MEMBER = 2;
+    private static final String MESSAGE_ERROR = "film.member.null";
+    private static final String SORT_CRITERION = "name";
 
     public SelectedActionMemberAction() {
     }
@@ -31,6 +36,27 @@ public class SelectedActionMemberAction implements Action {
                 daoFactory.close();
             }
             req.getSession().setAttribute("selectedAction", ADD_MEMBER);
+            return new View("operation-with-members-film", false);
+        }
+        if(Integer.parseInt(selected) == EDIT_MEMBER){
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            try {
+                FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
+                if (filmMemberDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", EDIT_MEMBER);
+                    req.getSession().setAttribute("messageError", MESSAGE_ERROR);
+                    return new View("operation-with-members-film", false);
+                }
+                List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
+                Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
+                req.getSession().setAttribute("filmMembers", filmMembers);
+                daoFactory.endTx();
+            } catch (Exception e) {
+                throw new DaoException(e);
+            } finally {
+                daoFactory.close();
+            }
+            req.getSession().setAttribute("selectedAction", EDIT_MEMBER);
             return new View("operation-with-members-film", false);
         }
         return new View("operation-with-members-film", false);

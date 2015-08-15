@@ -12,13 +12,10 @@ import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcSystemMemberDao implements SystemMemberDao {
-    private final static String RESULT_BIRTH_DATE = "birth_date";
-    private final static String RESULT_SURNAME = "surname";
-    private final static String RESULT_PATRONYMIC = "patronymic";
+
     private final static String RESULT_LOGIN = "login";
     private final static String RESULT_PASSWORD = "password";
     private final static String RESULT_EMAIL = "email";
-    private static final String RESULT_PHOTO = "photo";
     private final static String FIND_ALL_SYSTEM_MEMBERS = "SELECT * FROM SYSTEM_MEMBERS";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL, PHOTO) VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(ID,NAME) VALUES(?,?)";

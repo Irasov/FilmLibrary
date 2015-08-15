@@ -7,16 +7,17 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
-public class AddMemberPhoto implements Action {
+public class AddMemberPhotoAction implements Action {
     private static final String UPLOAD_PHOTO_DIR = "img/site";
 
-    public AddMemberPhoto() {
+    public AddMemberPhotoAction() {
     }
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String applicationPath = req.getServletContext().getRealPath("");
         String uploadFilePath = applicationPath + File.separator + UPLOAD_PHOTO_DIR;
+        System.out.println(uploadFilePath+File.separator+"file");
         File fileSaveDir = new File(uploadFilePath);
         if (!fileSaveDir.exists()) {
             boolean mkDirs = fileSaveDir.mkdirs();
@@ -46,7 +47,3 @@ public class AddMemberPhoto implements Action {
         return "";
     }
 }
-
-
-
-

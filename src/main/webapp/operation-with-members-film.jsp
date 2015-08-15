@@ -4,11 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <%--@elvariable id="selectedAction" type="java.lang.String"--%>
-<%--@elvariable id="message" type="java.lang.String"--%>
-<%--@elvariable id="films" type="java.util.List"--%>
-<%--@elvariable id="film" type="com.epam.irasov.filmlibrary.entity.Film"--%>
+<%--@elvariable id="messageFilmMember" type="java.lang.String"--%>
 <%--@elvariable id="fileError" type="java.lang.String"--%>
 <%--@elvariable id="messageError" type="java.lang.String"--%>
+<%--@elvariable id="filmMembers" type="java.util.List"--%>
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
@@ -44,11 +43,11 @@
                             <fmt:setBundle basename="i18n" var="lang"/>
                             <fmt:message key="site.select" bundle="${lang}"/>
                         </button>
-                        <c:if test="${not empty message}">
+                        <c:if test="${not empty messageFilmMember}">
                             <div class="complete">
                                 <fmt:setLocale value="${locale}"/>
                                 <fmt:setBundle basename="i18n" var="lang"/>
-                                <fmt:message key="${message}" bundle="${lang}"/>
+                                <fmt:message key="${messageFilmMember}" bundle="${lang}"/>
                             </div>
                         </c:if>
                     </form>
@@ -57,11 +56,11 @@
            <c:if test="${selectedAction==1}">
                 <fl:addMember/>
             </c:if>
-           <%--  <c:if test="${selectedAction==2}">
-                <c:if test="${not empty films}">
-                    <fl:editFilm/>
+             <c:if test="${selectedAction==2}">
+                <c:if test="${not empty filmMembers}">
+                    <fl:editMember/>
                 </c:if>
-                <c:if test="${empty films}">
+                <c:if test="${empty filmMembers}">
                     <div class="error">
                         <fmt:setLocale value="${locale}"/>
                         <fmt:setBundle basename="i18n" var="lang"/>
@@ -69,18 +68,18 @@
                     </div>
                 </c:if>
             </c:if>
-            <c:if test="${selectedAction==5}">
-                <c:if test="${not empty films}">
-                    <fl:removeFilm/>
-                </c:if>
-                <c:if test="${empty films}">
-                    <div class="error">
-                        <fmt:setLocale value="${locale}"/>
-                        <fmt:setBundle basename="i18n" var="lang"/>
-                        <fmt:message key="${messageError}" bundle="${lang}"/>
-                    </div>
-                </c:if>
-            </c:if>--%>
+            <%-- <c:if test="${selectedAction==3}">
+                 <c:if test="${not empty films}">
+                     <fl:removeFilm/>
+                 </c:if>
+                 <c:if test="${empty films}">
+                     <div class="error">
+                         <fmt:setLocale value="${locale}"/>
+                         <fmt:setBundle basename="i18n" var="lang"/>
+                         <fmt:message key="${messageError}" bundle="${lang}"/>
+                     </div>
+                 </c:if>
+             </c:if>--%>
         </div>
         <div class="user_menu"><fl:user_menu/></div>
     </div>

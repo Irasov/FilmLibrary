@@ -250,6 +250,9 @@ article, aside, footer, header, hgroup, nav, section {
 .add_member{
     float: left;
 }
+.edit_member{
+    float: left;
+}
 /*подвал*/
 .footer {
     margin: 5px 0 0 0;
