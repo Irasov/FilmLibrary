@@ -2,7 +2,6 @@ package com.epam.irasov.filmlibrary.dao;
 
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.Rating;
-import com.epam.irasov.filmlibrary.entity.SystemMember;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -22,6 +21,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String RESULT_COVER = "cover";
     private static final String RESULT_DURATION = "duration";
     private static final String RESULT_DESCRIPTION = "description";
+    private static final String ID_FILM_MEMBER = "id_film_member";
     private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
     private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, GENRE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT* FROM FILM WHERE ID = ?";
@@ -37,6 +37,10 @@ public class JdbcFilmDao implements FilmDao {
     private final static String DELETE_MOVIE = "DELETE FROM MOVIE WHERE DATE>?";
     private final static String DELETE_MOVIE_MEMBER = "DELETE FROM MOVIE_MEMBER WHERE ID_MOVIE=ANY(SELECT ID FROM MOVIE WHERE DATE>?)";
     private final static String FIND_BY_COUNT_MOVIE_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ROLE=? AND ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER GROUP BY ID_MEMBER HAVING COUNT(ID_MEMBER)=?)";
+    private static final String SAVE_FILM_FILM_MEMBER = "INSERT INTO FILM_FILM_MEMBER(ID_FILM, ID_FILM_MEMBER)VALUES(?,?)";
+    private static final String FIND_FILM_FILM_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
+    private static final String FIND_ID_FILM_MEMBER = "SELECT ID_FILM_MEMBER FROM FILM_FILM_MEMBER WHERE ID_FILM=? ";
+    private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=? AND ID_FILM_MEMBER=?";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -218,4 +222,69 @@ public class JdbcFilmDao implements FilmDao {
         }
     }
 
+    @Override
+    public void saveFilmFilmMember(Long idFilm, Long idFilmMember) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SAVE_FILM_FILM_MEMBER);
+            int index = 1;
+            preparedStatement.setLong(index, idFilm);
+            index++;
+            preparedStatement.setLong(index, idFilmMember);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int findByIdFilmFilmMember(Long id) {
+        int count = 0;
+        try {
+            int index=1;
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_FILM_FILM_MEMBER);
+            preparedStatement.setLong(index,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<Long> findByIdFilmMember(Long id) {
+        try {
+            List<Long> idMembers = new ArrayList<>();
+            int index=1;
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID_FILM_MEMBER);
+            preparedStatement.setLong(index,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                idMembers.add(resultSet.getLong(ID_FILM_MEMBER));
+                found = resultSet.next();
+            }
+            return idMembers;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void deleteFilmFilmMember(Long idFilm, Long idMember) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FILM_MEMBER);
+            int index = 1;
+            preparedStatement.setLong(index, idFilm);
+            index++;
+            preparedStatement.setLong(index, idMember);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
 }

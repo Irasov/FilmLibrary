@@ -3,7 +3,9 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmDao;
+import com.epam.irasov.filmlibrary.dao.FilmMemberDao;
 import com.epam.irasov.filmlibrary.entity.Film;
+import com.epam.irasov.filmlibrary.entity.FilmMember;
 import com.epam.irasov.filmlibrary.logic.Sorting;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +16,11 @@ public class SelectedActionFilmAction implements Action {
     private final static int ADD_FILM = 1;
     private final static int EDIT_FILMS = 2;
     private final static int FILM_ADD_MEMBER = 3;
+    private final static int REMOVE_FILM_FILM_MEMBER = 4;
     private final static int REMOVE_FILM = 5;
     private static final String SORT_CRITERION = "name";
     private static final String MESSAGE = "film.null";
+    private static final String MESSAGE_MEMBER = "film.or.member.null";
 
     public SelectedActionFilmAction() {
     }
@@ -51,6 +55,32 @@ public class SelectedActionFilmAction implements Action {
         }
         if (Integer.parseInt(selected) == FILM_ADD_MEMBER) {
             req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            try {
+                FilmDao filmDao = daoFactory.newFilmDao();
+                FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
+                if (filmDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
+                    req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    return new View("operation-with-movies", false);
+                }
+                if (filmMemberDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
+                    req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    return new View("operation-with-movies", false);
+                }
+                List<Film> films = filmDao.selectFilms();
+                Sorting.sortFilm(films, SORT_CRITERION);
+                req.getSession().setAttribute("films", films);
+                List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
+                Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
+                req.getSession().setAttribute("filmMembers", filmMembers);
+                daoFactory.endTx();
+            } catch (Exception e) {
+                throw new DaoException(e);
+            } finally {
+                daoFactory.close();
+            }
             return new View("operation-with-movies", false);
         }
         if (Integer.parseInt(selected) == REMOVE_FILM) {
@@ -63,6 +93,28 @@ public class SelectedActionFilmAction implements Action {
                     req.getSession().setAttribute("messageError", MESSAGE);
                     return new View("operation-with-movies", false);
                 }
+                List<Film> films = filmDao.selectFilms();
+                Sorting.sortFilm(films, SORT_CRITERION);
+                req.getSession().setAttribute("films", films);
+                daoFactory.endTx();
+            } catch (Exception e) {
+                throw new DaoException(e);
+            } finally {
+                daoFactory.close();
+            }
+            return new View("operation-with-movies", false);
+        }
+        if (Integer.parseInt(selected) == REMOVE_FILM_FILM_MEMBER) {
+            req.getSession().setAttribute("selectedAction", REMOVE_FILM_FILM_MEMBER);
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            try {
+                FilmDao filmDao = daoFactory.newFilmDao();
+                if (filmDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", REMOVE_FILM_FILM_MEMBER);
+                    req.getSession().setAttribute("messageError", MESSAGE);
+                    return new View("operation-with-movies", false);
+                }
+                daoFactory.beginTx();
                 List<Film> films = filmDao.selectFilms();
                 Sorting.sortFilm(films, SORT_CRITERION);
                 req.getSession().setAttribute("films", films);

@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class EditFilmAction implements Action {
-    private static final int FILM_ADD_MEMBER = 1;
 
     public EditFilmAction() {
     }

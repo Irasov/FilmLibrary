@@ -176,6 +176,10 @@ article, aside, footer, header, hgroup, nav, section {
 .reg_text {
     padding: 10px 0 10px 25px;
 }
+.reg_text_select_film{
+    float: left;
+    padding: 10px 0 10px 25px;
+}
 
 .reg_input {
     padding: 0 0 10px 25px;
@@ -245,6 +249,10 @@ article, aside, footer, header, hgroup, nav, section {
     float: left;
 }
 .removeFilm{
+    float: left;
+}
+
+.remove_film_film_member{
     float: left;
 }
 .add_member{

@@ -31,6 +31,7 @@ public class LoginAction implements Action {
         }
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
+            daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             SystemMember systemMember = systemMemberDao.findByCredentials(login, password);
             if (systemMember == null) {
@@ -38,6 +39,7 @@ public class LoginAction implements Action {
                 return new View("login", false);
             }
             req.getSession().setAttribute("systemMember",systemMember);
+            daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {

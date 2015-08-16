@@ -22,6 +22,7 @@ public class RemoveFilmMemberAction implements Action {
         boolean res = file.delete();
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
+            daoFactory.beginTx();
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
             filmMemberDao.remove(selectFilmMember);
             req.getSession().setAttribute("selectedAction", ADD_MEMBER);

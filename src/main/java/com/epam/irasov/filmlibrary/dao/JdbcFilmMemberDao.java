@@ -180,7 +180,7 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
             filmMember.setId(resultSet.getLong(RESULT_ID));
             filmMember.setName(resultSet.getString(RESULT_NAME));
             filmMember.setPatronymic(resultSet.getString(RESULT_PATRONYMIC));
-            filmMember.setSurname(resultSet.getString(RESULT_PATRONYMIC));
+            filmMember.setSurname(resultSet.getString(RESULT_SURNAME));
             filmMember.setBirthDate(LocalDate.parse(resultSet.getDate(RESULT_BIRTH_DATE).toString(), ofPattern("yyyy-MM-dd")));
             filmMember.setType(findType(resultSet.getLong(RESULT_ID_TYPE)));
             filmMember.setPhoto(resultSet.getString(RESULT_PHOTO));

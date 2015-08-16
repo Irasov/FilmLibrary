@@ -27,6 +27,7 @@ public class SelectedActionMemberAction implements Action {
         if (Integer.parseInt(selected) == ADD_MEMBER) {
             DaoFactory daoFactory = DaoFactory.getInstance();
             try {
+                daoFactory.beginTx();
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 List<FilmMember.Type> types = filmMemberDao.select();
                 req.getSession().setAttribute("types", types);
@@ -48,6 +49,7 @@ public class SelectedActionMemberAction implements Action {
                     req.getSession().setAttribute("messageError", MESSAGE_ERROR);
                     return new View("operation-with-members-film", false);
                 }
+                daoFactory.beginTx();
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
                 Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
                 req.getSession().setAttribute("filmMembers", filmMembers);

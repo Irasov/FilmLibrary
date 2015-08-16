@@ -55,9 +55,8 @@ public class AddFilmAction implements Action {
 
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
-            Rating rating = daoFactory.newRatingDao().save(new Rating(ID_RATING, name, VOTES_RATING));
-            System.out.println(name);
             daoFactory.beginTx();
+            Rating rating = daoFactory.newRatingDao().save(new Rating(ID_RATING, name, VOTES_RATING));
             FilmDao filmDao = daoFactory.newFilmDao();
             filmDao.save(new Film(ID_FILM, name, tagLine, genre ,LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findbyName(name), description));
             req.getSession().setAttribute("message",MESSAGE);

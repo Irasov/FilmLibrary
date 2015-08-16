@@ -17,6 +17,7 @@ public class SelectMemberAction implements Action {
         Long selectFilm = Long.parseLong(req.getParameter("idMember"));
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
+            daoFactory.beginTx();
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
             FilmMember filmMember = filmMemberDao.findById(selectFilm);
             req.getSession().setAttribute("filmMember", filmMember);

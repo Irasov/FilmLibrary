@@ -1,6 +1,8 @@
 package com.epam.irasov.filmlibrary.dao;
 
 import com.epam.irasov.filmlibrary.entity.Film;
+import com.epam.irasov.filmlibrary.entity.FilmMember;
+
 import java.util.List;
 
 public interface FilmDao {
@@ -10,4 +12,8 @@ public interface FilmDao {
     void upDate(Film film);
     List<Film> selectFilms();
     boolean emptyTable();
+    void saveFilmFilmMember(Long idFilm, Long idFilmMember);
+    int findByIdFilmFilmMember(Long id);
+    List<Long> findByIdFilmMember(Long id);
+    void deleteFilmFilmMember(Long idFilm, Long idMember);
 }

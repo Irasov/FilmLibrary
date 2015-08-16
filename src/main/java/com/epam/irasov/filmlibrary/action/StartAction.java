@@ -33,7 +33,6 @@ public class StartAction implements Action {
         HttpSession session = req.getSession();
         FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
         int cont = filmMemberDao.findType();
-        System.out.println("ssssssssssssssssssss" + cont);
         if (cont == 0) {
             FilmMember.Type type = new FilmMember.Type(ID_ACTOR, NAME_ACTOR);
             filmMemberDao.saveType(type);

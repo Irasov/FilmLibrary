@@ -19,7 +19,7 @@
         <div class="reg_text">
             <select name="idFilmMember" size="10" required title="select film">
                 <c:forEach items="${filmMembers}" var="filmMember">
-                    <option value="${filmMember.id}+${filmMember.photo}">${filmMember.name}(${filmMember.birthDate})</option>
+                    <option value="${filmMember.id}+${filmMember.photo}">${filmMember.surname}(${filmMember.birthDate})</option>
                 </c:forEach>
             </select>
         </div>

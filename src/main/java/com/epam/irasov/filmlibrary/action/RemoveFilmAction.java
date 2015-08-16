@@ -24,6 +24,7 @@ public class RemoveFilmAction implements Action {
         boolean res = file.delete();
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
+            daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
             Long idRating = filmDao.remove(selectFilm);
             RatingDao ratingDao = daoFactory.newRatingDao();

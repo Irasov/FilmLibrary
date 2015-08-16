@@ -32,9 +32,9 @@ public class AddMemberAction implements Action {
         String nameType = req.getParameter("type").substring(req.getParameter("type").indexOf("+")+1,req.getParameter("type").length());
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
+            daoFactory.beginTx();
             FilmMember.Type type = new FilmMember.Type(Long.parseLong(idType),nameType);
             FilmMember filmMember = new FilmMember(ID_MEMBER,name,patronymic,surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")),PATH_PHOTO+photo,type);
-            daoFactory.beginTx();
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
             filmMemberDao.saveFilmMember(filmMember);
             req.getSession().setAttribute("messageFilmMember", MESSAGE);

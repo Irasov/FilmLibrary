@@ -3,14 +3,17 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmDao;
-import com.epam.irasov.filmlibrary.entity.Film;
-import com.epam.irasov.filmlibrary.logic.Sorting;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 
-public class SelectFilm implements Action {
-    public SelectFilm() {
+import static java.time.format.DateTimeFormatter.ofPattern;
+
+public class AddFilmMembersAction implements Action {
+    private static final Object MESSAGE = "film.add.film.member";
+
+    public AddFilmMembersAction() {
     }
 
     @Override
@@ -20,15 +23,17 @@ public class SelectFilm implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            Film film = filmDao.findById(selectFilm);
-            System.out.println(film.getRating().getId());
-            req.getSession().setAttribute("film", film);
+            for(String idMember:req.getParameterValues("idMember")){
+                filmDao.saveFilmFilmMember(selectFilm,Long.parseLong(idMember));
+            }
+            req.getSession().setAttribute("message", MESSAGE);
+            req.getSession().setAttribute("selectedAction","");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-movies", false);
+        return new View("operation-with-movies", true);
     }
 }
