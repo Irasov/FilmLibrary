@@ -21,6 +21,7 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
     private static final String FIND_BY_ID_TYPE = "SELECT * FROM FILM_MEMBER_TYPE WHERE id=?";
     private static final String FIND_BY_ID = "SELECT * FROM FILM_MEMBER WHERE ID=?";
     private static final String UPDATE_FILM_MEMBER = "UPDATE FILM_MEMBER SET NAME = ?, PATRONYMIC = ?, SURNAME = ?, BIRTH_DATE = ? , PHOTO = ? WHERE ID=?";
+    private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_MEMBER WHERE id=?";
 
     private final Connection connection;
 
@@ -137,6 +138,7 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
                 filmMember.setName(resultSet.getString(RESULT_NAME));
                 filmMember.setPatronymic(resultSet.getString(RESULT_PATRONYMIC));
                 filmMember.setSurname(resultSet.getString(RESULT_SURNAME));
+                filmMember.setPhoto(resultSet.getString(RESULT_PHOTO));
                 filmMember.setBirthDate(LocalDate.parse(resultSet.getDate(RESULT_BIRTH_DATE).toString(), ofPattern("yyyy-MM-dd")));
                 filmMember.setType(findType(resultSet.getLong(RESULT_ID_TYPE)));
                 filmMembers.add(filmMember);
@@ -214,5 +216,18 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
         index++;
         preparedStatement.setLong(index, id);
         preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public Long remove(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FILM_MEMBER);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
+            return id;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 }

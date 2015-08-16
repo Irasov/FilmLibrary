@@ -17,10 +17,9 @@ public class RemoveFilmAction implements Action {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        Long selectFilm = Long.parseLong(req.getParameter("idFilm"));
-        String cover = req.getParameter("cover");
+        Long selectFilm = Long.parseLong(req.getParameter("idFilm").substring(0, req.getParameter("idFilm").indexOf("+")));
+        String cover = req.getParameter("idFilm").substring(req.getParameter("idFilm").indexOf("+") + 1, req.getParameter("idFilm").length());
         String applicationPath = req.getServletContext().getRealPath("");
-        System.out.println(cover);
         File file = new File(applicationPath + cover);
         boolean res = file.delete();
         DaoFactory daoFactory = DaoFactory.getInstance();

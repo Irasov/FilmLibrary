@@ -19,8 +19,7 @@
         <div class="reg_text">
             <select name="idFilm" size="10" required title="select film">
                 <c:forEach items="${films}" var="film">
-                    <option value="${film.id}">${film.name}(${film.premiere})</option>
-                    <input type="text" name="cover" value="${film.cover}" hidden class="reginput"
+                    <option value="${film.id}+${film.cover}">${film.name}(${film.premiere})</option>
                            title="cover"/>
                 </c:forEach>
             </select>

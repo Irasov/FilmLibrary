@@ -14,6 +14,7 @@ import java.util.List;
 public class SelectedActionMemberAction implements Action {
     private static final int ADD_MEMBER = 1;
     private final static int EDIT_MEMBER = 2;
+    private static final int REMOVE_FILM_MEMBER = 3;
     private static final String MESSAGE_ERROR = "film.member.null";
     private static final String SORT_CRITERION = "name";
 
@@ -57,6 +58,27 @@ public class SelectedActionMemberAction implements Action {
                 daoFactory.close();
             }
             req.getSession().setAttribute("selectedAction", EDIT_MEMBER);
+            return new View("operation-with-members-film", false);
+        }
+        if (Integer.parseInt(selected) == REMOVE_FILM_MEMBER) {
+            req.getSession().setAttribute("selectedAction", REMOVE_FILM_MEMBER);
+            DaoFactory daoFactory = DaoFactory.getInstance();
+            try {
+                FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
+                if (filmMemberDao.emptyTable()) {
+                    req.getSession().setAttribute("selectedAction", REMOVE_FILM_MEMBER);
+                    req.getSession().setAttribute("messageError", MESSAGE_ERROR);
+                    return new View("operation-with-members-film", false);
+                }
+                List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
+                Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
+                req.getSession().setAttribute("filmMembers", filmMembers);
+                daoFactory.endTx();
+            } catch (Exception e) {
+                throw new DaoException(e);
+            } finally {
+                daoFactory.close();
+            }
             return new View("operation-with-members-film", false);
         }
         return new View("operation-with-members-film", false);

@@ -68,18 +68,18 @@
                     </div>
                 </c:if>
             </c:if>
-            <%-- <c:if test="${selectedAction==3}">
-                 <c:if test="${not empty films}">
-                     <fl:removeFilm/>
+            <c:if test="${selectedAction==3}">
+                 <c:if test="${not empty filmMembers}">
+                     <fl:removeFilmMember/>
                  </c:if>
-                 <c:if test="${empty films}">
+                 <c:if test="${empty filmMembers}">
                      <div class="error">
                          <fmt:setLocale value="${locale}"/>
                          <fmt:setBundle basename="i18n" var="lang"/>
                          <fmt:message key="${messageError}" bundle="${lang}"/>
                      </div>
                  </c:if>
-             </c:if>--%>
+            </c:if>
         </div>
         <div class="user_menu"><fl:user_menu/></div>
     </div>
