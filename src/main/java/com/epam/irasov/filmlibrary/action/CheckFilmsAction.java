@@ -8,26 +8,32 @@ import com.epam.irasov.filmlibrary.logic.Sorting;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
-public class SelectFilm implements Action {
-    public SelectFilm() {
+public class CheckFilmsAction implements Action {
+    private static final String SORT_CRITERION = "name";
+
+    public CheckFilmsAction() {
     }
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        Long selectFilm = Long.parseLong(req.getParameter("idFilm"));
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            Film film = filmDao.findById(selectFilm);
-            req.getSession().setAttribute("film", film);
+            if (filmDao.emptyTable()) {
+                return new View("films", true);
+            }
+            List<Film> films = filmDao.selectFilms();
+            Sorting.sortFilm(films, SORT_CRITERION);
+            req.getSession().setAttribute("filmsView", films);
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-movies", false);
+        return new View("films", true);
     }
 }

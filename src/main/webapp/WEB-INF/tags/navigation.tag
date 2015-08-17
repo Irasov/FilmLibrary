@@ -17,23 +17,17 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.news" bundle="${lang}"/>
                 </span></a></li>
-        <li><a href="${pageContext.request.contextPath}/film.jsp">
+        <li><a href="${pageContext.request.contextPath}/check-films.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.films" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/check-film-members.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="site.actors" bundle="${lang}"/>
-            </span></a></li>
-        <li><a href="/">
-            <span>
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="site.other" bundle="${lang}"/>
+                <fmt:message key="site.film.members" bundle="${lang}"/>
             </span></a></li>
         <c:if test="${empty systemMember}">
             <li><a href="${pageContext.request.contextPath}/registration.jsp">

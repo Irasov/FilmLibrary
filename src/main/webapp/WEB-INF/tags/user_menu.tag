@@ -34,12 +34,6 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.reviews" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="${pageContext.request.contextPath}/my-film.jsp">
-            <span>
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="user.film" bundle="${lang}"/>
-            </span></a></li>
         <c:if test="${systemMember.type.id==1}">
             <li><a href="${pageContext.request.contextPath}/operation-with-movies.jsp">
             <span>
@@ -54,14 +48,6 @@
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="user.members.film" bundle="${lang}"/>
-            </span></a></li>
-        </c:if>
-        <c:if test="${systemMember.type.id==1}">
-        <li><a href="/">
-            <span>
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="user.users" bundle="${lang}"/>
             </span></a></li>
         </c:if>
         <c:if test="${systemMember.type.id==1}">

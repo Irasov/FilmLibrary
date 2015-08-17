@@ -29,7 +29,6 @@ public class EditFilmAction implements Action {
         Long rating = Long.parseLong(req.getParameter("rating"));
         String cover = req.getParameter("cover");
         String genre = req.getParameter("genre");
-        System.out.println(cover);
         String tagLineError = Validator.isTagLineValid(tagLine);
         String descriptionError = Validator.isDescriptionValid(description);
         String restrictionError = Validator.isRestrictionAgeValid(ageRestriction);

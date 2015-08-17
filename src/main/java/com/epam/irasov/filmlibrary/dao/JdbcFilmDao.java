@@ -12,6 +12,7 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcFilmDao implements FilmDao {
     private final static String RESULT_ID = "id";
+    private final static String RESULT_ID_FILM = "id_film";
     private final static String RESULT_PREMIERE = "premiere";
     private final static String RESULT_NAME = "name";
     private static final String RESULT_TAG_LINE = "tagline";
@@ -32,9 +33,11 @@ public class JdbcFilmDao implements FilmDao {
     private static final String SELECT_ID_RATING = "SELECT ID_RATING FROM FILM WHERE ID=?";
     private static final String SAVE_FILM_FILM_MEMBER = "INSERT INTO FILM_FILM_MEMBER(ID_FILM, ID_FILM_MEMBER)VALUES(?,?)";
     private static final String FIND_FILM_FILM_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
+    private static final String FIND_FILM_MEMBER_FILM = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=?";
     private static final String FIND_ID_FILM_MEMBER = "SELECT ID_FILM_MEMBER FROM FILM_FILM_MEMBER WHERE ID_FILM=? ";
     private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=? AND ID_FILM_MEMBER=?";
     private static final String DELETE_LIST_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
+    private static final String FIND_ID_FILM = "SELECT ID_FILM FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? ";;
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -289,6 +292,44 @@ public class JdbcFilmDao implements FilmDao {
             int index = 1;
             preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public int findByIdFilmMemberFilm(Long id) {
+        int count = 0;
+        try {
+            int index=1;
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_FILM_MEMBER_FILM);
+            preparedStatement.setLong(index,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<Long> findByIdFilm(Long id) {
+        try {
+            List<Long> idMembers = new ArrayList<>();
+            int index=1;
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID_FILM);
+            preparedStatement.setLong(index,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                idMembers.add(resultSet.getLong(RESULT_ID_FILM));
+                found = resultSet.next();
+            }
+            return idMembers;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

@@ -35,6 +35,10 @@ public class ActionFactory {
         actions.put("POST/memberAddFilm", new AddFilmMembersAction());
         actions.put("POST/selectFilmFilmMember", new SelectFilmFilmMemberAction());
         actions.put("POST/removeFilmFilmMember", new RemoveFilmFilmMember());
+        actions.put("GET/checkFilms", new CheckFilmsAction());
+        actions.put("POST/selectFilmView", new SelectFilmViewAction());
+        actions.put("POST/selectMemberView", new SelectMemberViewAction());
+        actions.put("GET/checkFilmMembers", new CheckFilmMembers());
     }
 
     public Action getAction(HttpServletRequest request) {
