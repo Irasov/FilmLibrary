@@ -92,8 +92,9 @@ public class FilmMember extends NamedEntity {
         if (this == o) return true;
         if (!(o instanceof FilmMember)) return false;
         if (!super.equals(o)) return false;
-        FilmMember member = (FilmMember) o;
-        return !(patronymic != null ? !patronymic.equals(member.patronymic) : member.patronymic != null) && !(surname != null ? !surname.equals(member.surname) : member.surname != null) && !(birthDate != null ? !birthDate.equals(member.birthDate) : member.birthDate != null) && !(photo != null ? !photo.equals(member.photo) : member.photo != null) && !(type != null ? !type.equals(member.type) : member.type != null);
+        FilmMember that = (FilmMember) o;
+        return !(patronymic != null ? !patronymic.equals(that.patronymic) : that.patronymic != null) && !(surname != null ? !surname.equals(that.surname) : that.surname != null) && !(birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) && !(photo != null ? !photo.equals(that.photo) : that.photo != null) && !(type != null ? !type.equals(that.type) : that.type != null) && !(reviews != null ? !reviews.equals(that.reviews) : that.reviews != null);
+
     }
 
     @Override
@@ -104,6 +105,7 @@ public class FilmMember extends NamedEntity {
         result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
         result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
         return result;
     }
 }
