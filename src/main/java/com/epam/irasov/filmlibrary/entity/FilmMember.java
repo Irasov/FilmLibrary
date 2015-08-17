@@ -1,8 +1,6 @@
 package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FilmMember extends NamedEntity {
     private String patronymic;
@@ -10,7 +8,6 @@ public class FilmMember extends NamedEntity {
     private LocalDate birthDate;
     private String photo;
     private Type type;
-    private List<Review> reviews;
 
     public static class Type extends NamedEntity {
         public Type() {
@@ -22,7 +19,7 @@ public class FilmMember extends NamedEntity {
     }
 
     public FilmMember() {
-        reviews = new ArrayList<>();
+
     }
 
     public FilmMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type) {
@@ -32,7 +29,6 @@ public class FilmMember extends NamedEntity {
         this.surname = surname;
         this.birthDate = birthDate;
         this.photo = photo;
-        reviews = new ArrayList<>();
     }
 
     public String getPatronymic() {
@@ -75,26 +71,13 @@ public class FilmMember extends NamedEntity {
         this.type = type;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public void addReviews(Review review) {
-        reviews.add(review);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof FilmMember)) return false;
         if (!super.equals(o)) return false;
         FilmMember that = (FilmMember) o;
-        return !(patronymic != null ? !patronymic.equals(that.patronymic) : that.patronymic != null) && !(surname != null ? !surname.equals(that.surname) : that.surname != null) && !(birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) && !(photo != null ? !photo.equals(that.photo) : that.photo != null) && !(type != null ? !type.equals(that.type) : that.type != null) && !(reviews != null ? !reviews.equals(that.reviews) : that.reviews != null);
-
+        return !(patronymic != null ? !patronymic.equals(that.patronymic) : that.patronymic != null) && !(surname != null ? !surname.equals(that.surname) : that.surname != null) && !(birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) && !(photo != null ? !photo.equals(that.photo) : that.photo != null) && !(type != null ? !type.equals(that.type) : that.type != null);
     }
 
     @Override
@@ -105,7 +88,6 @@ public class FilmMember extends NamedEntity {
         result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
         result = 31 * result + (photo != null ? photo.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
         return result;
     }
 }
