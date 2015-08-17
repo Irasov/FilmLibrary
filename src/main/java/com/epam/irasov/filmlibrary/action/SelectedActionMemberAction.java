@@ -3,10 +3,8 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmMemberDao;
-import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
-import com.epam.irasov.filmlibrary.logic.Sorting;
-
+import com.epam.irasov.filmlibrary.logic.Operation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -51,7 +49,7 @@ public class SelectedActionMemberAction implements Action {
                 }
                 daoFactory.beginTx();
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
-                Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
+                Operation.sortFilmMember(filmMembers, SORT_CRITERION);
                 req.getSession().setAttribute("filmMembers", filmMembers);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -73,7 +71,7 @@ public class SelectedActionMemberAction implements Action {
                     return new View("operation-with-members-film", false);
                 }
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
-                Sorting.sortFilmMember(filmMembers, SORT_CRITERION);
+                Operation.sortFilmMember(filmMembers, SORT_CRITERION);
                 req.getSession().setAttribute("filmMembers", filmMembers);
                 daoFactory.endTx();
             } catch (Exception e) {

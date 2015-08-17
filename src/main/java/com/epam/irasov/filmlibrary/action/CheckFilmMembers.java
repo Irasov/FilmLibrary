@@ -4,8 +4,7 @@ import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmMemberDao;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
-import com.epam.irasov.filmlibrary.logic.Sorting;
-
+import com.epam.irasov.filmlibrary.logic.Operation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -25,7 +24,7 @@ public class CheckFilmMembers implements Action {
                 return new View("film-members", true);
             }
             List<FilmMember> members = filmMemberDao.selectFilmMember();
-            Sorting.sortFilmMember(members, SORT_CRITERION);
+            Operation.sortFilmMember(members, SORT_CRITERION);
             req.getSession().setAttribute("filmMembersView", members);
             daoFactory.endTx();
         } catch (Exception e) {

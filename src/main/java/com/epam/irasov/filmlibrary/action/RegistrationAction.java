@@ -3,7 +3,11 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.SystemMemberDao;
-import com.epam.irasov.filmlibrary.entity.*;
+import com.epam.irasov.filmlibrary.entity.FilmBlock;
+import com.epam.irasov.filmlibrary.entity.FilmMember;
+import com.epam.irasov.filmlibrary.entity.NewsBlock;
+import com.epam.irasov.filmlibrary.entity.SystemMember;
+import com.epam.irasov.filmlibrary.logic.Operation;
 import com.epam.irasov.filmlibrary.validator.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +75,7 @@ public class RegistrationAction implements Action {
                 req.setAttribute("loginError", loginError);
                 return new View("registration", false);
             }
-            SystemMember systemMember = new SystemMember(ID_USER,name,patronymic,surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")),NO_AVATAR,login,password,email,type);
+            SystemMember systemMember = new SystemMember(ID_USER, name, patronymic, surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")), NO_AVATAR, login, Operation.getMD5(password), email, type);
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             req.getSession().setAttribute("systemMember", systemMemberDao.save(systemMember));

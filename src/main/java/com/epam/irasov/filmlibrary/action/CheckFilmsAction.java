@@ -4,8 +4,7 @@ import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmDao;
 import com.epam.irasov.filmlibrary.entity.Film;
-import com.epam.irasov.filmlibrary.logic.Sorting;
-
+import com.epam.irasov.filmlibrary.logic.Operation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -26,7 +25,7 @@ public class CheckFilmsAction implements Action {
                 return new View("films", true);
             }
             List<Film> films = filmDao.selectFilms();
-            Sorting.sortFilm(films, SORT_CRITERION);
+            Operation.sortFilm(films, SORT_CRITERION);
             req.getSession().setAttribute("filmsView", films);
             daoFactory.endTx();
         } catch (Exception e) {

@@ -4,7 +4,6 @@ import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmDao;
 import com.epam.irasov.filmlibrary.dao.FilmMemberDao;
-import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
 
 import javax.servlet.http.HttpServletRequest;

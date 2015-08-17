@@ -4,11 +4,10 @@ import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.SystemMemberDao;
 import com.epam.irasov.filmlibrary.entity.SystemMember;
+import com.epam.irasov.filmlibrary.logic.Operation;
 import com.epam.irasov.filmlibrary.validator.Validator;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 public class LoginAction implements Action {
 
@@ -33,7 +32,7 @@ public class LoginAction implements Action {
         try {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
-            SystemMember systemMember = systemMemberDao.findByCredentials(login, password);
+            SystemMember systemMember = systemMemberDao.findByCredentials(login, Operation.getMD5(password));
             if (systemMember == null) {
                 req.setAttribute("authError", "auth.error");
                 return new View("login", false);
