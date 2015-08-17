@@ -30,17 +30,11 @@ public class JdbcFilmDao implements FilmDao {
     private static final String EMPTY_TABLE = "SELECT ID FROM FILM";
     private static final String DELETE_FILM = "DELETE FROM FILM WHERE id=?";
     private static final String SELECT_ID_RATING = "SELECT ID_RATING FROM FILM WHERE ID=?";
-    private final static String FIND_BY_ID_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER WHERE ID_MOVIE=?)";
-    private final static String INSERT_MOVIE = "INSERT INTO MOVIE(ID, NAME, COUNTRY, DATE) VALUES(?,?,?,?)";
-    private final static String INSERT_MEMBER = "INSERT INTO MEMBER(SECOND_NAME, LAST_NAME, PATRONYMIC, DATE, ROLE) VALUES(?,?,?,?,?)";
-    private final static String INSERT_MOVIE_MEMBER = "INSERT INTO MOVIE_MEMBER(ID_MOVIE, ID_MEMBER) VALUES(?,?)";
-    private final static String DELETE_MOVIE = "DELETE FROM MOVIE WHERE DATE>?";
-    private final static String DELETE_MOVIE_MEMBER = "DELETE FROM MOVIE_MEMBER WHERE ID_MOVIE=ANY(SELECT ID FROM MOVIE WHERE DATE>?)";
-    private final static String FIND_BY_COUNT_MOVIE_MEMBER = "SELECT ID,SECOND_NAME,LAST_NAME,PATRONYMIC,DATE,ROLE FROM MEMBER WHERE ROLE=? AND ID=ANY(SELECT ID_MEMBER FROM MOVIE_MEMBER GROUP BY ID_MEMBER HAVING COUNT(ID_MEMBER)=?)";
     private static final String SAVE_FILM_FILM_MEMBER = "INSERT INTO FILM_FILM_MEMBER(ID_FILM, ID_FILM_MEMBER)VALUES(?,?)";
     private static final String FIND_FILM_FILM_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
     private static final String FIND_ID_FILM_MEMBER = "SELECT ID_FILM_MEMBER FROM FILM_FILM_MEMBER WHERE ID_FILM=? ";
     private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=? AND ID_FILM_MEMBER=?";
+    private static final String DELETE_LIST_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -282,6 +276,18 @@ public class JdbcFilmDao implements FilmDao {
             preparedStatement.setLong(index, idFilm);
             index++;
             preparedStatement.setLong(index, idMember);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void removeMemberList(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_LIST_MEMBER);
+            int index = 1;
+            preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

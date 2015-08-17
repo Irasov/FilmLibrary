@@ -22,6 +22,7 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
     private static final String FIND_BY_ID = "SELECT * FROM FILM_MEMBER WHERE ID=?";
     private static final String UPDATE_FILM_MEMBER = "UPDATE FILM_MEMBER SET NAME = ?, PATRONYMIC = ?, SURNAME = ?, BIRTH_DATE = ? , PHOTO = ? WHERE ID=?";
     private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_MEMBER WHERE id=?";
+    private static final String DELETE_FROM_FILMS = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=?";
 
     private final Connection connection;
 
@@ -226,6 +227,18 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
             preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
             return id;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void removeFromFilms(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FROM_FILMS);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
