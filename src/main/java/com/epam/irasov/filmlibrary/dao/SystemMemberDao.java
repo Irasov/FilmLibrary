@@ -16,6 +16,5 @@ public interface SystemMemberDao {
     int findType ();
     boolean checkForUniqueness(String login);
     boolean remove(SystemMember systemMember);
-    void update (SystemMember systemMember);
-
+    SystemMember upDate (SystemMember systemMember);
 }

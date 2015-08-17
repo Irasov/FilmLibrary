@@ -7,10 +7,10 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
-public class EditPhotoMemberAction implements Action {
+public class EditPhotoUser implements Action {
     private static final String UPLOAD_DIR_PHOTO_MEMBER = "img/site";
 
-    public EditPhotoMemberAction() {
+    public EditPhotoUser() {
     }
 
     @Override
@@ -19,7 +19,8 @@ public class EditPhotoMemberAction implements Action {
         String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR_PHOTO_MEMBER;
         File fileSaveDir = new File(uploadFilePath);
         String star = req.getParameter("strar");
-        if (!(star == null)) {
+        System.out.println("SSSSSSSSSSSS:"+star);
+        if ((!(star == null))&&(!(star.equals(UPLOAD_DIR_PHOTO_MEMBER+"/no_avatar.png")))) {
             File file = new File(applicationPath + star);
             boolean res = file.delete();
         }
@@ -38,10 +39,10 @@ public class EditPhotoMemberAction implements Action {
             }
         } catch (IOException | ServletException e) {
             req.setAttribute("fileError", "file.null");
-            return new View("operation-with-members-film", false);
+            return new View("edit-personal-data", false);
         }
         req.setAttribute("fileName", imgName);
-        return new View("operation-with-members-film", false);
+        return new View("edit-personal-data", false);
     }
 
     private String getFileName(Part part) {
@@ -56,4 +57,3 @@ public class EditPhotoMemberAction implements Action {
         return "";
     }
 }
-

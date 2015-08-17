@@ -21,7 +21,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(ID,NAME) VALUES(?,?)";
     private final static String FIND_BY_ID = "SELECT  ID, NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL FROM SYSTEM_MEMBER WHERE ID = ?";
     private final static String FIND_BY_ID_TYPE = "SELECT ID, NAME FROM SYSTEM_MEMBER_TYPE WHERE ID=ANY(SELECT ID_TYPE FROM SYSTEM_MEMBER WHERE ID=?)";
-    private final static String UPDATE_SYSTEM_MEMBER = "UPDATE SYSTEM_MEMBER SET NAME = ?, SURNAME = ?, PATRONYMIC=?, BIRTH_DATE =  ?  WHERE ID=?";
+    private final static String UPDATE_SYSTEM_MEMBER = "UPDATE SYSTEM_MEMBER SET NAME = ?, SURNAME = ?, PATRONYMIC=?, BIRTH_DATE=?,PHOTO=?, EMAIL=? WHERE ID=?";
     private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private static final String FIND_BY_CREDENTIALS = "SELECT * FROM SYSTEM_MEMBER WHERE (LOGIN=? AND PASSWORD=?)";
     private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
@@ -97,10 +97,11 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     }
 
     @Override
-    public void update(SystemMember systemMember) {
+    public SystemMember upDate(SystemMember systemMember) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SYSTEM_MEMBER);
-            setUpdateSystemMember(preparedStatement, systemMember.getName(), systemMember.getPatronymic(), systemMember.getSurname(), systemMember.getBirthDate(), systemMember.getEmail(), systemMember.getId());
+            setUpdateSystemMember(preparedStatement, systemMember.getName(), systemMember.getPatronymic(), systemMember.getSurname(), systemMember.getBirthDate(), systemMember.getPhoto(),systemMember.getEmail(), systemMember.getId());
+            return systemMember;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -237,7 +238,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         preparedStatement.executeUpdate();
     }
 
-    private void setUpdateSystemMember(PreparedStatement preparedStatement, String name, String patronymic, String surname, LocalDate birthDate, String email, Long id) throws SQLException {
+    private void setUpdateSystemMember(PreparedStatement preparedStatement, String name, String patronymic, String surname, LocalDate birthDate,String photo, String email, Long id) throws SQLException {
         int index = 1;
         preparedStatement.setString(index, name);
         index++;
@@ -246,6 +247,8 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         preparedStatement.setString(index, surname);
         index++;
         preparedStatement.setDate(index, Date.valueOf(birthDate));
+        index++;
+        preparedStatement.setString(index, photo);
         index++;
         preparedStatement.setString(index, email);
         index++;

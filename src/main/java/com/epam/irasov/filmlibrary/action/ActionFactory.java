@@ -39,6 +39,9 @@ public class ActionFactory {
         actions.put("POST/selectFilmView", new SelectFilmViewAction());
         actions.put("POST/selectMemberView", new SelectMemberViewAction());
         actions.put("GET/checkFilmMembers", new CheckFilmMembers());
+        actions.put("GET/editUser", new EditUser());
+        actions.put("POST/editUser", new EditUser());
+        actions.put("POST/editPhotoUser", new EditPhotoUser());
     }
 
     public Action getAction(HttpServletRequest request) {
