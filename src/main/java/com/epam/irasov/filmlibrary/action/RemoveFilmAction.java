@@ -26,6 +26,7 @@ public class RemoveFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
+            filmDao.removeMemberList(selectFilm);
             Long idRating = filmDao.remove(selectFilm);
             RatingDao ratingDao = daoFactory.newRatingDao();
             ratingDao.remove(idRating);
