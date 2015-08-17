@@ -1,6 +1,8 @@
 package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilmMember extends NamedEntity {
     private String patronymic;
@@ -8,6 +10,7 @@ public class FilmMember extends NamedEntity {
     private LocalDate birthDate;
     private String photo;
     private Type type;
+    private List<Review> reviews;
 
     public static class Type extends NamedEntity {
         public Type() {
@@ -19,6 +22,7 @@ public class FilmMember extends NamedEntity {
     }
 
     public FilmMember() {
+        reviews = new ArrayList<>();
     }
 
     public FilmMember(Long id, String name, String patronymic, String surname, LocalDate birthDate, String photo, Type type) {
@@ -28,6 +32,7 @@ public class FilmMember extends NamedEntity {
         this.surname = surname;
         this.birthDate = birthDate;
         this.photo = photo;
+        reviews = new ArrayList<>();
     }
 
     public String getPatronymic() {
@@ -68,6 +73,18 @@ public class FilmMember extends NamedEntity {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addReviews(Review review) {
+        reviews.add(review);
     }
 
     @Override
