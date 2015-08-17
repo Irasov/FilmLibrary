@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class CheckFilmsAction implements Action {
-    private static final String SORT_CRITERION = "name";
-
     public CheckFilmsAction() {
     }
 
@@ -25,7 +23,7 @@ public class CheckFilmsAction implements Action {
                 return new View("films", true);
             }
             List<Film> films = filmDao.selectFilms();
-            Operation.sortFilm(films, SORT_CRITERION);
+            Operation.sortFilm(films, Operation.SORT_NAME);
             req.getSession().setAttribute("filmsView", films);
             daoFactory.endTx();
         } catch (Exception e) {

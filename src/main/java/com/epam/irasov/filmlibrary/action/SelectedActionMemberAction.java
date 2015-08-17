@@ -14,7 +14,6 @@ public class SelectedActionMemberAction implements Action {
     private final static int EDIT_MEMBER = 2;
     private static final int REMOVE_FILM_MEMBER = 3;
     private static final String MESSAGE_ERROR = "film.member.null";
-    private static final String SORT_CRITERION = "name";
 
     public SelectedActionMemberAction() {
     }
@@ -49,7 +48,7 @@ public class SelectedActionMemberAction implements Action {
                 }
                 daoFactory.beginTx();
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
-                Operation.sortFilmMember(filmMembers, SORT_CRITERION);
+                Operation.sortFilmMember(filmMembers, Operation.SORT_NAME);
                 req.getSession().setAttribute("filmMembers", filmMembers);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -71,7 +70,7 @@ public class SelectedActionMemberAction implements Action {
                     return new View("operation-with-members-film", false);
                 }
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
-                Operation.sortFilmMember(filmMembers, SORT_CRITERION);
+                Operation.sortFilmMember(filmMembers, Operation.SORT_NAME);
                 req.getSession().setAttribute("filmMembers", filmMembers);
                 daoFactory.endTx();
             } catch (Exception e) {

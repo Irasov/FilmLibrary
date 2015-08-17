@@ -17,7 +17,6 @@ public class SelectedActionFilmAction implements Action {
     private final static int FILM_ADD_MEMBER = 3;
     private final static int REMOVE_FILM_FILM_MEMBER = 4;
     private final static int REMOVE_FILM = 5;
-    private static final String SORT_CRITERION = "name";
     private static final String MESSAGE = "film.null";
     private static final String MESSAGE_MEMBER = "film.or.member.null";
 
@@ -41,7 +40,7 @@ public class SelectedActionFilmAction implements Action {
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
-                Operation.sortFilm(films, SORT_CRITERION);
+                Operation.sortFilm(films, Operation.SORT_NAME);
                 req.getSession().setAttribute("films", films);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -69,10 +68,10 @@ public class SelectedActionFilmAction implements Action {
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
-                Operation.sortFilm(films, SORT_CRITERION);
+                Operation.sortFilm(films, Operation.SORT_NAME);
                 req.getSession().setAttribute("films", films);
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
-                Operation.sortFilmMember(filmMembers, SORT_CRITERION);
+                Operation.sortFilmMember(filmMembers, Operation.SORT_NAME);
                 req.getSession().setAttribute("filmMembers", filmMembers);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -93,7 +92,7 @@ public class SelectedActionFilmAction implements Action {
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
-                Operation.sortFilm(films, SORT_CRITERION);
+                Operation.sortFilm(films, Operation.SORT_NAME);
                 req.getSession().setAttribute("films", films);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -115,7 +114,7 @@ public class SelectedActionFilmAction implements Action {
                 }
                 daoFactory.beginTx();
                 List<Film> films = filmDao.selectFilms();
-                Operation.sortFilm(films, SORT_CRITERION);
+                Operation.sortFilm(films, Operation.SORT_NAME);
                 req.getSession().setAttribute("films", films);
                 daoFactory.endTx();
             } catch (Exception e) {
