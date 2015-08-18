@@ -43,7 +43,7 @@ public class Validator {
     }
 
     public static String isDescriptionValid(String description){
-        if((description.length()<1)||(description.length()>450)){
+        if((description.length()<1)||(description.length()>1000)){
             return "error.description";
         }
         return null;
