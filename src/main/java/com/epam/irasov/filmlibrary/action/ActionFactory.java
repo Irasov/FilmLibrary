@@ -38,10 +38,11 @@ public class ActionFactory {
         actions.put("GET/checkFilms", new CheckFilmsAction());
         actions.put("POST/selectFilmView", new SelectFilmViewAction());
         actions.put("POST/selectMemberView", new SelectMemberViewAction());
-        actions.put("GET/checkFilmMembers", new CheckFilmMembers());
-        actions.put("GET/editUser", new EditUser());
-        actions.put("POST/editUser", new EditUser());
-        actions.put("POST/editPhotoUser", new EditPhotoUser());
+        actions.put("GET/checkFilmMembers", new CheckFilmMembersAction());
+        actions.put("GET/editUser", new EditUserAction());
+        actions.put("POST/editUser", new EditUserAction());
+        actions.put("POST/editPhotoUser", new EditPhotoUserAction());
+        actions.put("POST/editUserPassword", new EditUserPasswordAction());
     }
 
     public Action getAction(HttpServletRequest request) {

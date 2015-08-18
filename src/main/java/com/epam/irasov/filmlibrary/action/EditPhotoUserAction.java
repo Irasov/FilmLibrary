@@ -7,10 +7,10 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
-public class EditPhotoUser implements Action {
+public class EditPhotoUserAction implements Action {
     private static final String UPLOAD_DIR_PHOTO_MEMBER = "img/site";
 
-    public EditPhotoUser() {
+    public EditPhotoUserAction() {
     }
 
     @Override

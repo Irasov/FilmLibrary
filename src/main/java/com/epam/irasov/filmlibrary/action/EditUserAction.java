@@ -13,8 +13,8 @@ import java.time.LocalDate;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class EditUser implements Action {
-    public EditUser() {
+public class EditUserAction implements Action {
+    public EditUserAction() {
     }
 
     @Override

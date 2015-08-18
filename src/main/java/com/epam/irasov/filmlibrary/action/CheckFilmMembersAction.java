@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class CheckFilmMembers implements Action {
-    public CheckFilmMembers() {
+public class CheckFilmMembersAction implements Action {
+    public CheckFilmMembersAction() {
     }
 
     @Override
