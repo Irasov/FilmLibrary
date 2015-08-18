@@ -19,30 +19,29 @@ public class ActionFactory {
         actions.put("POST/addFilm", new AddFilmAction());
         actions.put("POST/addImage", new AddImageAction());
         actions.put("POST/selected", new SelectedActionFilmAction());
-        actions.put("POST/selectFilm", new SelectFilm());
+        actions.put("POST/selectFilm", new SelectFilmAction());
         actions.put("POST/editFilm", new EditFilmAction());
         actions.put("GET/editFilm", new EditFilmAction());
         actions.put("POST/editImage", new EditImageAction());
         actions.put("POST/removeFilm", new RemoveFilmAction());
         actions.put("POST/selectedMemberOperation", new SelectedActionMemberAction());
-        actions.put("POST/addPhoto", new AddMemberPhotoAction());
         actions.put("POST/addMember", new AddMemberAction());
         actions.put("POST/selectMember", new SelectMemberAction());
-        actions.put("POST/editPhotoMember", new EditPhotoMemberAction());
         actions.put("POST/editFilmMember", new EditFilmMemberAction());
         actions.put("GET/editFilmMember", new EditFilmMemberAction());
         actions.put("POST/removeFilmMember", new RemoveFilmMemberAction());
         actions.put("POST/memberAddFilm", new AddFilmMembersAction());
         actions.put("POST/selectFilmFilmMember", new SelectFilmFilmMemberAction());
-        actions.put("POST/removeFilmFilmMember", new RemoveFilmFilmMember());
+        actions.put("POST/removeFilmFilmMember", new RemoveFilmFilmMemberAction());
         actions.put("GET/checkFilms", new CheckFilmsAction());
         actions.put("POST/selectFilmView", new SelectFilmViewAction());
         actions.put("POST/selectMemberView", new SelectMemberViewAction());
         actions.put("GET/checkFilmMembers", new CheckFilmMembersAction());
         actions.put("GET/editUser", new EditUserAction());
         actions.put("POST/editUser", new EditUserAction());
-        actions.put("POST/editPhotoUser", new EditPhotoUserAction());
         actions.put("POST/editUserPassword", new EditUserPasswordAction());
+        actions.put("POST/selectedNewsrOperation", new SelectedNewsAction());
+        actions.put("POST/addNews", new AddNewsAction());
     }
 
     public Action getAction(HttpServletRequest request) {
