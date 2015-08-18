@@ -40,7 +40,7 @@
         </div>
     </c:if>
     <c:if test="${empty fileName}">
-        <form action="${pageContext.request.contextPath}/controller?action=addImage" method="post"
+        <form action="${pageContext.request.contextPath}/controller?action=addImage&page=operation-with-movies" method="post"
               enctype="multipart/form-data">
             <div class="reg_input">
                 <input type="file" class="reginput" name="file" accept="image/jpeg,image/png"/>
@@ -101,8 +101,7 @@
                 </div>
             </c:if>
             <div class="reg_input">
-                            <textarea name="age" class="reginput" required title="restriction age" rows="1"
-                                      cols="5">0</textarea>
+                <textarea name="age" class="reginput" required title="restriction age" rows="1" cols="5">0</textarea>
             </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
@@ -110,8 +109,7 @@
                 <fmt:message key="film.duration" bundle="${lang}"/>
             </div>
             <div class="reg_input">
-                            <textarea name="duration" rows="1" cols="5" class="reginput" required
-                                      title="duration">0</textarea>
+                <textarea name="duration" rows="1" cols="5" class="reginput" required title="duration">0</textarea>
             </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>
@@ -126,8 +124,7 @@
                 </div>
             </c:if>
             <div class="reg_input">
-                            <textarea name="description" class="description" rows="10" cols="50" required
-                                      title="description"></textarea>
+                <textarea name="description" class="description" rows="10" cols="50" required title="description"></textarea>
             </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>

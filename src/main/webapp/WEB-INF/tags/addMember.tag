@@ -33,7 +33,7 @@
         </div>
     </c:if>
     <c:if test="${empty fileName}">
-        <form action="${pageContext.request.contextPath}/controller?action=addPhoto" method="post"
+        <form action="${pageContext.request.contextPath}/controller?action=addImage&page=operation-with-members-film" method="post"
               enctype="multipart/form-data">
             <div class="reg_input">
                 <input type="file" class="reginput" name="file" accept="image/jpeg,image/png"/>

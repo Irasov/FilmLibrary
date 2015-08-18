@@ -31,7 +31,7 @@ public class EditFilmMemberAction implements Action {
         daoFactory.beginTx();
         FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
         filmMemberDao.upDate(new FilmMember(id, name, patronymic, surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")), photo, new FilmMember.Type(idType,nameType)));
-        req.getSession().setAttribute("message", "edit.message");
+        req.getSession().setAttribute("messageFilmMember", "edit.message");
         req.getSession().setAttribute("selectedAction", "");
         req.getSession().setAttribute("filmMember", "");
         daoFactory.endTx();

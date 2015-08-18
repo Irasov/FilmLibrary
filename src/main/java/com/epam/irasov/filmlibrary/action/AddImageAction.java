@@ -16,7 +16,6 @@ public class AddImageAction implements Action {
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         String applicationPath = req.getServletContext().getRealPath("");
         String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
-        System.out.println(uploadFilePath+File.separator+"fileIMAGE");
         File fileSaveDir = new File(uploadFilePath);
         if (!fileSaveDir.exists()) {
             boolean mkDirs = fileSaveDir.mkdirs();
@@ -29,10 +28,10 @@ public class AddImageAction implements Action {
             }
         } catch (IOException | ServletException e) {
             req.setAttribute("fileError", "file.null");
-            return new View("operation-with-movies", false);
+            return new View(req.getParameter("page"), false);
         }
         req.setAttribute("fileName", fileName);
-        return new View("operation-with-movies", false);
+        return new View(req.getParameter("page"), false);
     }
 
     private String getFileName(Part part) {

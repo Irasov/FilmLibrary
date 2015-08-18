@@ -49,7 +49,7 @@
                 <fmt:message key="${fileError}" bundle="${lang}"/>
             </div>
         </c:if>
-        <form action="${pageContext.request.contextPath}/controller?action=editImage" method="post"
+        <form action="${pageContext.request.contextPath}/controller?action=editImage&page=operation-with-movies" method="post"
               enctype="multipart/form-data">
             <div class="reg_input">
                 <input type="file" class="reginput" name="file" accept="image/jpeg,image/png"/>

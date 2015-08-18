@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class EditImageAction implements Action {
     private static final String UPLOAD_DIR = "img/site";
+    private static final String PHOTO_DEFAULT = "img/site/no_avatar.png";
 
     public EditImageAction() {
     }
@@ -18,9 +19,10 @@ public class EditImageAction implements Action {
         String applicationPath = req.getServletContext().getRealPath("");
         String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
         File fileSaveDir = new File(uploadFilePath);
-        String star = req.getParameter("strar");
-        if (!(star == null)) {
-            File file = new File(applicationPath +star);
+        String previousImage = req.getParameter("strar");
+        System.out.println("sssss "+previousImage);
+        if (!(previousImage == null)&&(!previousImage.equals(PHOTO_DEFAULT))) {
+            File file = new File(applicationPath +previousImage);
             boolean res = file.delete();
         }
         if (!fileSaveDir.exists()) {
@@ -31,6 +33,7 @@ public class EditImageAction implements Action {
         try {
             for (Part part : req.getParts()) {
                 fileName = getFileName(part);
+                System.out.println(fileName);
                 if (!fileName.equals("")) {
                     part.write(uploadFilePath + File.separator + fileName);
                     imgName = fileName;
@@ -38,10 +41,10 @@ public class EditImageAction implements Action {
             }
         } catch (IOException | ServletException e) {
             req.setAttribute("fileError", "file.null");
-            return new View("operation-with-movies", false);
+            return new View(req.getParameter("page"), false);
         }
         req.setAttribute("fileName", imgName);
-        return new View("operation-with-movies", false);
+        return new View(req.getParameter("page"), false);
     }
 
     private String getFileName(Part part) {
