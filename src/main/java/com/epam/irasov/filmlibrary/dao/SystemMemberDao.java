@@ -10,11 +10,11 @@ public interface SystemMemberDao {
     SystemMember findBySurName(String surName);
     SystemMember save (SystemMember systemMember);
     SystemMember findByCredentials(String login,String password);
-    List<SystemMember> selectSystemMembers();
     FilmMember.Type saveType (SystemMember.Type type);
-    FilmMember.Type insertMemberType(FilmMember.Type type);
     int findType ();
     boolean checkForUniqueness(String login);
     boolean remove(SystemMember systemMember);
     SystemMember upDate (SystemMember systemMember);
+    boolean FindPassword(Long id,String password);
+    void UpDatePassword(Long id, String password);
 }

@@ -5,8 +5,6 @@ import com.epam.irasov.filmlibrary.entity.SystemMember;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -25,6 +23,8 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private static final String FIND_BY_CREDENTIALS = "SELECT * FROM SYSTEM_MEMBER WHERE (LOGIN=? AND PASSWORD=?)";
     private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
+    private static final String FIND_PASSWORD = "SELECT NAME FROM SYSTEM_MEMBER WHERE ID=? AND PASSWORD=?";
+    private static final String UPDATE_SYSTEM_MEMBER_PASSWORD = "UPDATE SYSTEM_MEMBER SET PASSWORD = ? WHERE ID=?";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -65,7 +65,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         }
     }
 
-    @Override
+   /* @Override
     public List<SystemMember> selectSystemMembers() {
         List<SystemMember> systemMembers = new ArrayList<>();
         try {
@@ -89,7 +89,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-    }
+    }*/
 
     @Override
     public SystemMember findBySurName(String surName) {
@@ -100,7 +100,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     public SystemMember upDate(SystemMember systemMember) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SYSTEM_MEMBER);
-            setUpdateSystemMember(preparedStatement, systemMember.getName(), systemMember.getPatronymic(), systemMember.getSurname(), systemMember.getBirthDate(), systemMember.getPhoto(),systemMember.getEmail(), systemMember.getId());
+            setUpdateSystemMember(preparedStatement, systemMember.getName(), systemMember.getPatronymic(), systemMember.getSurname(), systemMember.getBirthDate(), systemMember.getPhoto(), systemMember.getEmail(), systemMember.getId());
             return systemMember;
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -207,11 +207,6 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     }
 
     @Override
-    public FilmMember.Type insertMemberType(FilmMember.Type type) {
-        return null;
-    }
-
-    @Override
     public boolean remove(SystemMember systemMember) {
         return false;
     }
@@ -254,5 +249,40 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         index++;
         preparedStatement.setLong(index, id);
         preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public boolean FindPassword(Long id, String password) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_PASSWORD);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            index++;
+            preparedStatement.setString(index, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count == 0;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void UpDatePassword(Long id, String password) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SYSTEM_MEMBER_PASSWORD);
+            int index = 1;
+            preparedStatement.setString(index, password);
+            index++;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 }
