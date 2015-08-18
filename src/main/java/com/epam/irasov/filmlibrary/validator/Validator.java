@@ -49,4 +49,11 @@ public class Validator {
         return null;
     }
 
+    public static String isTextValid(String text){
+        if(text.length()>1500){
+            return "error.text";
+        }
+        return null;
+    }
+
 }

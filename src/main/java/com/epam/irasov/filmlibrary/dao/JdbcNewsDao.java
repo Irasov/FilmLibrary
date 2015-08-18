@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class JdbcNewsDao implements NewsDao {
-    private final static String SAVE_NEWS="INSERT INTO NEWS(ID, NAME, DATE, TEXT, IMAGE) VALUES(?,?,?,?,?)";
+    private final static String SAVE_NEWS="INSERT INTO NEWS(NAME, DATE, TEXT, IMAGE) VALUES(?,?,?,?)";
     private final static String FIND_BY_ID_NEWS="";
     private final Connection connection;
 
@@ -22,17 +22,15 @@ public class JdbcNewsDao implements NewsDao {
     public News save(News news) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_NEWS);
-            setInsertNews(preparedStatement,news.getId(), news.getName(), news.getDate(), news.getText(), news.getImage());
+            setInsertNews(preparedStatement,news.getName(), news.getDate(), news.getText(), news.getImage());
             return news;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
-    private void setInsertNews(PreparedStatement preparedStatement,Long id, String name, LocalDate date, String text, String image) throws SQLException{
+    private void setInsertNews(PreparedStatement preparedStatement,String name, LocalDate date, String text, String image) throws SQLException{
         int index = 1;
-        preparedStatement.setLong(index,id);
-        index++;
         preparedStatement.setString(index, name);
         index++;
         preparedStatement.setDate(index, Date.valueOf(date));
