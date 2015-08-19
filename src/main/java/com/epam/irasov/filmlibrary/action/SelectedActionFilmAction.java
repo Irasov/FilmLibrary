@@ -55,16 +55,19 @@ public class SelectedActionFilmAction implements Action {
             req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
             DaoFactory daoFactory = DaoFactory.getInstance();
             try {
+                daoFactory.beginTx();
                 FilmDao filmDao = daoFactory.newFilmDao();
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
                     req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    daoFactory.endTx();
                     return new View("operation-with-movies", false);
                 }
                 if (filmMemberDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
                     req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    daoFactory.endTx();
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();

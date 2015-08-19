@@ -63,10 +63,12 @@ public class SelectedActionMemberAction implements Action {
             req.getSession().setAttribute("selectedAction", REMOVE_FILM_MEMBER);
             DaoFactory daoFactory = DaoFactory.getInstance();
             try {
+                daoFactory.beginTx();
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 if (filmMemberDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", REMOVE_FILM_MEMBER);
                     req.getSession().setAttribute("messageError", MESSAGE_ERROR);
+                    daoFactory.endTx();
                     return new View("operation-with-members-film", false);
                 }
                 List<FilmMember> filmMembers = filmMemberDao.selectFilmMember();
