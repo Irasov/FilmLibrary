@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
-public class RemoveNews implements Action {
+public class RemoveNewsAction implements Action {
     private final static int ADD_NEWS = 1;
 
-    public RemoveNews() {
+    public RemoveNewsAction() {
     }
 
     @Override
