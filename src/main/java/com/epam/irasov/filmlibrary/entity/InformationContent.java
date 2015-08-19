@@ -1,8 +1,10 @@
 package com.epam.irasov.filmlibrary.entity;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 public abstract class InformationContent extends NamedEntity {
+    public static final Comparator<InformationContent> NAME_ORDER = new DateComparator();
     private LocalDate date;
     private String text;
 
@@ -14,6 +16,12 @@ public abstract class InformationContent extends NamedEntity {
         super(id, name);
         this.date = date;
         this.text = text;
+    }
+
+    public static class DateComparator implements Comparator<InformationContent> {
+        public int compare(InformationContent o1, InformationContent o2) {
+            return o2.getDate().compareTo(o1.getDate());
+        }
     }
 
     public LocalDate getDate() {
