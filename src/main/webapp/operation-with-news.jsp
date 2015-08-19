@@ -25,7 +25,7 @@
     <div class="operation">
       <div class="selected">
         <div class="select">
-          <form action="${pageContext.request.contextPath}/controller?action=selectedNewsrOperation" method="post">
+          <form action="${pageContext.request.contextPath}/controller?action=selectedNewsOperation" method="post">
             <p><input type="radio" name="selected" value="1" checked title="add news"/>
               <fmt:setLocale value="${locale}"/>
               <fmt:setBundle basename="i18n" var="lang"/>
