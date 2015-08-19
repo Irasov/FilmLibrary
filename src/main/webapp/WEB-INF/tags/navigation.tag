@@ -11,7 +11,7 @@
               <fmt:setBundle basename="i18n" var="lang"/>
               <fmt:message key="site.home" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/check-news.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>

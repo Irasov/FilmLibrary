@@ -36,7 +36,7 @@ public class SelectedActionNewsAction implements Action {
                     return new View("operation-with-news", false);
                 }
                 List<News> news = newsDao.selectNews();
-                Operation.sortNews(news, Operation.SORT_NAME);
+                Operation.sortNews(news, Operation.SORT_DATE);
                 req.getSession().setAttribute("news", news);
                 daoFactory.endTx();
             } catch (Exception e) {
@@ -60,7 +60,7 @@ public class SelectedActionNewsAction implements Action {
                     return new View("operation-with-news", false);
                 }
                 List<News> news = newsDao.selectNews();
-                Operation.sortNews(news, Operation.SORT_NAME);
+                Operation.sortNews(news, Operation.SORT_DATE);
                 req.getSession().setAttribute("news", news);
                 daoFactory.endTx();
             } catch (Exception e) {

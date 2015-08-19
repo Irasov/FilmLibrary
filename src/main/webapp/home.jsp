@@ -17,7 +17,9 @@
     <fl:header/>
     <fl:navigation/>
     <div class="container">
-        <fl:informationBlock/>
+        <div class="content">
+             <fl:informationBlock/>
+        </div>
     </div>
     <fl:footer/>
 </div>

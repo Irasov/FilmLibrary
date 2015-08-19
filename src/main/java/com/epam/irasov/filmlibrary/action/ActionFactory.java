@@ -45,7 +45,10 @@ public class ActionFactory {
         actions.put("POST/selectNews", new SelectNewsAction());
         actions.put("GET/editNews", new EditNewsAction());
         actions.put("POST/editNews", new EditNewsAction());
-        actions.put("POST/removeNews", new RemoveNews());
+        actions.put("POST/removeNews", new RemoveNewsAction());
+        actions.put("GET/checkNews", new CheckNewsAction());
+        actions.put("POST/selectNewsView", new SelectNewsViewAction());
+
     }
 
     public Action getAction(HttpServletRequest request) {

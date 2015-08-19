@@ -176,6 +176,7 @@ article, aside, footer, header, hgroup, nav, section {
 .reg_text {
     padding: 10px 0 10px 25px;
 }
+
 .reg_text_select_film{
     float: left;
     padding: 10px 0 10px 25px;
@@ -262,9 +263,26 @@ article, aside, footer, header, hgroup, nav, section {
     float: left;
 }
 
-.films{
-    margin: 15px 0 0 150px;
+.info_block{
+    margin: 0 auto;
+    height: 500px;
+    width: 800px;
 }
+.news_block{
+    float: left;
+    background-color: #ebfce7;
+    margin: 15px 0 0 0;
+    width: 300px;
+}
+
+.films_block{
+    float: left;
+    background-color: #ebfce7;
+    margin: 15px 0 0 100px;
+    width: 300px;
+}
+
+
 /*подвал*/
 .footer {
     margin: 5px 0 0 0;

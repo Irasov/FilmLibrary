@@ -40,6 +40,7 @@ public class AddNewsAction implements Action {
             System.out.println(news.getName()+news.getText());
             newsDao.save(news);
             req.getSession().setAttribute("messageNews", MESSAGE);
+
             req.getSession().setAttribute("selectedAction", "");
             daoFactory.endTx();
         } catch (Exception e) {

@@ -17,7 +17,7 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
     private final static String RESULT_COVER = "cover";
     private static final String INSERT_FILM_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
     private static final String ADD_FILMS = "INSERT INTO INFORMATION_BLOCK_FILMS(ID_INFORMATION_BLOCK, ID_FILM) VALUES (?,?)";
-    private static final String SELECT_FILMS = "SELECT NAME, COVER, PREMIERE FROM FILM WHERE iD=ANY(SELECT ID_FILM FROM INFORMATION_BLOCK_FILM WHERE ID_INFORMATION_BLOCK=?)";
+    private static final String SELECT_FILMS = "SELECT ID,NAME, COVER, PREMIERE FROM FILM WHERE ID=ANY(SELECT ID_FILM FROM INFORMATION_BLOCK_FILM WHERE ID_INFORMATION_BLOCK=?)";
     private static final String EMPTY_TABLE = "SELECT * FROM INFORMATION_BLOCK_FILM";
     private static final String SELECT_FILM_BLOCK = "SELECT NAME FROM INFORMATION_BLOCK WHERE ID=?";
 
@@ -102,6 +102,7 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
             Film film;
             while (found) {
                 film = new Film();
+                film.setId(resultSet.getLong(RESULT_ID));
                 film.setName(resultSet.getString(RESULT_NAME));
                 film.setPremiere(LocalDate.parse(resultSet.getDate(RESULT_PREMIERE).toString(), ofPattern("yyyy-MM-dd")));
                 film.setCover(resultSet.getString(RESULT_COVER));
