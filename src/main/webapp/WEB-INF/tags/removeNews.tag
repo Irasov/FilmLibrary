@@ -2,24 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="locale" type="java.lang.String"--%>
-<%--@elvariable id="films" type="java.util.List"--%>
-<%--@elvariable id="film" type="com.epam.irasov.filmlibrary.entity.Film"--%>
+<%--@elvariable id="news" type="java.util.List"--%>
+<%--@elvariable id="item" type="com.epam.irasov.filmlibrary.entity.News"--%>
 <div class="removeFilm">
     <div class="reg_text">
         <fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="film.remove" bundle="${lang}"/>
+        <fmt:message key="remove.news" bundle="${lang}"/>
     </div>
     <div class="reg_text">
         <fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="select.film.remove" bundle="${lang}"/>
+        <fmt:message key="select.news" bundle="${lang}"/>
     </div>
-    <form action="${pageContext.request.contextPath}/controller?action=removeFilm" method="post">
+    <form action="${pageContext.request.contextPath}/controller?action=removeNews" method="post">
         <div class="reg_text">
-            <select name="idFilm" size="10" required title="select film">
-                <c:forEach items="${films}" var="film">
-                    <option value="${film.id}+${film.cover}">${film.name}(${film.premiere})</option>
+            <select name="idNews" size="10" required title="select film">
+                <c:forEach items="${news}" var="item">
+                    <option value="${item.id}+${item.image}">${item.name}(${item.date})</option>
                 </c:forEach>
             </select>
         </div>
@@ -27,7 +27,7 @@
             <button type="submit">
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.remove" bundle="${lang}"/>
+                <fmt:message key="button.remove" bundle="${lang}"/>
             </button>
         </div>
     </form>

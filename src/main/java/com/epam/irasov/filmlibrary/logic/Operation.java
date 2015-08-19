@@ -3,6 +3,7 @@ package com.epam.irasov.filmlibrary.logic;
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
 import com.epam.irasov.filmlibrary.entity.NamedEntity;
+import com.epam.irasov.filmlibrary.entity.News;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -34,6 +35,12 @@ public class Operation {
     }
 
     public static void sortFilmMember(List<FilmMember> a, String variant) {
+        if (variant.equals(SORT_NAME)) {
+            Collections.sort(a, NamedEntity.NAME_ORDER);
+        }
+    }
+
+    public static void sortNews(List<News> a, String variant) {
         if (variant.equals(SORT_NAME)) {
             Collections.sort(a, NamedEntity.NAME_ORDER);
         }

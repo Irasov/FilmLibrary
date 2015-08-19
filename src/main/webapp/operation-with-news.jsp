@@ -6,7 +6,7 @@
 <%--@elvariable id="selectedAction" type="java.lang.String"--%>
 <%--@elvariable id="messageNews" type="java.lang.String"--%>
 <%--@elvariable id="fileError" type="java.lang.String"--%>
-<%--@elvariable id="messageError" type="java.lang.String"--%>
+<%--@elvariable id="messageErrorNews" type="java.lang.String"--%>
 <%--@elvariable id="news" type="java.util.List"--%>
 <html>
 <head>
@@ -64,7 +64,7 @@
           <div class="error">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="${messageError}" bundle="${lang}"/>
+            <fmt:message key="${messageErrorNews}" bundle="${lang}"/>
           </div>
         </c:if>
       </c:if>
@@ -76,7 +76,7 @@
           <div class="error">
             <fmt:setLocale value="${locale}"/>
             <fmt:setBundle basename="i18n" var="lang"/>
-            <fmt:message key="${messageError}" bundle="${lang}"/>
+            <fmt:message key="${messageErrorNews}" bundle="${lang}"/>
           </div>
         </c:if>
       </c:if>

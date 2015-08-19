@@ -8,13 +8,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcFilmDao implements FilmDao {
     private final static String RESULT_ID = "id";
     private final static String RESULT_ID_FILM = "id_film";
     private final static String RESULT_PREMIERE = "premiere";
-    private final static String RESULT_NAME = "name";
     private static final String RESULT_TAG_LINE = "tagline";
     private static final String RESULT_AGE_RESTRICTION = "age_restriction";
     private static final String RESULT_ID_RATING = "id_rating";

@@ -7,4 +7,5 @@ public final class SqlQueryResult {
     public final static String RESULT_SURNAME = "surname";
     public final static String RESULT_PATRONYMIC = "patronymic";
     public static final String RESULT_PHOTO = "photo";
+    public static final String RESULT_IMAGE = "image";
 }

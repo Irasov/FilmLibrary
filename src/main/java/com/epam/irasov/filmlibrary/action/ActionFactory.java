@@ -40,8 +40,12 @@ public class ActionFactory {
         actions.put("GET/editUser", new EditUserAction());
         actions.put("POST/editUser", new EditUserAction());
         actions.put("POST/editUserPassword", new EditUserPasswordAction());
-        actions.put("POST/selectedNewsrOperation", new SelectedNewsAction());
+        actions.put("POST/selectedNewsrOperation", new SelectedActionNewsAction());
         actions.put("POST/addNews", new AddNewsAction());
+        actions.put("POST/selectNews", new SelectNewsAction());
+        actions.put("GET/editNews", new EditNewsAction());
+        actions.put("POST/editNews", new EditNewsAction());
+        actions.put("POST/removeNews", new RemoveNews());
     }
 
     public Action getAction(HttpServletRequest request) {
