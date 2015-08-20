@@ -25,37 +25,15 @@
         <div class="films">
           <form action="${pageContext.request.contextPath}/controller?action=selectMemberView" method="post">
             <div class="reg_text">
-              <fmt:setLocale value="${locale}"/>
-              <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="user.surname" bundle="${lang}"/>
+              <img class="img_news" src="${filmMemberView.photo}"/>
             </div>
-            <div class="reg_input">
-              <input type="text" name="surname" value="${filmMemberView.surname}" title="filmMember surname" readonly/>
+            <div class="reg_text">
+                ${filmMemberView.surname} ${filmMemberView.patronymic} ${filmMemberView.name}
             </div>
             <div class="reg_text">
               <fmt:setLocale value="${locale}"/>
               <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="user.patronymic" bundle="${lang}"/>
-            </div>
-            <div class="reg_input">
-              <input type="text" name="patronymic" value="${filmMemberView.patronymic}" title="filmMember premiere"
-                     readonly/>
-            </div>
-            <div class="reg_text">
-              <fmt:setLocale value="${locale}"/>
-              <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="user.name" bundle="${lang}"/>
-            </div>
-            <div class="reg_input">
-              <input type="text" name="nane" value="${filmMemberView.name}" title="filmMember name" readonly/>
-            </div>
-            <div class="reg_text">
-              <fmt:setLocale value="${locale}"/>
-              <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="user.birthDate" bundle="${lang}"/>
-            </div>
-            <div class="reg_input">
-              <input type="text" name="birthDate" value="${filmMemberView.birthDate}" title="filmMember name" readonly/>
+              <fmt:message key="user.birthDate" bundle="${lang}"/>: ${filmMemberView.birthDate}
             </div>
             <input type="text" name="idMemberView" value="${filmMemberView.id}" title="filmMember name" hidden/>
             <div class="reg_text">

@@ -15,6 +15,7 @@
                 <form action="${pageContext.request.contextPath}/controller?action=selectFilmView" method="post">
                     <input name="id" hidden value="${film.id}" title=""/>
                     <div class="reg_text">
+                            <img class="img_block" src="${film.cover}" />
                             ${film.premiere}: ${film.name}
                         <br/>
                         <button type="submit">

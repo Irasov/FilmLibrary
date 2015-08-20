@@ -25,29 +25,16 @@
                 <div class="films">
                     <form action="${pageContext.request.contextPath}/controller?action=selectFilmView" method="post">
                         <div class="reg_text">
-                            <fmt:setLocale value="${locale}"/>
-                            <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="film.name" bundle="${lang}"/>
-                        </div>
-                        <div class="reg_input">
-                            <input type="text" name="name" value="${filmView.name}" title="film name" readonly/>
+                            <img src="${filmView.cover}" class="img_news"/>
                         </div>
                         <div class="reg_text">
-                            <fmt:setLocale value="${locale}"/>
-                            <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="film.premiere" bundle="${lang}"/>
-                        </div>
-                        <div class="reg_input">
-                            <input type="text" name="premiere" value="${filmView.premiere}" title="film premiere"
-                                   readonly/>
+                                ${filmView.name}
                         </div>
                         <div class="reg_text">
-                            <fmt:setLocale value="${locale}"/>
-                            <fmt:setBundle basename="i18n" var="lang"/>
-                            <fmt:message key="film.genre" bundle="${lang}"/>
+                                ${filmView.premiere}
                         </div>
-                        <div class="reg_input">
-                            <input type="text" name="genre" value="${filmView.genre}" title="film name" readonly/>
+                        <div class="reg_text">
+                                ${filmView.genre}
                         </div>
                         <input type="text" name="id" value="${filmView.id}" title="film name" hidden/>
                         <div class="reg_text">

@@ -16,6 +16,7 @@
                     <input name="id" hidden value="${item.id}" title=""/>
 
                     <div class="reg_text">
+                            <img class="img_block" src="${item.image}"/>
                             ${item.date}: ${item.name}
                         <br/>
                         <button type="submit">

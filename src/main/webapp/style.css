@@ -224,6 +224,16 @@ article, aside, footer, header, hgroup, nav, section {
     height: 200px;
 }
 
+.img_block {
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+.img_news {
+    width: 80px;
+    height: 80px;
+}
 .add_film {
     float: left;
 }
@@ -272,14 +282,14 @@ article, aside, footer, header, hgroup, nav, section {
     float: left;
     background-color: #ebfce7;
     margin: 15px 0 0 0;
-    width: 300px;
+    width: 350px;
 }
 
 .films_block{
     float: left;
     background-color: #ebfce7;
     margin: 15px 0 0 100px;
-    width: 300px;
+    width: 350px;
 }
 
 .add_member_film{

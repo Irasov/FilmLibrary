@@ -25,24 +25,14 @@
         <div class="films">
           <form action="${pageContext.request.contextPath}/controller?action=selectNewsView" method="post">
             <div class="reg_input">
-              <img src="${itemView.image}" class="img"/>
+              <img src="${itemView.image}" class="img_news"/>
             </div>
             <div class="reg_text">
-              <fmt:setLocale value="${locale}"/>
-              <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="title.news" bundle="${lang}"/>
-            </div>
-            <div class="reg_input">
-              <input type="text" name="name" value="${itemView.name}" title="title" readonly/>
+                ${itemView.date}
             </div>
             <div class="reg_text">
-              <fmt:setLocale value="${locale}"/>
-              <fmt:setBundle basename="i18n" var="lang"/>
-              <fmt:message key="date.news" bundle="${lang}"/>
-            </div>
-            <div class="reg_input">
-              <input type="text" name="date" value="${itemView.date}" title="date" readonly/>
-            </div>
+                ${itemView.name}
+              </div>
             <input type="text" name="id" value="${itemView.id}" title="" hidden/>
             <div class="reg_text">
               <button type="submit">
