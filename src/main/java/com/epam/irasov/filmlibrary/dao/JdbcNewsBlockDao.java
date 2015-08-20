@@ -10,6 +10,7 @@ import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class JdbcNewsBlockDao implements NewsBlockDao {
+    private static final Long NEWS_BLOCK_ID =1l;
     private final static String RESULT_DATE = "date";
     private static final String INSERT_NEWS_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
     private static final String SELECT_NEWS_BLOCk = "SELECT NAME FROM INFORMATION_BLOCK WHERE ID=?";
@@ -18,6 +19,7 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     private static final String RESULT_TEXT = "text";
     private static final String RESULT_IMAGE = "image";
     private static final String EMPTY_TABLE = "SELECT ID FROM INFORMATION_BLOCK_NEWS";
+    private static final String DELETE_NEWS_FROM_NEWS_BLOCK = "DELETE FROM INFORMATION_BLOCK_NEWS WHERE ID_NEWS=?";
 
     private final Connection connection;
 
@@ -58,13 +60,13 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
     }
 
     @Override
-    public void addNews(NewsBlock newsBlock, News news) {
+    public void addNews(Long id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEWS);
             int index = 1;
-            preparedStatement.setLong(index, newsBlock.getId());
+            preparedStatement.setLong(index, NEWS_BLOCK_ID);
             index++;
-            preparedStatement.setLong(index, news.getId());
+            preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -110,6 +112,18 @@ public class JdbcNewsBlockDao implements NewsBlockDao {
             }
             return newsBlock;
 
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void deleteNews(Long idNews) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_NEWS_FROM_NEWS_BLOCK);
+            int index = 1;
+            preparedStatement.setLong(index, idNews);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

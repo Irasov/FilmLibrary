@@ -282,6 +282,10 @@ article, aside, footer, header, hgroup, nav, section {
     width: 300px;
 }
 
+.add_member_film{
+    float: left;
+}
+
 
 /*подвал*/
 .footer {

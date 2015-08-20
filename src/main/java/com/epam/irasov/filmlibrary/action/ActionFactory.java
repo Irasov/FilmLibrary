@@ -40,7 +40,7 @@ public class ActionFactory {
         actions.put("GET/editUser", new EditUserAction());
         actions.put("POST/editUser", new EditUserAction());
         actions.put("POST/editUserPassword", new EditUserPasswordAction());
-        actions.put("POST/selectedNewsrOperation", new SelectedActionNewsAction());
+        actions.put("POST/selectedNewsOperation", new SelectedActionNewsAction());
         actions.put("POST/addNews", new AddNewsAction());
         actions.put("POST/selectNews", new SelectNewsAction());
         actions.put("GET/editNews", new EditNewsAction());
@@ -48,6 +48,9 @@ public class ActionFactory {
         actions.put("POST/removeNews", new RemoveNewsAction());
         actions.put("GET/checkNews", new CheckNewsAction());
         actions.put("POST/selectNewsView", new SelectNewsViewAction());
+        actions.put("POST/selectedOperationNewsBlock", new SelectedActionNewsBlockAction());
+        actions.put("POST/blockAddNews", new BlockAddNewsAction());
+        actions.put("POST/blockRemoveNews", new RemoveNewsBlockAction());
 
     }
 
