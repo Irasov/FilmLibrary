@@ -15,11 +15,13 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 public class JdbcFilmBlockDao implements FilmBlockDao {
     private final static String RESULT_PREMIERE = "premiere";
     private final static String RESULT_COVER = "cover";
+    private final static Long FILM_BLOCK_ID = 2l;
     private static final String INSERT_FILM_BLOCK = "INSERT INTO INFORMATION_BLOCK (ID,NAME) VALUES (?,?)";
-    private static final String ADD_FILMS = "INSERT INTO INFORMATION_BLOCK_FILMS(ID_INFORMATION_BLOCK, ID_FILM) VALUES (?,?)";
+    private static final String ADD_FILMS = "INSERT INTO INFORMATION_BLOCK_FILM(ID_INFORMATION_BLOCK, ID_FILM) VALUES (?,?)";
     private static final String SELECT_FILMS = "SELECT ID,NAME, COVER, PREMIERE FROM FILM WHERE ID=ANY(SELECT ID_FILM FROM INFORMATION_BLOCK_FILM WHERE ID_INFORMATION_BLOCK=?)";
     private static final String EMPTY_TABLE = "SELECT * FROM INFORMATION_BLOCK_FILM";
     private static final String SELECT_FILM_BLOCK = "SELECT NAME FROM INFORMATION_BLOCK WHERE ID=?";
+    private static final String DELETE_FILM_FROM_FILMS_BLOCK = "DELETE FROM INFORMATION_BLOCK_FILM WHERE ID_FILM=?";
 
     private final Connection connection;
 
@@ -60,13 +62,13 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
     }
 
     @Override
-    public void addFilm(FilmBlock filmBlock, Film film) {
+    public void addFilm(Long idFilm) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_FILMS);
             int index = 1;
-            preparedStatement.setLong(index, filmBlock.getId());
+            preparedStatement.setLong(index,FILM_BLOCK_ID);
             index++;
-            preparedStatement.setLong(index, film.getId());
+            preparedStatement.setLong(index, idFilm);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -111,6 +113,18 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
             }
             return filmBlock;
 
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void deleteFilm(Long idFilm) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_FILM_FROM_FILMS_BLOCK);
+            int index = 1;
+            preparedStatement.setLong(index, idFilm);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

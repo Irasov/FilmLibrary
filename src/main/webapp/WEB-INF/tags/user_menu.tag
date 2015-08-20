@@ -75,7 +75,7 @@
             </span></a></li>
         </c:if>
         <c:if test="${systemMember.type.id==1}">
-            <li><a href="/">
+            <li><a href="${pageContext.request.contextPath}/operation-with-films-block.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>

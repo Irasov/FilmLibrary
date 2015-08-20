@@ -1,9 +1,6 @@
 package com.epam.irasov.filmlibrary.action;
 
-import com.epam.irasov.filmlibrary.dao.DaoException;
-import com.epam.irasov.filmlibrary.dao.DaoFactory;
-import com.epam.irasov.filmlibrary.dao.FilmDao;
-import com.epam.irasov.filmlibrary.dao.RatingDao;
+import com.epam.irasov.filmlibrary.dao.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +22,8 @@ public class RemoveFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
+            FilmBlockDao filmBlockDao = daoFactory.newFilmBlockDao();
+            filmBlockDao.deleteFilm(selectFilm);
             filmDao.removeMemberList(selectFilm);
             Long idRating = filmDao.remove(selectFilm);
             RatingDao ratingDao = daoFactory.newRatingDao();

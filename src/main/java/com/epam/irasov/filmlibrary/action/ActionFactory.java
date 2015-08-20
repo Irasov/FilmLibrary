@@ -51,7 +51,9 @@ public class ActionFactory {
         actions.put("POST/selectedOperationNewsBlock", new SelectedActionNewsBlockAction());
         actions.put("POST/blockAddNews", new BlockAddNewsAction());
         actions.put("POST/blockRemoveNews", new RemoveNewsBlockAction());
-
+        actions.put("POST/selectedOperationFilmBlock", new SelectedActionFilmBlockAction());
+        actions.put("POST/blockAddFilm", new BlockAddFilmAction());
+        actions.put("POST/blockRemoveFilm", new BlockRemoveFilmAction());
     }
 
     public Action getAction(HttpServletRequest request) {
