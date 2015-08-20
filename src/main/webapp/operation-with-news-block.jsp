@@ -14,7 +14,7 @@
     <title>
         <fmt:setLocale value="${locale}"/>
         <fmt:setBundle basename="i18n" var="lang"/>
-        <fmt:message key="site.films" bundle="${lang}"/>
+        <fmt:message key="site.news" bundle="${lang}"/>
     </title>
 </head>
 <body>
