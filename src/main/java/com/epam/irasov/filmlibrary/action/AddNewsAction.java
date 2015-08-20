@@ -39,8 +39,7 @@ public class AddNewsAction implements Action {
             News news = new News(DEFAULT_ID_NEWS, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text,PATH_IMAGE + fileName);
             System.out.println(news.getName()+news.getText());
             newsDao.save(news);
-            req.getSession().setAttribute("messageNews", MESSAGE);
-
+            req.setAttribute("messageNews", MESSAGE);
             req.getSession().setAttribute("selectedAction", "");
             daoFactory.endTx();
         } catch (Exception e) {
@@ -48,6 +47,6 @@ public class AddNewsAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-news", true);
+        return new View("operation-with-news", false);
     }
 }

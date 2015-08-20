@@ -49,7 +49,7 @@ public class EditFilmAction implements Action {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
             filmDao.upDate(new Film(id, name, tagLine, genre, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findbyId(rating), description));
-            req.getSession().setAttribute("message", "edit.message");
+            req.setAttribute("message", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("film", "");
             daoFactory.endTx();
@@ -58,7 +58,7 @@ public class EditFilmAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-movies", true);
+        return new View("operation-with-movies", false);
     }
 }
 

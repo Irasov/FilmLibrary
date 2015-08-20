@@ -34,7 +34,7 @@ public class EditNewsAction implements Action {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
             newsDao.upDate(new News(id, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text, image));
-            req.getSession().setAttribute("message", "edit.message");
+            req.setAttribute("message", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("item", "");
             daoFactory.endTx();
@@ -43,6 +43,6 @@ public class EditNewsAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-news", true);
+        return new View("operation-with-news", false);
     }
 }

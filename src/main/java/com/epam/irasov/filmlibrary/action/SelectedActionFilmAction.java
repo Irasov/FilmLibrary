@@ -36,7 +36,7 @@ public class SelectedActionFilmAction implements Action {
                 FilmDao filmDao = daoFactory.newFilmDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", EDIT_FILMS);
-                    req.getSession().setAttribute("messageError", MESSAGE);
+                    req.setAttribute("messageError", MESSAGE);
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
@@ -60,13 +60,13 @@ public class SelectedActionFilmAction implements Action {
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
-                    req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    req.setAttribute("messageError", MESSAGE_MEMBER);
                     daoFactory.endTx();
                     return new View("operation-with-movies", false);
                 }
                 if (filmMemberDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", FILM_ADD_MEMBER);
-                    req.getSession().setAttribute("messageError", MESSAGE_MEMBER);
+                    req.setAttribute("messageError", MESSAGE_MEMBER);
                     daoFactory.endTx();
                     return new View("operation-with-movies", false);
                 }
@@ -91,7 +91,7 @@ public class SelectedActionFilmAction implements Action {
                 FilmDao filmDao = daoFactory.newFilmDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", REMOVE_FILM);
-                    req.getSession().setAttribute("messageError", MESSAGE);
+                    req.setAttribute("messageError", MESSAGE);
                     return new View("operation-with-movies", false);
                 }
                 List<Film> films = filmDao.selectFilms();
@@ -112,7 +112,7 @@ public class SelectedActionFilmAction implements Action {
                 FilmDao filmDao = daoFactory.newFilmDao();
                 if (filmDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", REMOVE_FILM_FILM_MEMBER);
-                    req.getSession().setAttribute("messageError", MESSAGE);
+                    req.setAttribute("messageError", MESSAGE);
                     return new View("operation-with-movies", false);
                 }
                 daoFactory.beginTx();

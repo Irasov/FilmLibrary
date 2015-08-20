@@ -59,7 +59,7 @@ public class AddFilmAction implements Action {
             Rating rating = daoFactory.newRatingDao().save(new Rating(ID_RATING, name, VOTES_RATING));
             FilmDao filmDao = daoFactory.newFilmDao();
             filmDao.save(new Film(ID_FILM, name, tagLine, genre ,LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findbyName(name), description));
-            req.getSession().setAttribute("message",MESSAGE);
+            req.setAttribute("message",MESSAGE);
             req.getSession().setAttribute("selectedAction","");
             req.getSession().setAttribute("film","");
             daoFactory.endTx();
@@ -69,6 +69,6 @@ public class AddFilmAction implements Action {
             daoFactory.close();
         }
 
-        return new View("operation-with-movies", true);
+        return new View("operation-with-movies", false);
     }
 }

@@ -2,6 +2,7 @@ package com.epam.irasov.filmlibrary.action;
 
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
+import com.epam.irasov.filmlibrary.dao.NewsBlockDao;
 import com.epam.irasov.filmlibrary.dao.NewsDao;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,11 @@ public class RemoveNewsAction implements Action {
         try {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
+            NewsBlockDao newsBlockDao = daoFactory.newNewsBlockDao();
+            newsBlockDao.deleteNews(selectNews);
             newsDao.remove(selectNews);
             req.getSession().setAttribute("selectedAction", "");
-            req.getSession().setAttribute("message", "remove.message");
+            req.setAttribute("messageNews", "remove.message");
             req.getSession().setAttribute("news", "");
             daoFactory.endTx();
         } catch (Exception e) {
@@ -34,6 +37,6 @@ public class RemoveNewsAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-news", true);
+        return new View("operation-with-news", false);
     }
 }

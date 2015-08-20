@@ -26,7 +26,7 @@ public class RemoveFilmMemberAction implements Action {
             filmMemberDao.removeFromFilms(selectFilmMember);
             filmMemberDao.remove(selectFilmMember);
             req.getSession().setAttribute("selectedAction", "");
-            req.getSession().setAttribute("messageFilmMember", "remove.message");
+            req.setAttribute("messageFilmMember", "remove.message");
             req.getSession().setAttribute("filmMembers", "");
             daoFactory.endTx();
         } catch (Exception e) {
@@ -34,6 +34,6 @@ public class RemoveFilmMemberAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-members-film", true);
+        return new View("operation-with-members-film", false);
     }
 }

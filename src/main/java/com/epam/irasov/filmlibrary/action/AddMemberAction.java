@@ -37,7 +37,7 @@ public class AddMemberAction implements Action {
             FilmMember filmMember = new FilmMember(ID_MEMBER,name,patronymic,surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")),PATH_PHOTO+photo,type);
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
             filmMemberDao.saveFilmMember(filmMember);
-            req.getSession().setAttribute("messageFilmMember", MESSAGE);
+            req.setAttribute("messageFilmMember", MESSAGE);
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("filmMember","");
             daoFactory.endTx();
@@ -46,7 +46,7 @@ public class AddMemberAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-members-film", true);
+        return new View("operation-with-members-film", false);
     }
 
 

@@ -26,7 +26,7 @@ public class AddFilmMembersAction implements Action {
             for(String idMember:req.getParameterValues("idMember")){
                 filmDao.saveFilmFilmMember(selectFilm,Long.parseLong(idMember));
             }
-            req.getSession().setAttribute("message", MESSAGE);
+            req.setAttribute("message", MESSAGE);
             req.getSession().setAttribute("selectedAction","");
             daoFactory.endTx();
         } catch (Exception e) {
@@ -34,6 +34,6 @@ public class AddFilmMembersAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-movies", true);
+        return new View("operation-with-movies", false);
     }
 }

@@ -30,7 +30,7 @@ public class RemoveFilmAction implements Action {
             RatingDao ratingDao = daoFactory.newRatingDao();
             ratingDao.remove(idRating);
             req.getSession().setAttribute("selectedAction", "");
-            req.getSession().setAttribute("message", "remove.message");
+            req.setAttribute("message", "remove.message");
             req.getSession().setAttribute("films", "");
             daoFactory.endTx();
         } catch (Exception e) {
@@ -38,6 +38,6 @@ public class RemoveFilmAction implements Action {
         } finally {
             daoFactory.close();
         }
-        return new View("operation-with-movies", true);
+        return new View("operation-with-movies", false);
     }
 }

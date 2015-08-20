@@ -32,7 +32,7 @@ public class SelectedActionNewsAction implements Action {
                 NewsDao newsDao = daoFactory.newNewsDao();
                 if (newsDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", EDIT_NEWS);
-                    req.getSession().setAttribute("messageErrorNews", MESSAGE_ERROR);
+                    req.setAttribute("messageErrorNews", MESSAGE_ERROR);
                     return new View("operation-with-news", false);
                 }
                 List<News> news = newsDao.selectNews();
@@ -55,7 +55,7 @@ public class SelectedActionNewsAction implements Action {
                 NewsDao newsDao = daoFactory.newNewsDao();
                 if (newsDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", REMOVE_NEWS);
-                    req.getSession().setAttribute("messageErrorNews", MESSAGE_ERROR);
+                    req.setAttribute("messageErrorNews", MESSAGE_ERROR);
                     daoFactory.endTx();
                     return new View("operation-with-news", false);
                 }

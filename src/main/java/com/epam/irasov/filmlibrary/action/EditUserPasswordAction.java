@@ -45,13 +45,13 @@ public class EditUserPasswordAction implements Action {
             systemMemberDao.UpDatePassword(systemMember.getId(), newPassword);
             systemMember.setPassword(newPassword);
             req.getSession().setAttribute("systemMember", systemMember);
-            req.getSession().setAttribute("messageEditPass", "edit.user.pass");
+            req.setAttribute("messageEditPass", "edit.user.pass");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("change-password", true);
+        return new View("change-password", false);
     }
 }

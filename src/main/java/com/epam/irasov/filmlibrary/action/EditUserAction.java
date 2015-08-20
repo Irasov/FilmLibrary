@@ -40,13 +40,13 @@ public class EditUserAction implements Action {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
             req.getSession().setAttribute("systemMember", systemMemberDao.upDate(new SystemMember(id, name, patronymic, surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")), photo, login, password, email, new FilmMember.Type(idType, nameType))));
-            req.getSession().setAttribute("messageEdit", "edit.user.message");
+            req.setAttribute("messageEdit", "edit.user.message");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("edit-personal-data", true);
+        return new View("edit-personal-data", false);
     }
 }

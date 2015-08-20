@@ -43,7 +43,7 @@ public class SelectedActionMemberAction implements Action {
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 if (filmMemberDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", EDIT_MEMBER);
-                    req.getSession().setAttribute("messageError", MESSAGE_ERROR);
+                    req.setAttribute("messageError", MESSAGE_ERROR);
                     return new View("operation-with-members-film", false);
                 }
                 daoFactory.beginTx();
@@ -67,7 +67,7 @@ public class SelectedActionMemberAction implements Action {
                 FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
                 if (filmMemberDao.emptyTable()) {
                     req.getSession().setAttribute("selectedAction", REMOVE_FILM_MEMBER);
-                    req.getSession().setAttribute("messageError", MESSAGE_ERROR);
+                    req.setAttribute("messageError", MESSAGE_ERROR);
                     daoFactory.endTx();
                     return new View("operation-with-members-film", false);
                 }
