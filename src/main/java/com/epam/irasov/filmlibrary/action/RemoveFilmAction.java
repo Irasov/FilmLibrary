@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
 public class RemoveFilmAction implements Action {
-    private final static int ADD_FILM = 1;
 
     public RemoveFilmAction() {
     }
@@ -30,7 +29,7 @@ public class RemoveFilmAction implements Action {
             Long idRating = filmDao.remove(selectFilm);
             RatingDao ratingDao = daoFactory.newRatingDao();
             ratingDao.remove(idRating);
-            req.getSession().setAttribute("selectedAction", ADD_FILM);
+            req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("message", "remove.message");
             req.getSession().setAttribute("films", "");
             daoFactory.endTx();

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RemoveFilmFilmMemberAction implements Action {
-    private static final int ADD_FILM = 1;
 
     public RemoveFilmFilmMemberAction() {
     }
@@ -23,7 +22,7 @@ public class RemoveFilmFilmMemberAction implements Action {
             for (String idMember : req.getParameterValues("idMember")) {
                 filmDao.deleteFilmFilmMember(selectFilm, Long.parseLong(idMember));
             }
-            req.getSession().setAttribute("selectedAction", ADD_FILM);
+            req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("message", "remove.message");
             req.getSession().setAttribute("filmMembersRemove", "");
             daoFactory.endTx();

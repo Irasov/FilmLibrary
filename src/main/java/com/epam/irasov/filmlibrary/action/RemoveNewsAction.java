@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
 public class RemoveNewsAction implements Action {
-    private final static int ADD_NEWS = 1;
 
     public RemoveNewsAction() {
     }
@@ -26,7 +25,7 @@ public class RemoveNewsAction implements Action {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
             newsDao.remove(selectNews);
-            req.getSession().setAttribute("selectedAction", ADD_NEWS);
+            req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("message", "remove.message");
             req.getSession().setAttribute("news", "");
             daoFactory.endTx();
