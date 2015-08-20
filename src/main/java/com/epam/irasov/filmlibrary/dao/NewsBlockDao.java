@@ -11,4 +11,5 @@ public interface NewsBlockDao {
     NewsBlock findByIDNewsBlock(Long idNewsBlock);
     boolean emptyTable();
     void deleteNews(Long idNews);
+    boolean findNews(Long idNews);
 }

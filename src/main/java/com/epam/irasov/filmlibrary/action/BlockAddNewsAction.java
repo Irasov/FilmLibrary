@@ -20,6 +20,11 @@ public class BlockAddNewsAction implements Action {
         try {
             daoFactory.beginTx();
             NewsBlockDao newsBlockDao = daoFactory.newNewsBlockDao();
+            if(newsBlockDao.findNews(id)){
+                req.setAttribute("messageRepeat","repeat.news");
+                daoFactory.endTx();
+                return new View("operation-with-news-block", false);
+            }
             newsBlockDao.addNews(id);
             req.setAttribute("messageBlock", MESSAGE);
             req.getSession().setAttribute("selectedAction", "");
