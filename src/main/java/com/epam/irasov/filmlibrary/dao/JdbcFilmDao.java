@@ -23,6 +23,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String RESULT_DURATION = "duration";
     private static final String RESULT_DESCRIPTION = "description";
     private static final String ID_FILM_MEMBER = "id_film_member";
+    private static final String RESULT_VOTES = "votes";
     private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
     private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, GENRE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT* FROM FILM WHERE ID = ?";
@@ -37,7 +38,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String FIND_ID_FILM_MEMBER = "SELECT ID_FILM_MEMBER FROM FILM_FILM_MEMBER WHERE ID_FILM=? ";
     private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=? AND ID_FILM_MEMBER=?";
     private static final String DELETE_LIST_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
-    private static final String FIND_ID_FILM = "SELECT ID_FILM FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? ";;
+    private static final String FIND_ID_FILM = "SELECT ID_FILM FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? ";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -213,6 +214,7 @@ public class JdbcFilmDao implements FilmDao {
             Rating rating = new Rating();
             rating.setId(resultSet.getLong(RESULT_ID));
             rating.setName(resultSet.getString(RESULT_NAME));
+            rating.setVotes(resultSet.getInt(RESULT_VOTES));
             return rating;
         } catch (SQLException e) {
             throw new DaoException(e);

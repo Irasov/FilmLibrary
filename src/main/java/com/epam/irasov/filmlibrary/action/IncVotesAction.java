@@ -3,42 +3,36 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.*;
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
-import com.epam.irasov.filmlibrary.entity.Rating;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectFilmViewAction implements Action {
-    public SelectFilmViewAction() {
+public class IncVotesAction implements Action {
+    public IncVotesAction() {
     }
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
         Long selectFilm = Long.parseLong(req.getParameter("id"));
+        Long selectRating = Long.parseLong(req.getParameter("idRating"));
+        int votes = Integer.parseInt(req.getParameter("votes"));
+        votes++;
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
+            RatingDao ratingDao = daoFactory.newRatingDao();
             FilmDao filmDao = daoFactory.newFilmDao();
-            FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
+            ratingDao.upDate(selectRating, votes);
             Film film = filmDao.findById(selectFilm);
             req.getSession().setAttribute("filmView", film);
-            if (!(filmDao.findByIdFilmFilmMember(selectFilm) == 0)) {
-                List<Long> idMember = filmDao.findByIdFilmMember(selectFilm);
-                List<FilmMember> members = new ArrayList<>();
-                for (Long id : idMember) {
-                    FilmMember filmMember = filmMemberDao.findById(id);
-                    members.add(filmMember);
-                }
-                req.getSession().setAttribute("filmMembersViewIn", members);
-            }
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
         } finally {
             daoFactory.close();
         }
-        return new View("film", true);
+        return new View("film", false);
     }
 }

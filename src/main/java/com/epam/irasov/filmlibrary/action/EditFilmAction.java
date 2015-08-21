@@ -48,7 +48,7 @@ public class EditFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
-            filmDao.upDate(new Film(id, name, tagLine, genre, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findbyId(rating), description));
+            filmDao.upDate(new Film(id, name, tagLine, genre, LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), cover, daoFactory.newRatingDao().findById(rating), description));
             req.setAttribute("message", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("film", "");

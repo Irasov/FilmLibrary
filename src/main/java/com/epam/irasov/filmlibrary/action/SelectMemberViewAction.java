@@ -31,7 +31,7 @@ public class SelectMemberViewAction implements Action {
                     Film film = filmDao.findById(id);
                     films.add(film);
                 }
-                req.getSession().setAttribute("filmsView", films);
+                req.getSession().setAttribute("filmsViewIn", films);
             }
             req.getSession().setAttribute("filmMemberView", filmMember);
             daoFactory.endTx();

@@ -2,10 +2,7 @@ package com.epam.irasov.filmlibrary.dao;
 
 import com.epam.irasov.filmlibrary.entity.Rating;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 
@@ -15,6 +12,7 @@ public class JdbcRatingDao implements RatingDao {
     private static final java.lang.String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
     private static final java.lang.String FIND_BY_ID = "SELECT * FROM RATING WHERE ID=?";
     private static final String DELETE_RATING = "DELETE FROM RATING WHERE ID=?";
+    private static final String UPDATE_RATING = "UPDATE RATING SET VOTES = ? WHERE ID=?";;
 
 
     private final Connection connection;
@@ -39,8 +37,17 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public void upDate() {
-
+    public void upDate(Long idRating, int votes) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_RATING);
+            int index = 1;
+            preparedStatement.setInt(index, votes);
+            index++;
+            preparedStatement.setLong(index, idRating);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override
@@ -56,7 +63,7 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public Rating findbyName(String name) {
+    public Rating findByName(String name) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
             int index = 1;
@@ -75,7 +82,7 @@ public class JdbcRatingDao implements RatingDao {
     }
 
     @Override
-    public Rating findbyId(Long id) {
+    public Rating findById(Long id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
             int index = 1;
