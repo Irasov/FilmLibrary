@@ -12,35 +12,31 @@ import java.time.LocalDate;
 
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class AddNewsAction implements Action {
-    private static final Long DEFAULT_ID_NEWS = 1l;
-    private final static String MESSAGE = "news.add.complete";
-    private final static String PATH_IMAGE = "img/site/";
-
-    public AddNewsAction() {
+public class EditNewsAction implements Action {
+    public EditNewsAction() {
     }
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
+        Long id = Long.parseLong(req.getParameter("id"));
         String title = req.getParameter("title");
         String text = req.getParameter("text");
         String date = req.getParameter("date");
-        String fileName = req.getParameter("fileName");
+        String imageNews = req.getParameter("image");
         String textError = Validator.isTextValid(text);
         if (textError != null) {
             req.setAttribute("textError", textError);
-            req.setAttribute("fileName", fileName);
+            req.setAttribute("fileName", imageNews);
             return new View("operation-with-news", false);
         }
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
-            News news = new News(DEFAULT_ID_NEWS, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text,PATH_IMAGE + fileName);
-            System.out.println(news.getName()+news.getText());
-            newsDao.save(news);
-            req.setAttribute("messageNews", MESSAGE);
+            newsDao.upDate(new News(id, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text, imageNews));
+            req.setAttribute("message", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
+            req.getSession().setAttribute("item", "");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
