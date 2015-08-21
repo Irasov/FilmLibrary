@@ -32,7 +32,7 @@
             <button type="submit">
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.select" bundle="${lang}"/>
+                <fmt:message key="news.select" bundle="${lang}"/>
             </button>
         </div>
     </form>
