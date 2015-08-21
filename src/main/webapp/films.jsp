@@ -28,13 +28,19 @@
                             <img src="${filmView.cover}" class="img_news"/>
                         </div>
                         <div class="reg_text">
-                                ${filmView.name}
+                            <fmt:setLocale value="${locale}"/>
+                            <fmt:setBundle basename="i18n" var="lang"/>
+                            <fmt:message key="film.name" bundle="${lang}"/> ${filmView.name}
                         </div>
                         <div class="reg_text">
-                                ${filmView.premiere}
+                            <fmt:setLocale value="${locale}"/>
+                            <fmt:setBundle basename="i18n" var="lang"/>
+                            <fmt:message key="film.premiere" bundle="${lang}"/>: ${filmView.premiere}
                         </div>
                         <div class="reg_text">
-                                ${filmView.genre}
+                            <fmt:setLocale value="${locale}"/>
+                            <fmt:setBundle basename="i18n" var="lang"/>
+                            <fmt:message key="film.genre" bundle="${lang}"/>: ${filmView.genre}
                         </div>
                         <input type="text" name="id" value="${filmView.id}" title="film name" hidden/>
                         <div class="reg_text">
