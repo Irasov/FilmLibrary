@@ -6,9 +6,6 @@ import com.epam.irasov.filmlibrary.dao.FilmDao;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
-
-import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class AddFilmMembersAction implements Action {
     private static final Object MESSAGE = "film.add.film.member";
@@ -24,7 +21,9 @@ public class AddFilmMembersAction implements Action {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
             for(String idMember:req.getParameterValues("idMember")){
-                filmDao.saveFilmFilmMember(selectFilm,Long.parseLong(idMember));
+                if (!(filmDao.findMember(selectFilm, Long.parseLong(idMember)))) {
+                    filmDao.saveFilmFilmMember(selectFilm, Long.parseLong(idMember));
+                }
             }
             req.setAttribute("message", MESSAGE);
             req.getSession().setAttribute("selectedAction","");
