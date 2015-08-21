@@ -22,18 +22,18 @@ public class EditNewsAction implements Action {
         String title = req.getParameter("title");
         String text = req.getParameter("text");
         String date = req.getParameter("date");
-        String imageNews = req.getParameter("image");
+        String image = req.getParameter("image");
         String textError = Validator.isTextValid(text);
         if (textError != null) {
             req.setAttribute("textError", textError);
-            req.setAttribute("fileName", imageNews);
+            req.setAttribute("fileName", image);
             return new View("operation-with-news", false);
         }
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
-            newsDao.upDate(new News(id, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text, imageNews));
+            newsDao.upDate(new News(id, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text, image));
             req.setAttribute("message", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("item", "");
