@@ -22,6 +22,7 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
     private static final String EMPTY_TABLE = "SELECT * FROM INFORMATION_BLOCK_FILM";
     private static final String SELECT_FILM_BLOCK = "SELECT NAME FROM INFORMATION_BLOCK WHERE ID=?";
     private static final String DELETE_FILM_FROM_FILMS_BLOCK = "DELETE FROM INFORMATION_BLOCK_FILM WHERE ID_FILM=?";
+    private static final String FIND_FILM = "SELECT ID FROM INFORMATION_BLOCK_FILM WHERE ID_FILM=?";
 
     private final Connection connection;
 
@@ -125,6 +126,25 @@ public class JdbcFilmBlockDao implements FilmBlockDao {
             int index = 1;
             preparedStatement.setLong(index, idFilm);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean findFilm(Long id) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_FILM);
+            int index = 1;
+            preparedStatement.setLong(index,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count != 0;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

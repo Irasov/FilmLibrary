@@ -20,6 +20,11 @@ public class BlockAddFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmBlockDao filmBlockDao = daoFactory.newFilmBlockDao();
+            if(filmBlockDao.findFilm(id)){
+                req.setAttribute("messageRepeat","repeat.film");
+                daoFactory.endTx();
+                return new View("operation-with-films-block", false);
+            }
             filmBlockDao.addFilm(id);
             req.setAttribute("messageBlockFilms", MESSAGE);
             req.getSession().setAttribute("selectedAction", "");

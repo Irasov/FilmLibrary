@@ -11,4 +11,5 @@ public interface FilmBlockDao {
     FilmBlock findByIDFilmBlock(Long idFilmBlock);
     boolean emptyTable();
     void deleteFilm(Long idFilm);
+    boolean findFilm(Long id);
 }
