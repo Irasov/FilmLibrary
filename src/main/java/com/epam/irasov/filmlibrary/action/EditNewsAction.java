@@ -34,7 +34,7 @@ public class EditNewsAction implements Action {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
             newsDao.upDate(new News(id, title, LocalDate.parse(date, ofPattern("yyyy-MM-dd")), text, image));
-            req.setAttribute("message", "edit.message");
+            req.setAttribute("messageNews", "edit.message");
             req.getSession().setAttribute("selectedAction", "");
             req.getSession().setAttribute("item", "");
             daoFactory.endTx();
