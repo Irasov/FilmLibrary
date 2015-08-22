@@ -55,6 +55,7 @@ public class ActionFactory {
         actions.put("POST/blockAddFilm", new BlockAddFilmAction());
         actions.put("POST/blockRemoveFilm", new BlockRemoveFilmAction());
         actions.put("POST/incVotes", new IncVotesAction());
+        actions.put("POST/addReviews", new AddReviewsAction());
     }
 
     public Action getAction(HttpServletRequest request) {

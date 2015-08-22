@@ -2,6 +2,7 @@ package com.epam.irasov.filmlibrary.dao;
 
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.Rating;
+import com.epam.irasov.filmlibrary.entity.Review;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String RESULT_DESCRIPTION = "description";
     private static final String ID_FILM_MEMBER = "id_film_member";
     private static final String RESULT_VOTES = "votes";
+    private static final String ID_REVIEW = "id_review";
     private final static String FIND_ALL_FILMS = "SELECT * FROM FILM";
     private final static String SAVE_FILM = "INSERT INTO FILM(NAME, TAGLINE, GENRE, AGE_RESTRICTION, DURATION, COVER, DESCRIPTION, ID_RATING, PREMIERE )VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String FIND_BY_ID = "SELECT* FROM FILM WHERE ID = ?";
@@ -40,6 +42,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String DELETE_LIST_MEMBER = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM=?";
     private static final String FIND_ID_FILM = "SELECT ID_FILM FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? ";
     private static final String FIND_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? AND ID_FILM=?";
+    private static final String FIND_ID_REVIEW = "SELECT ID_REVIEW FROM FILM_REVIEW WHERE ID_FILM=?";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -354,6 +357,26 @@ public class JdbcFilmDao implements FilmDao {
                 found = resultSet.next();
             }
             return count != 0;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public List<Long> findReviewsInFilm(Long idFilm) {
+        try {
+            List<Long> idReviews = new ArrayList<>();
+            int index = 1;
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID_REVIEW);
+            preparedStatement.setLong(index, idFilm);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            while (found) {
+                idReviews.add(resultSet.getLong(ID_REVIEW));
+                found = resultSet.next();
+            }
+            return idReviews;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

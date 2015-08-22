@@ -18,5 +18,6 @@ public interface FilmDao {
     List<Long> findByIdFilmMember(Long id);
     void deleteFilmFilmMember(Long idFilm, Long idMember);
     void removeMemberList(Long id);
+    List<Long> findReviewsInFilm(Long idFilm);
     boolean findMember(Long idFilm, Long idMember);
 }

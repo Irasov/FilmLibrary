@@ -177,6 +177,10 @@ article, aside, footer, header, hgroup, nav, section {
     padding: 10px 0 10px 25px;
 }
 
+/*.reviews{
+    padding: 10px 0 10px 25px;
+}*/
+
 .reg_text_select_film{
     float: left;
     padding: 10px 0 10px 25px;

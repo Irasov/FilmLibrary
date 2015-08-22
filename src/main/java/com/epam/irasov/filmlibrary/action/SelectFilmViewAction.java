@@ -3,7 +3,7 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.*;
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.FilmMember;
-import com.epam.irasov.filmlibrary.entity.Rating;
+import com.epam.irasov.filmlibrary.entity.Review;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,15 @@ public class SelectFilmViewAction implements Action {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
+            ReviewDao reviewDao = daoFactory.newReviewDao();
             Film film = filmDao.findById(selectFilm);
+            if (filmDao.findReviewsInFilm(selectFilm) != null) {
+                List<Long> idReviews = filmDao.findReviewsInFilm(selectFilm);
+                for (Long id : idReviews) {
+                    Review review = reviewDao.findById(id);
+                    film.addReviews(review);
+                }
+            }
             req.getSession().setAttribute("filmView", film);
             if (!(filmDao.findByIdFilmFilmMember(selectFilm) == 0)) {
                 List<Long> idMember = filmDao.findByIdFilmMember(selectFilm);

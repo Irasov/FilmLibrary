@@ -8,4 +8,5 @@ public interface RatingDao {
     void remove(Long id);
     Rating findByName(String name);
     Rating findById(Long id);
+    Long findId();
 }

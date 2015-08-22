@@ -8,11 +8,12 @@ import static com.epam.irasov.filmlibrary.dao.SqlQueryResult.*;
 
 public class JdbcRatingDao implements RatingDao {
     private final static String RESULT_VOTES = "votes";
-    private final static String SAVE_RATING = "INSERT INTO RATING(NAME, VOTES) VALUES(?,?)";
-    private static final java.lang.String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
-    private static final java.lang.String FIND_BY_ID = "SELECT * FROM RATING WHERE ID=?";
+    private final static String SAVE_RATING = "INSERT INTO RATING(ID,NAME, VOTES) VALUES(?,?,?)";
+    private static final String FIND_BY_NAME = "SELECT * FROM RATING WHERE NAME=?";
+    private static final String FIND_BY_ID = "SELECT * FROM RATING WHERE ID=?";
     private static final String DELETE_RATING = "DELETE FROM RATING WHERE ID=?";
     private static final String UPDATE_RATING = "UPDATE RATING SET VOTES = ? WHERE ID=?";;
+    private static final String FIND_ID = "SELECT ID FROM RATING";
 
 
     private final Connection connection;
@@ -26,6 +27,8 @@ public class JdbcRatingDao implements RatingDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_RATING);
             int index = 1;
+            preparedStatement.setLong(index, rating.getId());
+            index++;
             preparedStatement.setString(index, rating.getName());
             index++;
             preparedStatement.setInt(index, rating.getVotes());
@@ -95,6 +98,19 @@ public class JdbcRatingDao implements RatingDao {
             rating.setName(resultSet.getString(RESULT_NAME));
             rating.setVotes(resultSet.getInt(RESULT_VOTES));
             return rating;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Long findId() {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.last();
+            if (!found) return null;
+            return resultSet.getLong("id");
         } catch (SQLException e) {
             throw new DaoException(e);
         }
