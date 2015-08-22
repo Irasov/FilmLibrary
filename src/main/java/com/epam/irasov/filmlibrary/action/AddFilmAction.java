@@ -3,6 +3,7 @@ package com.epam.irasov.filmlibrary.action;
 import com.epam.irasov.filmlibrary.dao.DaoException;
 import com.epam.irasov.filmlibrary.dao.DaoFactory;
 import com.epam.irasov.filmlibrary.dao.FilmDao;
+import com.epam.irasov.filmlibrary.dao.RatingDao;
 import com.epam.irasov.filmlibrary.entity.Film;
 import com.epam.irasov.filmlibrary.entity.Rating;
 import com.epam.irasov.filmlibrary.validator.Validator;
@@ -33,6 +34,7 @@ public class AddFilmAction implements Action {
         String premiere = req.getParameter("premiere");
         String cover = req.getParameter("fileName");
         String genre = req.getParameter("genre");
+        Long idRating = null;
 
         String tagLineError = Validator.isTagLineValid(tagLine);
         String descriptionError = Validator.isDescriptionValid(description);
@@ -56,9 +58,17 @@ public class AddFilmAction implements Action {
         DaoFactory daoFactory = DaoFactory.getInstance();
         try {
             daoFactory.beginTx();
-            Rating rating = daoFactory.newRatingDao().save(new Rating(ID_RATING, name, VOTES_RATING));
+            RatingDao ratingDao = daoFactory.newRatingDao();
+            Rating rating;
+            if(ratingDao.findId()!=null){
+                idRating = ratingDao.findId();
+                idRating++;
+                rating = ratingDao.save(new Rating(idRating, name, VOTES_RATING));
+            }else{
+                rating = ratingDao.save(new Rating(ID_RATING, name, VOTES_RATING));
+            }
             FilmDao filmDao = daoFactory.newFilmDao();
-            filmDao.save(new Film(ID_FILM, name, tagLine, genre ,LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, daoFactory.newRatingDao().findByName(name), description));
+            filmDao.save(new Film(ID_FILM, name, tagLine, genre ,LocalDate.parse(premiere, ofPattern("yyyy-MM-dd")), Integer.parseInt(ageRestriction), Integer.parseInt(duration), PATH_IMAGE + cover, rating, description));
             req.setAttribute("message",MESSAGE);
             req.getSession().setAttribute("selectedAction","");
             req.getSession().setAttribute("film","");
