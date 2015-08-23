@@ -40,7 +40,6 @@ public class AddReviewsAction implements Action {
             daoFactory.beginTx();
             ReviewDao reviewDao = daoFactory.newReviewDao();
             SystemMember systemMember = (SystemMember) req.getSession().getAttribute("systemMember");
-            daoFactory.beginTx();
             RatingDao ratingDao = daoFactory.newRatingDao();
             Rating rating;
             if (ratingDao.findId() != null) {
