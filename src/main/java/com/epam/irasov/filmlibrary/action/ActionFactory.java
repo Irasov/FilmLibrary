@@ -61,9 +61,11 @@ public class ActionFactory {
         actions.put("POST/published", new ReviewPublishedAction());
         actions.put("POST/removeReview", new RemoveReviewAction());
         actions.put("POST/selectedMyReviewOperation", new SelectedMyReviewOperationAction());
-        actions.put("POST/selectMyReview", new SelectMyReview());
-        actions.put("POST/editReview", new EditReview());
-        actions.put("POST/removeMyReview", new RemoveMyReview());
+        actions.put("POST/selectMyReview", new SelectMyReviewAction());
+        actions.put("POST/editReview", new EditReviewAction());
+        actions.put("POST/removeMyReview", new RemoveMyReviewAction());
+        actions.put("POST/searchFilm", new SearchFilmAction());
+        actions.put("POST/searchMember", new SearchMemberAction());
     }
 
     public Action getAction(HttpServletRequest request) {

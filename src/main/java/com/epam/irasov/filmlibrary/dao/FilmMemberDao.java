@@ -15,4 +15,5 @@ public interface FilmMemberDao {
     void upDate(FilmMember filmMember);
     Long remove(Long id);
     void removeFromFilms(Long id);
+    FilmMember findBySurname(String surname);
 }

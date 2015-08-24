@@ -44,6 +44,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String FIND_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? AND ID_FILM=?";
     private static final String FIND_ID_REVIEW = "SELECT ID_REVIEW FROM FILM_REVIEW WHERE ID_FILM=?";
     private static final String DELETE_REVIEW = "DELETE FROM FILM_REVIEW WHERE ID_REVIEW=?";
+    private static final String FIND_BY_NAME = "SELECT* FROM FILM WHERE NAME = ?";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -390,6 +391,32 @@ public class JdbcFilmDao implements FilmDao {
             int index = 1;
             preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public Film findByName(String name) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
+            int index = 1;
+            preparedStatement.setString(index, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            Film film = new Film();
+            film.setId(resultSet.getLong(RESULT_ID));
+            film.setName(resultSet.getString(RESULT_NAME));
+            film.setTagLine(resultSet.getString(RESULT_TAG_LINE));
+            film.setGenre(resultSet.getString(RESULT_GENRE));
+            film.setAgeRestriction(resultSet.getInt(RESULT_AGE_RESTRICTION));
+            film.setDuration(resultSet.getInt(RESULT_DURATION));
+            film.setCover(resultSet.getString(RESULT_COVER));
+            film.setDescription(resultSet.getString(RESULT_DESCRIPTION));
+            film.setRating(findRating(resultSet.getLong(RESULT_ID_RATING)));
+            film.setPremiere(LocalDate.parse(resultSet.getDate(RESULT_PREMIERE).toString(), ofPattern("yyyy-MM-dd")));
+            return film;
         } catch (SQLException e) {
             throw new DaoException(e);
         }

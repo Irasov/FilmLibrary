@@ -45,7 +45,7 @@
                 <fmt:message key="site.login" bundle="${lang}"/>
             </span></a></li>
         </c:if>
-        <li><a href="/">
+        <li><a href="${pageContext.request.contextPath}/search.jsp">
             <span>
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>

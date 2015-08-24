@@ -23,6 +23,7 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
     private static final String UPDATE_FILM_MEMBER = "UPDATE FILM_MEMBER SET NAME = ?, PATRONYMIC = ?, SURNAME = ?, BIRTH_DATE = ? , PHOTO = ? WHERE ID=?";
     private static final String DELETE_FILM_MEMBER = "DELETE FROM FILM_MEMBER WHERE id=?";
     private static final String DELETE_FROM_FILMS = "DELETE FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=?";
+    private static final String FIND_BY_NAME = "SELECT * FROM FILM_MEMBER WHERE SURNAME=?";
 
     private final Connection connection;
 
@@ -239,6 +240,30 @@ public class JdbcFilmMemberDao implements FilmMemberDao {
             int index = 1;
             preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public FilmMember findBySurname(String surname) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_NAME);
+            int index = 1;
+            preparedStatement.setString(index, surname);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            if (!found) return null;
+            FilmMember filmMember = new FilmMember();
+            filmMember.setId(resultSet.getLong(RESULT_ID));
+            filmMember.setName(resultSet.getString(RESULT_NAME));
+            filmMember.setPatronymic(resultSet.getString(RESULT_PATRONYMIC));
+            filmMember.setSurname(resultSet.getString(RESULT_SURNAME));
+            filmMember.setBirthDate(LocalDate.parse(resultSet.getDate(RESULT_BIRTH_DATE).toString(), ofPattern("yyyy-MM-dd")));
+            filmMember.setType(findType(resultSet.getLong(RESULT_ID_TYPE)));
+            filmMember.setPhoto(resultSet.getString(RESULT_PHOTO));
+            System.out.println("find" +filmMember.getPhoto());
+            return filmMember;
         } catch (SQLException e) {
             throw new DaoException(e);
         }
