@@ -26,7 +26,7 @@ public class AddFilmAction implements Action {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        String name = req.getParameter("name");
+        String name = req.getParameter("name").toLowerCase();
         String tagLine = req.getParameter("tagLine");
         String ageRestriction = req.getParameter("age");
         String duration = req.getParameter("duration");
