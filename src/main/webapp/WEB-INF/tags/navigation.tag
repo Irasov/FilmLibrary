@@ -51,12 +51,6 @@
                 <fmt:setBundle basename="i18n" var="lang"/>
                 <fmt:message key="site.search" bundle="${lang}"/>
             </span></a></li>
-        <li><a href="/">
-            <span>
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="site.about" bundle="${lang}"/>
-            </span></a></li>
         <c:if test="${not empty systemMember}">
             <li><a href="${pageContext.request.contextPath}/user.jsp">
             <span>
