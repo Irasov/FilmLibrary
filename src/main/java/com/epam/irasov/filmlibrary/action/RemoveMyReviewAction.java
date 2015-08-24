@@ -5,8 +5,8 @@ import com.epam.irasov.filmlibrary.dao.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RemoveMyReview implements Action {
-    public RemoveMyReview() {
+public class RemoveMyReviewAction implements Action {
+    public RemoveMyReviewAction() {
     }
 
     @Override

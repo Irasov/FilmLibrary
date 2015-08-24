@@ -9,8 +9,8 @@ import com.epam.irasov.filmlibrary.validator.Validator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class EditReview implements Action {
-    public EditReview() {
+public class EditReviewAction implements Action {
+    public EditReviewAction() {
     }
 
     @Override

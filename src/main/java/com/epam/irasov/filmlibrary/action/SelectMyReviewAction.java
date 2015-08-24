@@ -8,8 +8,8 @@ import com.epam.irasov.filmlibrary.entity.Review;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SelectMyReview implements Action {
-    public SelectMyReview() {
+public class SelectMyReviewAction implements Action {
+    public SelectMyReviewAction() {
     }
 
     @Override
