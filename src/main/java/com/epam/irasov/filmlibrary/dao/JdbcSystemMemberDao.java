@@ -14,7 +14,6 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private final static String RESULT_LOGIN = "login";
     private final static String RESULT_PASSWORD = "password";
     private final static String RESULT_EMAIL = "email";
-    private final static String FIND_ALL_SYSTEM_MEMBERS = "SELECT * FROM SYSTEM_MEMBERS";
     private final static String SAVE_SYSTEM_MEMBER = "INSERT INTO SYSTEM_MEMBER(NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL, PHOTO) VALUES(?,?,?,?,?,?,?,?,?)";
     private final static String SAVE_SYSTEM_MEMBER_TYPE = "INSERT INTO SYSTEM_MEMBER_TYPE(ID,NAME) VALUES(?,?)";
     private final static String FIND_BY_ID = "SELECT  ID, NAME, PATRONYMIC, SURNAME, BIRTH_DATE, ID_TYPE, LOGIN, PASSWORD, EMAIL FROM SYSTEM_MEMBER WHERE ID = ?";
@@ -23,6 +22,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private static final String FIND_SYSTEM_MEMBER_TYPE = "SELECT ID FROM SYSTEM_MEMBER_TYPE";
     private static final String FIND_BY_CREDENTIALS = "SELECT * FROM SYSTEM_MEMBER WHERE (LOGIN=? AND PASSWORD=?)";
     private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
+    private static final String FIND_EMAIL = "SELECT * FROM SYSTEM_MEMBER WHERE EMAIL=?";
     private static final String FIND_PASSWORD = "SELECT NAME FROM SYSTEM_MEMBER WHERE ID=? AND PASSWORD=?";
     private static final String UPDATE_SYSTEM_MEMBER_PASSWORD = "UPDATE SYSTEM_MEMBER SET PASSWORD = ? WHERE ID=?";
     private static final String DELETE_REVIEW = "DELETE FROM SYSTEM_MEMBER_REVIEW WHERE ID_REVIEW=?";
@@ -195,6 +195,24 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_LOGIN);
             preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            boolean found = resultSet.next();
+            while (found) {
+                count++;
+                found = resultSet.next();
+            }
+            return count == 0;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public boolean emailCheckForUniqueness(String email) {
+        int count = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_EMAIL);
+            preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean found = resultSet.next();
             while (found) {

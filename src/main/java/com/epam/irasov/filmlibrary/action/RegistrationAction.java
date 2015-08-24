@@ -29,6 +29,7 @@ public class RegistrationAction implements Action {
     private final static String NEWS_BLOCK_NAME_INITIAL_VALUE = "news.block.title";
     private final static String FILM_BLOCK_NAME_INITIAL_VALUE = "films.block.title";
     private final static String NO_AVATAR = "img/site/no_avatar.png";
+    private static final String ERROR_UNIQUE_EMAIL = "not.unique.email";
 
     public RegistrationAction() {
     }
@@ -73,6 +74,11 @@ public class RegistrationAction implements Action {
             if (!daoFactory.newSystemMemberDao().checkForUniqueness(login)) {
                 loginError = ERROR_UNIQUE_LOGIN;
                 req.setAttribute("loginError", loginError);
+                return new View("registration", false);
+            }
+            if (!daoFactory.newSystemMemberDao().emailCheckForUniqueness(email)) {
+                emailError = ERROR_UNIQUE_EMAIL;
+                req.setAttribute("loginError", emailError);
                 return new View("registration", false);
             }
             SystemMember systemMember = new SystemMember(ID_USER, name, patronymic, surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")), NO_AVATAR, login, Operation.getMD5(password), email, type);

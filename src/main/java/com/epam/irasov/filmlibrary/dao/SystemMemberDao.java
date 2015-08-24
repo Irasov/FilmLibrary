@@ -13,6 +13,7 @@ public interface SystemMemberDao {
     FilmMember.Type saveType (SystemMember.Type type);
     int findType ();
     boolean checkForUniqueness(String login);
+    boolean emailCheckForUniqueness(String email);
     boolean remove(SystemMember systemMember);
     SystemMember upDate (SystemMember systemMember);
     boolean FindPassword(Long id,String password);
