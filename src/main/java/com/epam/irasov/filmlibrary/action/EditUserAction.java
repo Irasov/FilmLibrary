@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
 public class EditUserAction implements Action {
+    private static final String ERROR_UNIQUE_EMAIL = "not.unique.email";
     public EditUserAction() {
     }
 
@@ -39,6 +40,11 @@ public class EditUserAction implements Action {
         try {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
+            if (!daoFactory.newSystemMemberDao().emailCheckForUniqueness(email)) {
+                emailError = ERROR_UNIQUE_EMAIL;
+                req.setAttribute("emailError", emailError);
+                return new View("edit-personal-data", false);
+            }
             req.getSession().setAttribute("systemMember", systemMemberDao.upDate(new SystemMember(id, name, patronymic, surName, LocalDate.parse(birthDate, ofPattern("yyyy-MM-dd")), photo, login, password, email, new FilmMember.Type(idType, nameType))));
             req.setAttribute("messageEdit", "edit.user.message");
             daoFactory.endTx();
