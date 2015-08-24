@@ -17,4 +17,5 @@ public interface SystemMemberDao {
     SystemMember upDate (SystemMember systemMember);
     boolean FindPassword(Long id,String password);
     void UpDatePassword(Long id, String password);
+    void removeReview(Long id);
 }

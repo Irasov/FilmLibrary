@@ -5,6 +5,7 @@
 <%--@elvariable id="locale" type="java.lang.String"--%>
 <%--@elvariable id="filmMembersView" type="java.util.List"--%>
 <%--@elvariable id="filmMemberView" type="com.epam.irasov.filmlibrary.entity.FilmMember"--%>
+<%--@elvariable id="var" type="java.lang.Integer"--%>
 
 <html>
 <head>
@@ -22,7 +23,7 @@
   <div class="container">
     <c:if test="${not empty filmMembersView}">
       <c:forEach items="${filmMembersView}" var="filmMemberView">
-        <div class="films">
+        <div class="film">
           <form action="${pageContext.request.contextPath}/controller?action=selectMemberView" method="post">
             <div class="reg_text">
               <img class="img_news" src="${filmMemberView.photo}"/>
@@ -43,12 +44,15 @@
                 <fmt:message key="full.information" bundle="${lang}"/>
               </button>
             </div>
+            <input type="text" name="end" value="${var=var+1}" title="film name" hidden/>
           </form>
         </div>
       </c:forEach>
     </c:if>
   </div>
-  <fl:footer/>
+  <c:if test="${empty filmMembersView}">
+    <fl:footer/>
+  </c:if>
 </div>
 </body>
 </html>

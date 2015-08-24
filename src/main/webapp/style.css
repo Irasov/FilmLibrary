@@ -14,7 +14,7 @@ html {
 body {
     font: 12px "Helvetica Neue", Verdana, Tahoma, Arial, Nelvetica, Geneva, sans-serif;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     background: #fff;
     color: #4d4d4d;
 }
@@ -176,10 +176,27 @@ article, aside, footer, header, hgroup, nav, section {
 .reg_text {
     padding: 10px 0 10px 25px;
 }
+.film_img{
+    float: left;
+    padding: 10px 50px 10px 25px;
+}
 
-/*.reviews{
-    padding: 10px 0 10px 25px;
-}*/
+.film_info{
+    float: left;
+    padding: 0 150px 0 0;
+}
+
+.filmMember{
+    height: 230px;
+}
+
+.film{
+    float: left;
+}
+
+.container_film{
+    /*width: 1100px;*/
+}
 
 .reg_text_select_film{
     float: left;
@@ -263,6 +280,17 @@ article, aside, footer, header, hgroup, nav, section {
 .operation {
     float: left;
 }
+
+.operation_review {
+    float: left;
+    width: 450px;
+}
+
+.reviews_op{
+    float: left;
+    width: 450px;
+}
+
 .removeFilm{
     float: left;
 }
@@ -290,7 +318,6 @@ article, aside, footer, header, hgroup, nav, section {
 }
 
 .films_block{
-    float: left;
     background-color: #ebfce7;
     margin: 15px 0 0 100px;
     width: 350px;
@@ -305,6 +332,7 @@ article, aside, footer, header, hgroup, nav, section {
 .footer {
     margin: 5px 0 0 0;
     height: 110px;
+    width: 1100px;
     background: #aed40a url('img/site/footer_bg.png') repeat-x left top;
 
 }

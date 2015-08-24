@@ -43,6 +43,7 @@ public class JdbcFilmDao implements FilmDao {
     private static final String FIND_ID_FILM = "SELECT ID_FILM FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? ";
     private static final String FIND_MEMBER = "SELECT ID FROM FILM_FILM_MEMBER WHERE ID_FILM_MEMBER=? AND ID_FILM=?";
     private static final String FIND_ID_REVIEW = "SELECT ID_REVIEW FROM FILM_REVIEW WHERE ID_FILM=?";
+    private static final String DELETE_REVIEW = "DELETE FROM FILM_REVIEW WHERE ID_REVIEW=?";
     private final Connection connection;
 
     public JdbcFilmDao(Connection connection) {
@@ -377,6 +378,18 @@ public class JdbcFilmDao implements FilmDao {
                 found = resultSet.next();
             }
             return idReviews;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void removeReview(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_REVIEW);
+            int index = 1;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

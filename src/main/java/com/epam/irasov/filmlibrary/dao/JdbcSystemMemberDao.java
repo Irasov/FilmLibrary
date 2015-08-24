@@ -25,6 +25,7 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
     private static final String FIND_LOGIN = "SELECT * FROM SYSTEM_MEMBER WHERE LOGIN=?";
     private static final String FIND_PASSWORD = "SELECT NAME FROM SYSTEM_MEMBER WHERE ID=? AND PASSWORD=?";
     private static final String UPDATE_SYSTEM_MEMBER_PASSWORD = "UPDATE SYSTEM_MEMBER SET PASSWORD = ? WHERE ID=?";
+    private static final String DELETE_REVIEW = "DELETE FROM SYSTEM_MEMBER_REVIEW WHERE ID_REVIEW=?";
     private final Connection connection;
 
     public JdbcSystemMemberDao(Connection connection) {
@@ -279,6 +280,18 @@ public class JdbcSystemMemberDao implements SystemMemberDao {
             int index = 1;
             preparedStatement.setString(index, password);
             index++;
+            preparedStatement.setLong(index, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void removeReview(Long id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_REVIEW);
+            int index = 1;
             preparedStatement.setLong(index, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

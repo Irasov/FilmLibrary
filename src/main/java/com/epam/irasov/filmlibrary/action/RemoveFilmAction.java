@@ -1,10 +1,12 @@
 package com.epam.irasov.filmlibrary.action;
 
 import com.epam.irasov.filmlibrary.dao.*;
+import com.epam.irasov.filmlibrary.entity.Review;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.util.List;
 
 public class RemoveFilmAction implements Action {
 
@@ -22,15 +24,30 @@ public class RemoveFilmAction implements Action {
         try {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
+            ReviewDao reviewDao = daoFactory.newReviewDao();
             FilmBlockDao filmBlockDao = daoFactory.newFilmBlockDao();
+            SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
+            RatingDao ratingDao = daoFactory.newRatingDao();
+            if (filmDao.findReviewsInFilm(selectFilm) != null) {
+                List<Long> idReviews = filmDao.findReviewsInFilm(selectFilm);
+                for (Long id : idReviews) {
+                    filmDao.removeReview(id);
+                    systemMemberDao.removeReview(id);
+                    filmDao.removeReview(id);
+                    Long idRating = reviewDao.findIdRating(id);
+                    reviewDao.remove(id);
+                    ratingDao.remove(idRating);
+                }
+            }
             filmBlockDao.deleteFilm(selectFilm);
             filmDao.removeMemberList(selectFilm);
             Long idRating = filmDao.remove(selectFilm);
-            RatingDao ratingDao = daoFactory.newRatingDao();
+            ratingDao = daoFactory.newRatingDao();
             ratingDao.remove(idRating);
             req.getSession().setAttribute("selectedAction", "");
             req.setAttribute("message", "remove.message");
             req.getSession().setAttribute("films", "");
+            req.getSession().setAttribute("filmsView","");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

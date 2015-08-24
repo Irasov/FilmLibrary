@@ -24,63 +24,66 @@
     <fl:navigation/>
     <div class="container">
         <div class="films">
-            <div class="reg_text">
+            <div class="film_img">
                 <img class="img" src="${filmView.cover}"/>
             </div>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.name" bundle="${lang}"/> ${filmView.name}
-            </div>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.tagline" bundle="${lang}"/>: ${filmView.tagLine}
-            </div>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.premiere" bundle="${lang}"/>: ${filmView.premiere}
-            </div>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.genre" bundle="${lang}"/>: ${filmView.genre}
-            </div>
-            <c:if test="${not empty filmMembersViewIn}">
+            <div class="film_info">
                 <div class="reg_text">
                     <fmt:setLocale value="${locale}"/>
                     <fmt:setBundle basename="i18n" var="lang"/>
-                    <fmt:message key="film.member" bundle="${lang}"/>
+                    <fmt:message key="film.name" bundle="${lang}"/> ${filmView.name}
                 </div>
                 <div class="reg_text">
-                    <form action="${pageContext.request.contextPath}/controller?action=selectMemberView" method="post">
-                        <div class="reg_text">
-                            <select name="idMemberView" size="10" required title="select Member">
-                                <c:forEach items="${filmMembersViewIn}" var="filmMemberView">
-                                    <option value="${filmMemberView.id}">${filmMemberView.surname}(${filmMemberView.type.name})</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="reg_text">
-                            <button type="submit">
-                                <fmt:setLocale value="${locale}"/>
-                                <fmt:setBundle basename="i18n" var="lang"/>
-                                <fmt:message key="full.information" bundle="${lang}"/>
-                            </button>
-                        </div>
-                    </form>
+                    <fmt:setLocale value="${locale}"/>
+                    <fmt:setBundle basename="i18n" var="lang"/>
+                    <fmt:message key="film.tagline" bundle="${lang}"/>: ${filmView.tagLine}
                 </div>
-            </c:if>
-            <div class="reg_text">
-                <fmt:setLocale value="${locale}"/>
-                <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.restriction.age" bundle="${lang}"/>: ${filmView.ageRestriction}+
+                <div class="reg_text">
+                    <fmt:setLocale value="${locale}"/>
+                    <fmt:setBundle basename="i18n" var="lang"/>
+                    <fmt:message key="film.premiere" bundle="${lang}"/>: ${filmView.premiere}
+                </div>
+                <div class="reg_text">
+                    <fmt:setLocale value="${locale}"/>
+                    <fmt:setBundle basename="i18n" var="lang"/>
+                    <fmt:message key="film.genre" bundle="${lang}"/>: ${filmView.genre}
+                </div>
+                <div class="reg_text">
+                    <fmt:setLocale value="${locale}"/>
+                    <fmt:setBundle basename="i18n" var="lang"/>
+                    <fmt:message key="film.restriction.age" bundle="${lang}"/>: ${filmView.ageRestriction}+
+                </div>
+                <div class="reg_text">
+                    <fmt:setLocale value="${locale}"/>
+                    <fmt:setBundle basename="i18n" var="lang"/>
+                    <fmt:message key="film.duration" bundle="${lang}"/>: ${filmView.duration}
+                </div>
             </div>
-            <div class="reg_text">
+            <div class="filmMember">
                 <fmt:setLocale value="${locale}"/>
                 <fmt:setBundle basename="i18n" var="lang"/>
-                <fmt:message key="film.duration" bundle="${lang}"/>: ${filmView.duration}
+                <fmt:message key="film.member" bundle="${lang}"/>
+                <c:if test="${not empty filmMembersViewIn}">
+                    <div class="reg_text">
+                        <form action="${pageContext.request.contextPath}/controller?action=selectMemberView"
+                              method="post">
+                            <div class="reg_text">
+                                <select name="idMemberView" size="7" required title="select Member">
+                                    <c:forEach items="${filmMembersViewIn}" var="filmMemberView">
+                                        <option value="${filmMemberView.id}">${filmMemberView.surname}(${filmMemberView.type.name})</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="reg_text">
+                                <button type="submit">
+                                    <fmt:setLocale value="${locale}"/>
+                                    <fmt:setBundle basename="i18n" var="lang"/>
+                                    <fmt:message key="full.information" bundle="${lang}"/>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </c:if>
             </div>
             <div class="reg_text">
                 <fmt:setLocale value="${locale}"/>

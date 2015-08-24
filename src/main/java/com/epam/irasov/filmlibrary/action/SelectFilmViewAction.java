@@ -40,6 +40,8 @@ public class SelectFilmViewAction implements Action {
                     members.add(filmMember);
                 }
                 req.getSession().setAttribute("filmMembersViewIn", members);
+            }else{
+                req.getSession().setAttribute("filmMembersViewIn","");
             }
             daoFactory.endTx();
         } catch (Exception e) {
