@@ -23,9 +23,9 @@ public class AddMemberAction implements Action {
 
     @Override
     public View execute(HttpServletRequest req, HttpServletResponse resp) {
-        String name = req.getParameter("name");
-        String patronymic = req.getParameter("patronymic");
-        String surName = req.getParameter("surname");
+        String name = req.getParameter("name").toLowerCase();
+        String patronymic = req.getParameter("patronymic").toLowerCase();
+        String surName = req.getParameter("surname").toLowerCase();
         String birthDate = req.getParameter("birthdate");
         String photo = req.getParameter("fileName");
         String idType = req.getParameter("type").substring(0, req.getParameter("type").indexOf("+"));
