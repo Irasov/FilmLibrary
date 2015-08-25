@@ -31,6 +31,7 @@ public class RemoveNewsAction implements Action {
             req.getSession().setAttribute("selectedAction", "");
             req.setAttribute("messageNews", "remove.message");
             req.getSession().setAttribute("news", "");
+            req.getSession().setAttribute("newsInBlock", "");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);

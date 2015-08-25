@@ -52,11 +52,15 @@ public class StartAction implements Action {
             if (!newsBlockDao.emptyTable()) {
                 newsBlock = newsBlockDao.findByIDNewsBlock(Long.parseLong(ID_NEWS_BLOCK));
                 session.setAttribute("newsBlock", newsBlock);
+            }else {
+                session.setAttribute("newsBlock", "");
             }
             FilmBlockDao filmBlockDao = daoFactory.newFilmBlockDao();
             if (!filmBlockDao.emptyTable()) {
                 filmBlock = filmBlockDao.findByIDFilmBlock(Long.parseLong(ID_FILM_BLOCK));
                 session.setAttribute("filmBlock", filmBlock);
+            } else{
+                session.setAttribute("filmBlock", "");
             }
         } catch (Exception e) {
             throw new DaoException(e);

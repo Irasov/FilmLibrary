@@ -48,6 +48,7 @@ public class RemoveFilmAction implements Action {
             req.setAttribute("message", "remove.message");
             req.getSession().setAttribute("films", "");
             req.getSession().setAttribute("filmsView","");
+            req.getSession().setAttribute("filmsInBlock","");
             daoFactory.endTx();
         } catch (Exception e) {
             throw new DaoException(e);
