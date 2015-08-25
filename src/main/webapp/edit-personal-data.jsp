@@ -114,6 +114,7 @@
           </c:if>
           <div class="reg_input">
             <input type="text" name="email"  value="${systemMember.email}" class="reginput" required title="email@example.com"/>
+            <input type="text" name="prevEmail"  value="${systemMember.email}" class="reginput" hidden title="email@example.com"/>
           </div>
           <div class="reg_text">
             <button type="submit">

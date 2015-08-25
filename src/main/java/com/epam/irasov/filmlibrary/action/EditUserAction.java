@@ -29,6 +29,7 @@ public class EditUserAction implements Action {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
+        String prevEmail = req.getParameter("prevEmail");
         Long idType = Long.parseLong(req.getParameter("idType"));
         String nameType = req.getParameter("nameType");
         String emailError = Validator.isEmailValid(email);
@@ -40,7 +41,7 @@ public class EditUserAction implements Action {
         try {
             daoFactory.beginTx();
             SystemMemberDao systemMemberDao = daoFactory.newSystemMemberDao();
-            if (!daoFactory.newSystemMemberDao().emailCheckForUniqueness(email)) {
+            if ((!daoFactory.newSystemMemberDao().emailCheckForUniqueness(email))&&(!prevEmail.equals(email))) {
                 emailError = ERROR_UNIQUE_EMAIL;
                 req.setAttribute("emailError", emailError);
                 return new View("edit-personal-data", false);
