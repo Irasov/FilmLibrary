@@ -21,6 +21,7 @@ public class CheckNewsAction implements Action {
             daoFactory.beginTx();
             NewsDao newsDao = daoFactory.newNewsDao();
             if (newsDao.emptyTable()) {
+                req.getSession().setAttribute("newsView", "");
                 return new View("news", true);
             }
             List<News> news = newsDao.selectNews();

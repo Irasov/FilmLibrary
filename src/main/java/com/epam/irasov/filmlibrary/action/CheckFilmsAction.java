@@ -20,6 +20,7 @@ public class CheckFilmsAction implements Action {
             daoFactory.beginTx();
             FilmDao filmDao = daoFactory.newFilmDao();
             if (filmDao.emptyTable()) {
+                req.getSession().setAttribute("filmsView", "");
                 return new View("films", true);
             }
             List<Film> films = filmDao.selectFilms();

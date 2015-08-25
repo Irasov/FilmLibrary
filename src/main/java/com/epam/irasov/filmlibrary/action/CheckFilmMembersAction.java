@@ -20,6 +20,7 @@ public class CheckFilmMembersAction implements Action {
             daoFactory.beginTx();
             FilmMemberDao filmMemberDao = daoFactory.newFilmMemberDao();
             if (filmMemberDao.emptyTable()) {
+                req.getSession().setAttribute("filmMembersView", "");
                 return new View("film-members", true);
             }
             List<FilmMember> members = filmMemberDao.selectFilmMember();
